@@ -152,6 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleHaven.cpp" />
+    <ClCompile Include="schip.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="schip.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

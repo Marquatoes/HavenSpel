@@ -18,5 +18,13 @@
     <ClCompile Include="ConsoleHaven.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="schip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="schip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

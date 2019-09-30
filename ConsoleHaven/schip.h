@@ -10,11 +10,11 @@ private:
 	int _schadepunte;
 	char *_bijzonderheden;
 public:
-	schip(char *type ,int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden) {};
-	~schip() {};
-	schip(const schip &copySchip) {};
-	schip& operator=(const schip& moveSchip) {};
-	schip(const schip &&moveSchip) {};
-	schip& operator=(const schip &&moveSchip) {};
+	schip(char *type ,int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden);
+	~schip();
+	schip(const schip &copySchip);
+	schip& operator=(const schip& copySchip);
+	schip(const schip &&moveSchip);
+	schip& operator=(const schip &&moveSchip);
 };
 
