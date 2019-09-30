@@ -1,8 +1,8 @@
 #include "schip.h"
 #include <cstring>
 
-schip::schip(char type, int prijs, int laadruimte, int kanonnen, int schadepunten, char bijzonderheden) :
-	_type{ &type } , _prijs{ prijs }, _laadruimte{ laadruimte }, _kanonnen{ kanonnen }, _schadepunte{ schadepunten }, _bijzonderheden{ &bijzonderheden } {};
+schip::schip(char *type, int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden) :
+	_type{ type } , _prijs{ prijs }, _laadruimte{ laadruimte }, _kanonnen{ kanonnen }, _schadepunte{ schadepunten }, _bijzonderheden{ &bijzonderheden } {};
 
 schip::~schip()
 {
