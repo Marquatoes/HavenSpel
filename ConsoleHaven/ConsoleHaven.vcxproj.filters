@@ -21,9 +21,24 @@
     <ClCompile Include="schip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Handelsgoed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Handelsgoed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,14 +7,14 @@ private:
 	int _prijs;
 	int _laadruimte;
 	int _kanonnen;
-	int _schadepunte;
+	int _schadepunten;
 	char *_bijzonderheden;
 public:
 	schip(char *type ,int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden);
 	~schip();
 	schip(const schip &copySchip);
 	schip& operator=(const schip& copySchip);
-	schip(const schip &&moveSchip);
-	schip& operator=(const schip &&moveSchip);
+	schip(schip &&moveSchip);
+	schip& operator=(schip &&moveSchip) noexcept;
 };
 
