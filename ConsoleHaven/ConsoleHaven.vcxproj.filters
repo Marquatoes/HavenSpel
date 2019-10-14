@@ -27,6 +27,9 @@
     <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schip.h">
