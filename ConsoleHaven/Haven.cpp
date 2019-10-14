@@ -56,7 +56,7 @@ Haven& Haven::operator=(const Haven& copyHaven)
 	return *this;
 }
 
-Haven::Haven(Haven&& moveHaven) : _dockedSchip { moveHaven._dockedSchip }, _koopSchepen{ moveHaven._koopSchepen }, _handelsGoederen{ moveHaven._handelsGoederen },
+Haven::Haven(Haven&& moveHaven) noexcept : _dockedSchip { moveHaven._dockedSchip }, _koopSchepen{ moveHaven._koopSchepen }, _handelsGoederen{ moveHaven._handelsGoederen },
 _kannonen{ moveHaven._kannonen }, _aantalSchepen{ moveHaven._aantalSchepen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKannonen{ moveHaven._aantalKannonen }
 {
 	moveHaven._dockedSchip = nullptr;
@@ -95,4 +95,27 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 	moveHaven._aantalGoederen = moveHaven._aantalKannonen = moveHaven._aantalSchepen = 0;
 
 	return *this;
+}
+
+void Haven::seedCannons(RNG *rng)
+{
+	int aantal = 0;
+	_kannonen = nullptr;
+	_kannonen = new Kannon[10];
+	int random = rng->getRandomNumber(0, 5);
+	aantal += random;
+	for (int i = 0; i < random; i++) {
+		_kannonen[i] = *new Kannon(1, 50);
+	}
+	random = rng->getRandomNumber(0, 3);
+	aantal += random;
+	for (int i = aantal; i < aantal + random; i++) {
+		_kannonen[i] = *new Kannon(2, 200);
+	}
+	random = rng->getRandomNumber(0, 2);
+	aantal += random;
+	for (int i = aantal; i < aantal + random; i++) {
+		_kannonen[i] = *new Kannon(3, 1000);
+	}
+	_aantalKannonen = aantal;
 }

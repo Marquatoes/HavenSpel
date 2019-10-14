@@ -2,10 +2,18 @@
 //
 
 #include <iostream>
+#include "RNG.h";
+#include "Kannon.h";
+#include "Haven.h";
 
 int main()
 {
+	RNG *rng = new RNG();
+	Kannon kannonArray[10];
     std::cout << "Hello World!\n";
+	Haven *haven = new Haven(nullptr, nullptr, nullptr,0, 0, 0);
+	haven->seedCannons(rng);
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

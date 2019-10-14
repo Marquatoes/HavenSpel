@@ -1,14 +1,8 @@
 #include "Kannon.h"
 
-Kannon::Kannon()
-{
-}
+Kannon::Kannon() : _type{ 0 }, _prijs{ 0 } {}
 
-Kannon::Kannon(int type, int prijs)
-{
-	_type = type;
-	_prijs = prijs;
-}
+Kannon::Kannon(int type, int prijs) : _type { type }, _prijs { prijs } {}
 
 const int Kannon::getType()
 {

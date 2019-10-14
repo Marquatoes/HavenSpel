@@ -15,7 +15,7 @@ public:
 	~schip();
 	schip(const schip &copySchip);
 	schip& operator=(const schip& copySchip);
-	schip(schip &&moveSchip);
+	schip(schip &&moveSchip) noexcept;
 	schip& operator=(schip &&moveSchip) noexcept;
 };
 

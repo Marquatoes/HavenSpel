@@ -1,6 +1,7 @@
 #include "schip.h";
 #include "Handelsgoed.h";
 #include "Kannon.h";
+#include "RNG.h";
 #pragma once
 class Haven
 {
@@ -17,6 +18,7 @@ public:
 	~Haven();
 	Haven(const Haven& copyHaven);
 	Haven& operator=(const Haven& copyHaven);
-	Haven(Haven&& moveHaven);
+	Haven(Haven&& moveHaven) noexcept;
 	Haven& operator=(Haven&& moveHaven) noexcept;
+	void seedCannons(RNG *rng);
 };

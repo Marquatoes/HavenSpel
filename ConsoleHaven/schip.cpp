@@ -1,7 +1,7 @@
 #include "schip.h"
 #include <cstring>
 
-schip::schip()
+schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _kanonnen{ 0 }, _schadepunten{ 0 }
 {
 	_type = new char[100];
 	_bijzonderheden = new char[100];
@@ -45,7 +45,7 @@ schip& schip::operator=(const schip& copySchip)
 	return *this;
 }
 
-schip::schip(schip&& moveSchip) : _type{ moveSchip._type }, _prijs{ moveSchip._prijs }, _laadruimte{ moveSchip._laadruimte }, _kanonnen{ moveSchip._kanonnen }, _schadepunten{ moveSchip._schadepunten }, _bijzonderheden{ moveSchip._bijzonderheden } {
+schip::schip(schip&& moveSchip) noexcept : _type{ moveSchip._type }, _prijs{ moveSchip._prijs }, _laadruimte{ moveSchip._laadruimte }, _kanonnen{ moveSchip._kanonnen }, _schadepunten{ moveSchip._schadepunten }, _bijzonderheden{ moveSchip._bijzonderheden } {
 	moveSchip._type = nullptr;
 	moveSchip._bijzonderheden = nullptr;
 	moveSchip._kanonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = 0;
