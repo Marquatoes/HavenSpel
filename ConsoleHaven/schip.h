@@ -10,6 +10,7 @@ private:
 	int _schadepunten;
 	char *_bijzonderheden;
 public:
+	schip();
 	schip(char *type ,int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden);
 	~schip();
 	schip(const schip &copySchip);

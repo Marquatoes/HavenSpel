@@ -9,6 +9,7 @@ private:
 	int _maxPrijs;
 	int _minPrijs;
 public:
+	Handelsgoed();
 	Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal);
 	const int getPrijs();
 	const int getAantal();
