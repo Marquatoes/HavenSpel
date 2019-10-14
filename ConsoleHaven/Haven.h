@@ -9,8 +9,11 @@ private:
 	schip* _koopSchepen;
 	Handelsgoed* _handelsGoederen;
 	Kannon* _kannonen;
+	size_t _aantalSchepen;
+	size_t _aantalGoederen;
+	size_t _aantalKannonen;
 public:
-	Haven(schip *dockedSchip, schip* koopSchepen, Handelsgoed* handelsGoederen);
+	Haven(schip *dockedSchip, schip* koopSchepen, Handelsgoed* handelsGoederen, size_t aantalSchepen , size_t aantalGoederen, size_t aantalKannonen);
 	~Haven();
 	Haven(const Haven& copyHaven);
 	Haven& operator=(const Haven& copyHaven);
