@@ -2,10 +2,11 @@
 
 RNG::RNG()
 {
-	srand(time(NULL));
+	
 }
 
 int RNG::getRandomNumber(int min, int max)
 {
-	return rand() % max + min;
+	std::uniform_int_distribution<int> distribution1(min, max);
+	return distribution1(generator);
 }
