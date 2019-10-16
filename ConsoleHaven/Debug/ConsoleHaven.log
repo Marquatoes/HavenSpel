@@ -1,9 +1,12 @@
-﻿  ConsoleHaven.cpp
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  Haven.cpp
 C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(116,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(121,34): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(125,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(132,20): warning C4018: '<': signed/unsigned mismatch
   ConsoleHaven.vcxproj -> C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe

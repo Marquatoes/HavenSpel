@@ -17,5 +17,9 @@ public:
 	schip& operator=(const schip& copySchip);
 	schip(schip &&moveSchip) noexcept;
 	schip& operator=(schip &&moveSchip) noexcept;
+	void repareer(int aantalSchadePunten);
+	const int getSchade();
+	void setSchade(int aantal);
+	const bool hasType(const char* type);
 };
 

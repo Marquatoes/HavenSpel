@@ -76,3 +76,28 @@ schip& schip::operator=(schip&& moveSchip) noexcept
 
 	return *this;
 }
+
+void schip::repareer(int aantalSchadePunten)
+{
+	if (_schadepunten > aantalSchadePunten) {
+		_schadepunten -= aantalSchadePunten;
+	}
+	else {
+		_schadepunten = 0;
+	}
+}
+
+const int schip::getSchade()
+{
+	return _schadepunten;
+}
+
+void schip::setSchade(int aantal)
+{
+	_schadepunten = aantal;
+}
+
+const bool schip::hasType(const char* type)
+{
+	return false;
+}

@@ -1,5 +1,4 @@
 #include "Haven.h"
-#include <cstring>
 
 Haven::Haven(schip* dockedSchip, schip* koopSchepen, Handelsgoed* handelsGoederen, size_t aantalSchepen, size_t aantalGoederen, size_t aantalKannonen) :
 	_dockedSchip{ dockedSchip }, _koopSchepen{ koopSchepen }, _handelsGoederen{ handelsGoederen }, _aantalSchepen { aantalSchepen }, _aantalGoederen { aantalGoederen } , _aantalKannonen { aantalKannonen } 
@@ -21,6 +20,7 @@ Haven::~Haven()
 	if (_kannonen != nullptr) {
 		delete[] _kannonen;
 	}
+	_aantalSchepen = _aantalGoederen = _aantalKannonen = 0;
 
 }
 
@@ -40,13 +40,13 @@ Haven& Haven::operator=(const Haven& copyHaven)
 		delete _dockedSchip;
 	}
 	if (_koopSchepen != nullptr) {
-		delete[] _koopSchepen;
+		delete _koopSchepen;
 	}
 	if (_handelsGoederen != nullptr) {
-		delete[] _handelsGoederen;
+		delete _handelsGoederen;
 	}
 	if (_kannonen != nullptr) {
-		delete[] _kannonen;
+		delete _kannonen;
 	}
 
 	_dockedSchip = copyHaven._dockedSchip;
@@ -74,13 +74,13 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 		delete _dockedSchip;
 	}
 	if (_koopSchepen != nullptr) {
-		delete[] _koopSchepen;
+		delete _koopSchepen;
 	}
 	if (_handelsGoederen != nullptr) {
-		delete[] _handelsGoederen;
+		delete _handelsGoederen;
 	}
 	if (_kannonen != nullptr) {
-		delete[] _kannonen;
+		delete _kannonen;
 	}
 
 	_dockedSchip = moveHaven._dockedSchip;
@@ -97,25 +97,54 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 	return *this;
 }
 
-void Haven::seedCannons(RNG *rng)
+void Haven::seedHaven(RNG *rng)
 {
-	int aantal = 0;
-	_kannonen = nullptr;
+	seedKannonen(rng);
+	seedGoederen(rng);
+}
+
+void Haven::seedKannonen(RNG* rng)
+{
+	_aantalKannonen = 0;
 	_kannonen = new Kannon[10];
-	int random = rng->getRandomNumber(0, 5);
-	aantal += random;
-	for (int i = 0; i < random; i++) {
-		_kannonen[i] = *new Kannon(1, 50);
+	int random = rng->getRandomNumber(0, 5);	
+	for (int i = _aantalKannonen; i < random; i++) {
+		_kannonen[i] = Kannon(1, 50);
 	}
+	_aantalKannonen += random;
 	random = rng->getRandomNumber(0, 3);
-	aantal += random;
-	for (int i = aantal; i < aantal + random; i++) {
-		_kannonen[i] = *new Kannon(2, 200);
+	for (int i = _aantalKannonen; i < _aantalKannonen + random; i++) {
+		_kannonen [i] = Kannon(2, 200);
 	}
+	_aantalKannonen += random;
 	random = rng->getRandomNumber(0, 2);
-	aantal += random;
-	for (int i = aantal; i < aantal + random; i++) {
-		_kannonen[i] = *new Kannon(3, 1000);
+	for (int i = _aantalKannonen; i < _aantalKannonen + random; i++) {
+		_kannonen[i] = Kannon(3, 1000);
 	}
-	_aantalKannonen = aantal;
+	_aantalKannonen += random;
+	for (int i = 0; i < _aantalKannonen; i++) {
+		std::cout << _kannonen[i].getPrijs() << std::endl;
+	}
+}
+
+void Haven::seedGoederen(RNG* rng)
+{
+	for (int i = 0; i < _aantalGoederen; i++) {
+		_handelsGoederen[i].setAantal(rng->getRandomNumber(_handelsGoederen[i].getMinAantal(), _handelsGoederen[i].getMaxAantal()));
+		_handelsGoederen[i].setPrijs(rng->getRandomNumber(_handelsGoederen[i].getMinPrijs(), _handelsGoederen[i].getMaxPrijs()));
+	}
+}
+
+void Haven::enterHaven(schip* enterSchip)
+{
+	_dockedSchip = std::move(enterSchip);
+}
+
+void Haven::repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunten)
+{
+	if (speler->getGoudstukken() >= (aantalSchadePunten / 10) && aantalSchadePunten <= repareerSchip->getSchade()) {
+		repareerSchip->repareer(aantalSchadePunten);
+		speler->setGoudstukken(speler->getGoudstukken() - (aantalSchadePunten / 10));
+	}
+	
 }

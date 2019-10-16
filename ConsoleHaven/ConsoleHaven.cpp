@@ -1,6 +1,8 @@
 // ConsoleHaven.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include <iostream>
 #include "RNG.h";
 #include "Kannon.h";
@@ -9,8 +11,11 @@
 int main()
 {
 	RNG *rng = new RNG();
-	Kannon kannonArray[10];
-    std::cout << rng->getRandomNumber(1,2) << std::endl;
+	Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
+	haven->seedHaven(rng);
+	delete haven;
+	delete rng;
+	_CrtDumpMemoryLeaks();
 
 }
 
