@@ -8,7 +8,7 @@ void Zee::enterZee(schip* vaarSchip)
 int Zee::vaar(RNG* rng)
 {
 	if (rng->getRandomNumber(1,10) < 3) {
-		vechtMetPiraten();
+		vechtMetPiraten();		
 	}
 	else {
 		int random = rng->getRandomNumber(1,20);
@@ -17,7 +17,6 @@ int Zee::vaar(RNG* rng)
 }
 
 void Zee::vechtMetPiraten() {
-
 }
 //DP toepassen wanneer we klaar zijn !
 int Zee::gevolgWind(int actie, RNG* rng) {

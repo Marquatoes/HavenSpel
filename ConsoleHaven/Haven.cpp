@@ -140,7 +140,7 @@ void Haven::enterHaven(schip* enterSchip)
 	_dockedSchip = std::move(enterSchip);
 }
 
-void Haven::repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunten)
+void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchadePunten)
 {
 	if (speler->getGoudstukken() >= (aantalSchadePunten / 10) && aantalSchadePunten <= repareerSchip->getSchade()) {
 		repareerSchip->repareer(aantalSchadePunten);
@@ -148,3 +148,16 @@ void Haven::repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunte
 	}
 	
 }
+void Haven::koopKannon(schip* schip, Speler* speler) {
+	
+	//Selecteer optie
+	int type;
+	for (int i = 0; i < _aantalKannonen; i++) {
+		if (_kannonen[i].getType() == type && _kannonen[i].getPrijs() < speler->getGoudstukken()) {
+			speler->setGoudstukken(speler->getGoudstukken() - _kannonen[i].getPrijs());
+			//Move kannon to schip
+			_dockedSchip.addKanon(_kannonen[i]);
+		}
+	}
+}
+

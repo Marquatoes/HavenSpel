@@ -4,6 +4,7 @@
 class Zee {
 private:
 	schip* _vaarSchip;
+	schip* _piraten;
 	void vechtMetPiraten();
 	int gevolgWind(int actie, RNG* rng);
 public:

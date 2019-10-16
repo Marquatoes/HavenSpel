@@ -26,4 +26,5 @@ public:
 	void seedGoederen(RNG* rng);
 	void enterHaven(schip* enterSchip);
 	void repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunten);
+	void koopKannon(schip* schip, Speler* speler);
 };
