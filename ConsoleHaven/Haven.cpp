@@ -25,7 +25,7 @@ Haven::~Haven()
 
 Haven::Haven(const Haven& copyHaven) : _dockedSchip { copyHaven._dockedSchip }
 {
-	if (&copyHaven == this) return *this;
+	if (&copyHaven == this) return;
 	
 	if (_dockedSchip != nullptr) {
 		delete _dockedSchip;

@@ -2,10 +2,16 @@
 //
 
 #include <iostream>
+#include "FileReader.h"
 
+schip* schepen[13];
+Haven* havens[25];
 int main()
 {
     std::cout << "Hello World!\n";
+	FileReader f = FileReader();
+	f.ReadSchepenFile(schepen);
+	f.MaakHavens(havens, schepen);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
