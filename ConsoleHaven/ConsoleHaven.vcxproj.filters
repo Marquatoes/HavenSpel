@@ -39,6 +39,9 @@
     <ClCompile Include="Speler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schip.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

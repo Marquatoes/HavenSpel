@@ -1,21 +1,27 @@
 #include <cstddef>
+#include "Kannon.h";
 #pragma once
 class schip
 {
 private:
-	char *_type;
+	char* _type;
 	int _prijs;
 	int _laadruimte;
-	int _kanonnen;
+	int _maxKanonnen;
 	int _schadepunten;
-	char *_bijzonderheden;
+	char* _bijzonderheden;
+	Kannon* _kannonen;
 public:
 	schip();
-	schip(char *type ,int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden);
+	schip(char* type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char* bijzonderheden, Kannon* kannonen);
 	~schip();
-	schip(const schip &copySchip);
+	schip(const schip& copySchip);
 	schip& operator=(const schip& copySchip);
-	schip(schip &&moveSchip) noexcept;
-	schip& operator=(schip &&moveSchip) noexcept;
+	schip(schip&& moveSchip) noexcept;
+	schip& operator=(schip&& moveSchip) noexcept;
+	void repareer(int aantalSchadePunten);
+	const int getSchade();
+	void setSchade(int aantal);
+	const bool hasType(const char* type);
+	bool addKannon(Kannon kannon);
 };
-

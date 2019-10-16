@@ -35,3 +35,13 @@ const int Handelsgoed::getMaxPrijs()
 	return _maxPrijs;
 }
 
+void Handelsgoed::setAantal(int aantal)
+{
+	_aantal = aantal;
+}
+
+void Handelsgoed::setPrijs(int prijs)
+{
+	_prijs = prijs;
+}
+

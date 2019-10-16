@@ -17,5 +17,7 @@ public:
 	const int getMaxAantal();
 	const int getMinPrijs();
 	const int getMaxPrijs();
+	void setAantal(int aantal);
+	void setPrijs(int prijs);
 	
 };

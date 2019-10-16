@@ -151,6 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Handelsgoed.cpp" />
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp" />
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.cpp" />
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\RNG.cpp" />
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Speler.cpp" />
+    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.cpp" />
     <ClCompile Include="ConsoleHaven.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Handelsgoed.cpp" />
@@ -166,6 +172,7 @@
     <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.h" />
     <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\RNG.h" />
     <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Speler.h" />
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.h" />
     <ClInclude Include="schip.h" />
   </ItemGroup>
   <ItemGroup>
