@@ -33,27 +33,15 @@
     <ClCompile Include="FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp">
+    <ClCompile Include="RNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\RNG.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Speler.cpp">
+    <ClCompile Include="Speler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Handelsgoed.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Haven.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Kannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\RNG.h">
@@ -62,7 +50,13 @@
     <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Speler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileReader.h">
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Handelsgoed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Gebruiker%27\Documents\GitHub\HavenSpel\ConsoleHaven\Kannon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

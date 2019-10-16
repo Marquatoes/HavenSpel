@@ -65,7 +65,7 @@ void FileReader::MaakHavens(Haven* havens[], schip* schepen[]) {
 			goederen[j - 1] = new Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid);
 
 		}
-		havens[i - 1] = new Haven(NULL, *schepen, *goederen);
+		havens[i - 1] = new Haven(NULL, *schepen, *goederen, sizeof schepen, sizeof goederen, 10);
 
 	}
 }
