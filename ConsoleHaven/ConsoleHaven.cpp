@@ -5,13 +5,20 @@
 #include "RNG.h";
 #include "Kannon.h";
 #include "Haven.h";
+#include "FileReader.h"
 
+schip* schepen[13];
+Haven* havens[25];
 int main()
 {
 	RNG *rng = new RNG();
 	Kannon kannonArray[10];
     std::cout << rng->getRandomNumber(1,2) << std::endl;
 
+    std::cout << "Hello World!\n";
+	FileReader f = FileReader();
+	f.ReadSchepenFile(schepen);
+	f.MaakHavens(havens, schepen);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
