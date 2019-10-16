@@ -10,9 +10,7 @@ int main()
 {
 	RNG *rng = new RNG();
 	Kannon kannonArray[10];
-    std::cout << "Hello World!\n";
-	Haven *haven = new Haven(nullptr, nullptr, nullptr,0, 0, 0);
-	haven->seedCannons(rng);
+    std::cout << rng->getRandomNumber(1,2) << std::endl;
 
 }
 
