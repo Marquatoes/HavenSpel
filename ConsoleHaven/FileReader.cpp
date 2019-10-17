@@ -5,10 +5,10 @@
 #include <sstream>
 
 
-void FileReader::ReadSchepenFile(schip* schepen[]) {
+void FileReader::ReadSchepenFile(schip* schepen) {
 
 	std::ifstream file("DataFiles/schepen.csv");
-
+	
 	char* next_token1 = NULL;
 	char line [1000];
 	int currentShip = 0;
@@ -18,35 +18,32 @@ void FileReader::ReadSchepenFile(schip* schepen[]) {
 	{
 		file.getline(line, sizeof line);
 		char* token1 = strtok_s(line, ";", &next_token1);
-		int counter = 0;
 		
-		while (token1 != NULL) {
-			ships[currentShip][counter] = new char[25];
-			if (token1 != nullptr) {
-				strcpy_s(ships[currentShip][counter], 25, token1);
+		for (int i = 0; i < 6; i++) {
+			ships[currentShip][i] = new char[25];
+			if (token1 != NULL) {
+				strcpy_s(ships[currentShip][i], 25, token1);
+				token1 = strtok_s(NULL, ";", &next_token1);
 			}
 
-			token1 = strtok_s(NULL, ";", &next_token1);
-			counter++;
 		}
 		currentShip++;
 	}
 	file.close();
 	for (int i = 1; i < 14; i++) {
-		schepen[i - 1] = new schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], nullptr, 0);
+
+		schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], nullptr, 0);
 	}
-	//delete[] ships;
-	
 }
 
-void FileReader::MaakHavens(Haven* havens[], schip* schepen[]) {
+void FileReader::MaakHavens(Haven* havens[], schip schepen[]) {
 	char* prijzen[25][16];
 	char* hoeveelheden[25][16];
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
 
 	for (int i = 1; i < 25; i++) {
-		Handelsgoed* goederen[15];
+		Handelsgoed goederen[15];
 		int k;
 		int minPrijs = NULL;
 		int maxPrijs = NULL;
@@ -62,11 +59,11 @@ void FileReader::MaakHavens(Haven* havens[], schip* schepen[]) {
 			char* minH = strtok_s(hoeveelheden[i][j], "-", &maxH);
 			minHoeveelheid = atoi(minH);
 			maxHoeveelheid = atoi(maxH);
-			goederen[j - 1] = new Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid);
+			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid);
 
 		}
-		havens[i - 1] = new Haven(NULL, *schepen, *goederen, 13, 25, 10);
-
+		havens[i - 1] = new Haven(NULL, schepen, goederen, 13, 15, 10);
+		havens[i - 1]->seedHaven();
 	}
 }
 

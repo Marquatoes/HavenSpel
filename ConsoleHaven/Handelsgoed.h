@@ -11,12 +11,12 @@ private:
 public:
 	Handelsgoed();
 	Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal);
-	const int getPrijs();
-	const int getAantal();
-	const int getMinAantal();
-	const int getMaxAantal();
-	const int getMinPrijs();
-	const int getMaxPrijs();
+	int getPrijs() const;
+	int getAantal() const;
+	int getMinAantal() const;
+	int getMaxAantal() const;
+	int getMinPrijs() const;
+	int getMaxPrijs() const;
 	void setAantal(int aantal);
 	void setPrijs(int prijs);
 	

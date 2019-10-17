@@ -5,32 +5,32 @@ Handelsgoed::Handelsgoed() :_prijs{ 0 }, _aantal{ 0 }, _maxPrijs{ 0 }, _minPrijs
 Handelsgoed::Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal) : 
 	_prijs{ prijs }, _aantal{ aantal }, _maxPrijs{ maxPrijs }, _minPrijs{ minPrijs }, _maxAantal { maxAantal }, _minAantal { minAantal } {}
 
-const int Handelsgoed::getPrijs()
+int Handelsgoed::getPrijs() const
 {
 	return _prijs;
 }
 
-const int Handelsgoed::getAantal()
+int Handelsgoed::getAantal() const
 {
 	return _aantal;
 }
 
-const int Handelsgoed::getMinAantal()
+int Handelsgoed::getMinAantal() const
 {
 	return _minAantal;
 }
 
-const int Handelsgoed::getMaxAantal()
+int Handelsgoed::getMaxAantal() const
 {
 	return _maxAantal;
 }
 
-const int Handelsgoed::getMinPrijs()
+int Handelsgoed::getMinPrijs() const
 {
 	return _minPrijs;
 }
 
-const int Handelsgoed::getMaxPrijs()
+int Handelsgoed::getMaxPrijs() const
 {
 	return _maxPrijs;
 }

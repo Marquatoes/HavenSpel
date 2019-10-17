@@ -10,28 +10,29 @@
 #include "FileReader.h"
 #include "Zee.h"
 
-schip* schepen[13];
+schip alleSchepen[13];
 Haven* havens[25];
 
 int main()
 {
-	Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
-	haven->seedHaven();
+	//Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
+	//haven->seedHaven();
 	//delete haven;
 	
 	const char* s = "log,licht";
 	char* t = new char[44];
 	strcpy_s(t, 44, s);
 	char grootte[] = "licht";
-//	schip* kutschip = new schip(nullptr, 100, 100, 100, 417, t , new Kanon(grootte, 50), 0);
+	schip* kutschip = new schip(nullptr, 100, 100, 100, 417, t , nullptr, 0);
 	FileReader f = FileReader();
+	schip *schepen = alleSchepen;
 	f.ReadSchepenFile(schepen);
-	f.MaakHavens(havens, schepen);
+	f.MaakHavens(havens, alleSchepen);
 	//std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
 	int turns = 5;
-	Zee* zee = new Zee(turns, *schepen);
-	schip *schip1 = schepen[5];
-	zee->enterZee(schepen[0]);
+	Zee* zee = new Zee(turns, schepen);
+	//schip *schip1 = schepen[5];
+	zee->enterZee(kutschip);
 	zee->vaar();
 	RNG::Release();
 	delete zee;

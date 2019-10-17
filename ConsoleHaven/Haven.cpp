@@ -1,8 +1,17 @@
 #include "Haven.h"
 
 Haven::Haven(schip* dockedSchip, schip* koopSchepen, Handelsgoed* handelsGoederen, size_t aantalSchepen, size_t aantalGoederen, size_t aantalKanonnen) :
-	_dockedSchip{ dockedSchip }, _koopSchepen{ koopSchepen }, _handelsGoederen{ handelsGoederen }, _aantalSchepen { aantalSchepen }, _aantalGoederen { aantalGoederen } , _aantalKanonnen { aantalKanonnen } 
+	_dockedSchip{ dockedSchip }, _aantalSchepen { aantalSchepen }, _aantalGoederen { aantalGoederen } , _aantalKanonnen { aantalKanonnen } 
 {
+	_handelsGoederen = new Handelsgoed[aantalGoederen];
+	for (int i = 0; i < aantalGoederen; i++) {
+		_handelsGoederen[i] = handelsGoederen[i];
+	}
+
+	_koopSchepen = new schip[aantalSchepen];
+	for (int i = 0; i < aantalSchepen; i++) {
+		_koopSchepen[i] = koopSchepen[i];
+	}
 	_kanonnen = nullptr;
 }
 

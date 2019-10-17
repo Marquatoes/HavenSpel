@@ -1,7 +1,10 @@
 #include "Zee.h"
 Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _piraten{ nullptr }, _schepen {schepen}
 {
-
+	_schepen = new schip[13];
+	for (int i = 0; i < 13; i++) {
+		_schepen[i] = schepen[i];
+	}
 }
 
 Zee::~Zee()
@@ -10,7 +13,7 @@ Zee::~Zee()
 		delete _vaarSchip;
 	}
 	if (_piraten != nullptr) {
-		delete _piraten;
+		//delete _piraten;
 	}
 	
 }
