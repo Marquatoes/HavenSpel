@@ -33,7 +33,7 @@ void FileReader::ReadSchepenFile(schip* schepen[]) {
 	}
 	file.close();
 	for (int i = 1; i < 14; i++) {
-		schepen[i - 1] = new schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5]);
+		schepen[i - 1] = new schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], nullptr);
 	}
 	//delete[] ships;
 	

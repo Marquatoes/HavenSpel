@@ -22,6 +22,6 @@ public:
 	void repareer(int aantalSchadePunten);
 	const int getSchade();
 	void setSchade(int aantal);
-	const bool hasType(const char* type);
+	const bool hasBijzonderheid(const char* bijzonderheid);
 	bool addKannon(Kannon kannon);
 };

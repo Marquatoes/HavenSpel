@@ -148,15 +148,14 @@ void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchad
 	}
 	
 }
-void Haven::koopKannon(schip* schip, Speler* speler) {
+void Haven::koopKannon(schip* schip, Speler* speler, int type) {
 	
 	//Selecteer optie
-	int type;
 	for (int i = 0; i < _aantalKannonen; i++) {
 		if (_kannonen[i].getType() == type && _kannonen[i].getPrijs() < speler->getGoudstukken()) {
 			speler->setGoudstukken(speler->getGoudstukken() - _kannonen[i].getPrijs());
 			//Move kannon to schip
-			_dockedSchip.addKanon(_kannonen[i]);
+			_dockedSchip->addKannon(_kannonen[i]);
 		}
 	}
 }

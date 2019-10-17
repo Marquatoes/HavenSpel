@@ -112,8 +112,24 @@ void schip::setSchade(int aantal)
 	_schadepunten = aantal;
 }
 
-const bool schip::hasType(const char* type)
+const bool schip::hasBijzonderheid(const char* bijzonderheid)
 {
+	char* copy = new char[100];
+	strcpy_s(copy, 100 , _bijzonderheden);
+	if (bijzonderheid != nullptr) {
+		char* next_token1{};
+		strtok_s(copy, ",", &next_token1);
+		if (std::strcmp(copy, bijzonderheid) == 0) {
+			delete[] copy;
+			return true;
+		}
+		if (next_token1 != nullptr && std::strcmp(next_token1, bijzonderheid) == 0)
+		{
+			delete[] copy;
+			return true;
+		}
+		delete[] copy;
+	}
 	return false;
 }
 

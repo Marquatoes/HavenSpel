@@ -24,13 +24,13 @@ int Zee::gevolgWind(int actie, RNG* rng) {
 		return 0;
 	}
 	else if (actie >= 3 && actie <= 4) {
-		if (_vaarSchip->hasType("licht")) {
+		if (_vaarSchip->hasBijzonderheid("licht")) {
 			return 1;
 		}
 		return 0;
 	}
 	else if (actie >= 5 && actie <= 7) {
-		if (_vaarSchip->hasType("log")) {
+		if (_vaarSchip->hasBijzonderheid("log")) {
 			return 0;
 		}
 		return 1;

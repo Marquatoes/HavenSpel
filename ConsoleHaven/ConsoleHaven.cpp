@@ -18,12 +18,18 @@ int main()
 	haven->seedHaven(rng);
 	delete haven;
 	delete rng;
+	const char* s = "log,licht";
+	char* t = new char[44];
+	strcpy_s(t, 44, s);
+	schip* kutschip = new schip(nullptr, 10000000, 100000, 10010205621, 41728491204, t , new Kannon(1, 50));
+	std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
+	delete kutschip;
 	_CrtDumpMemoryLeaks();
 
-    std::cout << "Hello World!\n";
-	FileReader f = FileReader();
-	f.ReadSchepenFile(schepen);
-	f.MaakHavens(havens, schepen);
+    //std::cout << "Hello World!\n";
+	//FileReader f = FileReader();
+	//f.ReadSchepenFile(schepen);
+	//f.MaakHavens(havens, schepen);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
