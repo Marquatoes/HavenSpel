@@ -1,22 +1,24 @@
-﻿  Zee.cpp
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  ConsoleHaven.cpp
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\schip.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(7,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(8,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(9,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\schip.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(23,105): warning C4305: 'argument': truncation from '__int64' to 'int'
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(23,70): warning C4309: 'argument': truncation of constant value
+﻿  ConsoleHaven.cpp
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(7,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(8,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(9,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Zee.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+  FileReader.cpp
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Zee.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
   Generating Code...
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\ConsoleHaven.cpp(23,57): warning C4309: 'argument': truncation of constant value
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.cpp(17): warning C4715: 'Zee::vaar': not all control paths return a value
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Zee.cpp(57): warning C4715: 'Zee::gevolgWind': not all control paths return a value
-  ConsoleHaven.vcxproj -> C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\FileReader.cpp(47,7): warning C4101:  'k': unreferenced local variable
+  ConsoleHaven.vcxproj -> D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe
