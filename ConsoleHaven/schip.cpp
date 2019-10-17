@@ -1,14 +1,14 @@
 #include "schip.h"
 
-schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten{ 0 }, _aantalKannonnen{ 0 }
+schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten{ 0 }, _aantalKanonnen{ 0 }
 {
 	_type = new char[100];
 	_bijzonderheden = new char[100];
-	_kannonen = nullptr;
+	_kanonnen = nullptr;
 }
 
-schip::schip(char *type, int prijs, int laadruimte, int kanonnen, int schadepunten, char *bijzonderheden, Kannon* kannonen, int aantalKannonnen) :
-	_type{ type }, _prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ kanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kannonen{ kannonen }, _aantalKannonnen{ aantalKannonnen } {};
+schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
+	_type{ type }, _prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen } {};
 
 schip::~schip()
 {
@@ -18,15 +18,15 @@ schip::~schip()
 	if (_bijzonderheden != nullptr) {
 		delete[] _bijzonderheden;
 	}
-	if (_kannonen != nullptr) {
-		delete[] _kannonen;
+	if (_kanonnen != nullptr) {
+		delete[] _kanonnen;
 	}
 }
 
-schip::schip(const schip& copySchip) : _type{ new char[100] }, _prijs{ copySchip._prijs }, _laadruimte{ copySchip._laadruimte }, _maxKanonnen{ copySchip._maxKanonnen }, _schadepunten{ copySchip._schadepunten }, _bijzonderheden{ new char[100] }, _kannonen{ new Kannon[_maxKanonnen] }, _aantalKannonnen{ 0 } {
+schip::schip(const schip& copySchip) : _type{ new char[100] }, _prijs{ copySchip._prijs }, _laadruimte{ copySchip._laadruimte }, _maxKanonnen{ copySchip._maxKanonnen }, _schadepunten{ copySchip._schadepunten }, _bijzonderheden{ new char[100] }, _kanonnen{ new Kanon[_maxKanonnen] }, _aantalKanonnen{ 0 } {
 	std::memcpy(_type, copySchip._type, 100);
 	std::memcpy(_bijzonderheden, copySchip._bijzonderheden, 100);
-	std:memcpy(_kannonen, copySchip._kannonen, _maxKanonnen);
+	std:memcpy(_kanonnen, copySchip._kanonnen, _maxKanonnen);
 }
 
 schip& schip::operator=(const schip& copySchip)
@@ -39,8 +39,8 @@ schip& schip::operator=(const schip& copySchip)
 	if (_bijzonderheden != nullptr) {
 		delete[] _bijzonderheden;
 	}
-	if (_kannonen != nullptr) {
-		delete[] _kannonen;
+	if (_kanonnen != nullptr) {
+		delete[] _kanonnen;
 	}
 
 	_type = copySchip._type;
@@ -49,16 +49,16 @@ schip& schip::operator=(const schip& copySchip)
 	_maxKanonnen = copySchip._maxKanonnen;
 	_schadepunten = copySchip._schadepunten;
 	_bijzonderheden = copySchip._bijzonderheden;
-	_kannonen = copySchip._kannonen;
-	_aantalKannonnen = copySchip._aantalKannonnen;
+	_kanonnen = copySchip._kanonnen;
+	_aantalKanonnen = copySchip._aantalKanonnen;
 	return *this;
 }
 
-schip::schip(schip&& moveSchip) noexcept : _type{ moveSchip._type }, _prijs{ moveSchip._prijs }, _laadruimte{ moveSchip._laadruimte }, _maxKanonnen{ moveSchip._maxKanonnen }, _schadepunten{ moveSchip._schadepunten }, _bijzonderheden{ moveSchip._bijzonderheden }, _kannonen{ moveSchip._kannonen } {
+schip::schip(schip&& moveSchip) noexcept : _type{ moveSchip._type }, _prijs{ moveSchip._prijs }, _laadruimte{ moveSchip._laadruimte }, _maxKanonnen{ moveSchip._maxKanonnen }, _schadepunten{ moveSchip._schadepunten }, _bijzonderheden{ moveSchip._bijzonderheden }, _kanonnen{ moveSchip._kanonnen }, _aantalKanonnen{ moveSchip._aantalKanonnen } {
 	moveSchip._type = nullptr;
 	moveSchip._bijzonderheden = nullptr;
-	moveSchip._kannonen = nullptr;
-	moveSchip._maxKanonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = moveSchip._aantalKannonnen = 0;
+	moveSchip._kanonnen = nullptr;
+	moveSchip._maxKanonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = moveSchip._aantalKanonnen = 0;
 }
 
 schip& schip::operator=(schip&& moveSchip) noexcept
@@ -72,8 +72,8 @@ schip& schip::operator=(schip&& moveSchip) noexcept
 	if (_bijzonderheden != nullptr) {
 		delete[] _bijzonderheden;
 	}
-	if (_kannonen != nullptr) {
-		delete[] _kannonen;
+	if (_kanonnen != nullptr) {
+		delete[] _kanonnen;
 	}
 
 	_type = moveSchip._type;
@@ -82,13 +82,13 @@ schip& schip::operator=(schip&& moveSchip) noexcept
 	_maxKanonnen = moveSchip._maxKanonnen;
 	_schadepunten = moveSchip._schadepunten;
 	_bijzonderheden = moveSchip._bijzonderheden;
-	_kannonen = moveSchip._kannonen;
-	_aantalKannonnen = moveSchip._aantalKannonnen;
+	_kanonnen = moveSchip._kanonnen;
+	_aantalKanonnen = moveSchip._aantalKanonnen;
 
 	moveSchip._type = nullptr;
 	moveSchip._bijzonderheden = nullptr;
-	moveSchip._kannonen = nullptr;
-	moveSchip._maxKanonnen = moveSchip._aantalKannonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = 0;
+	moveSchip._kanonnen = nullptr;
+	moveSchip._maxKanonnen = moveSchip._aantalKanonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = 0;
 
 	return *this;
 }
@@ -111,8 +111,8 @@ const int schip::getSchade()
 const int schip::getDamage(RNG* rng)
 {
 	int dmg = 0;
-	for (int i = 0; i < _aantalKannonnen, i++) {
-		dmg += _kannonen[i].getDamage();
+	for (int i = 0; i < _aantalKanonnen; i++) {
+		dmg += _kanonnen[i].getDamage(rng);
 	}
 	return dmg;
 }
@@ -143,7 +143,7 @@ const bool schip::hasBijzonderheid(const char* bijzonderheid)
 	return false;
 }
 
-bool schip::addKannon(Kannon kannon)
+bool schip::addKanon(Kanon kanon)
 {
 	return false;
 }

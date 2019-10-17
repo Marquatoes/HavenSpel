@@ -100,6 +100,7 @@ bool Zee::vaar(RNG* rng)
 
 void Zee::vechtMetPiraten(RNG* rng) {
 	int random = rng->getRandomNumber(0, 12);
+	_piraten = new schip();
 	*_piraten = _schepen[random];
 
 	vaar(rng);

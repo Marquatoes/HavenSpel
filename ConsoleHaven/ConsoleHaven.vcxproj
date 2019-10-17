@@ -155,7 +155,7 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Handelsgoed.cpp" />
     <ClCompile Include="Haven.cpp" />
-    <ClCompile Include="Kannon.cpp" />
+    <ClCompile Include="Kanon.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="schip.cpp" />
     <ClCompile Include="Speler.cpp" />
@@ -165,7 +165,7 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Handelsgoed.h" />
     <ClInclude Include="Haven.h" />
-    <ClInclude Include="Kannon.h" />
+    <ClInclude Include="Kanon.h" />
     <ClInclude Include="RNG.h" />
     <ClInclude Include="schip.h" />
     <ClInclude Include="Speler.h" />

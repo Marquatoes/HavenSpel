@@ -5,7 +5,7 @@
 #include <crtdbg.h>
 #include <iostream>
 #include "RNG.h";
-#include "Kannon.h";
+#include "Kanon.h";
 #include "Haven.h";
 #include "FileReader.h"
 #include "Zee.h"
@@ -17,26 +17,28 @@ int main()
 	RNG *rng = new RNG();
 	Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
 	haven->seedHaven(rng);
-	delete haven;
+	//delete haven;
 	
 	const char* s = "log,licht";
 	char* t = new char[44];
 	strcpy_s(t, 44, s);
-	schip* kutschip = new schip(nullptr, 100, 100, 100, 417, t , new Kannon(1, 50));
-
+	char grootte[] = "licht";
+//	schip* kutschip = new schip(nullptr, 100, 100, 100, 417, t , new Kanon(grootte, 50), 0);
+	FileReader f = FileReader();
+	f.ReadSchepenFile(schepen);
+	f.MaakHavens(havens, schepen);
 	//std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
 	int turns = 5;
-	Zee* zee = new Zee(turns, schepen);
-	zee->enterZee(kutschip);
+	Zee* zee = new Zee(turns, *schepen);
+	schip *schip1 = schepen[5];
+	zee->enterZee(schepen[0]);
 	zee->vaar(rng);
 	delete rng;
 	delete zee;
 	_CrtDumpMemoryLeaks();
 
     //std::cout << "Hello World!\n";
-	//FileReader f = FileReader();
-	//f.ReadSchepenFile(schepen);
-	//f.MaakHavens(havens, schepen);
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
