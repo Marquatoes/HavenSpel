@@ -118,7 +118,7 @@ const bool schip::hasBijzonderheid(const char* bijzonderheid)
 	strcpy_s(copy, 100 , _bijzonderheden);
 	if (bijzonderheid != nullptr) {
 		char* next_token1{};
-		strtok_s(copy, ",", &next_token1);
+		copy = strtok_s(copy, ",", &next_token1);
 		if (std::strcmp(copy, bijzonderheid) == 0) {
 			delete[] copy;
 			return true;

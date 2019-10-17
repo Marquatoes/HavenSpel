@@ -8,6 +8,7 @@
 #include "Kannon.h";
 #include "Haven.h";
 #include "FileReader.h"
+#include "Zee.h"
 
 schip* schepen[13];
 Haven* havens[25];
@@ -17,13 +18,19 @@ int main()
 	Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
 	haven->seedHaven(rng);
 	delete haven;
-	delete rng;
+	
 	const char* s = "log,licht";
 	char* t = new char[44];
 	strcpy_s(t, 44, s);
-	schip* kutschip = new schip(nullptr, 10000000, 100000, 10010205621, 41728491204, t , new Kannon(1, 50));
-	std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
-	delete kutschip;
+	schip* kutschip = new schip(nullptr, 100, 100, 100, 417, t , new Kannon(1, 50));
+
+	//std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
+	int turns = 5;
+	Zee* zee = new Zee(turns);
+	zee->enterZee(kutschip);
+	zee->vaar(rng);
+	delete rng;
+	delete zee;
 	_CrtDumpMemoryLeaks();
 
     //std::cout << "Hello World!\n";
