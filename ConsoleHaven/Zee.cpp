@@ -1,5 +1,5 @@
 #include "Zee.h"
-Zee::Zee(int turns) : _turns{ turns }, _vaarSchip{ nullptr }, _piraten{ nullptr }
+Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _piraten{ nullptr }, _schepen {schepen}
 {
 
 }
@@ -15,9 +15,9 @@ Zee::~Zee()
 	
 }
 
-Zee::Zee(const Zee& copyZee) : _turns {copyZee._turns}, _vaarSchip{copyZee._vaarSchip}, _piraten{copyZee._piraten}
+Zee::Zee(const Zee& copyZee) : _turns {copyZee._turns}, _vaarSchip{copyZee._vaarSchip}, _piraten{copyZee._piraten}, _schepen { new schip[13]}
 {
-	
+	std:memcpy(_schepen, copyZee._schepen, 13);
 }
 
 Zee& Zee::operator=(const Zee& copyZee)
@@ -30,17 +30,22 @@ Zee& Zee::operator=(const Zee& copyZee)
 	if (_vaarSchip != nullptr) {
 		delete _vaarSchip;
 	}
+	if (_schepen != nullptr) {
+		delete[] _schepen;
+	}
 
 	_piraten = copyZee._piraten;
 	_vaarSchip = copyZee._vaarSchip;
+	_schepen = copyZee._schepen;
 	_turns = copyZee._turns;
 	return *this;
 }
 
-Zee::Zee(Zee&& moveZee) noexcept : _turns{ moveZee._turns }, _vaarSchip{ moveZee._vaarSchip }, _piraten{ moveZee._piraten }
+Zee::Zee(Zee&& moveZee) noexcept : _turns{ moveZee._turns }, _vaarSchip{ moveZee._vaarSchip }, _piraten{ moveZee._piraten }, _schepen{moveZee._schepen}
 {
 	_piraten = nullptr;
 	_vaarSchip = nullptr;
+	_schepen = nullptr;
 	_turns = 0;
 }
 
@@ -55,14 +60,20 @@ Zee& Zee::operator=(Zee&& moveZee) noexcept
 	if (_vaarSchip != nullptr) {
 		delete _vaarSchip;
 	}
+	if (_schepen != nullptr) {
+		delete _schepen;
+	}
 
 	_piraten = moveZee._piraten;
 	_vaarSchip = moveZee._vaarSchip;
 	_turns = moveZee._turns;
+	_schepen = moveZee._schepen;
 
 	moveZee._piraten = nullptr;
 	moveZee._vaarSchip = nullptr;
+	moveZee._schepen = nullptr;
 	moveZee._turns = 0;
+	
 	return *this;
 }
 
@@ -88,6 +99,9 @@ bool Zee::vaar(RNG* rng)
 }
 
 void Zee::vechtMetPiraten(RNG* rng) {
+	int random = rng->getRandomNumber(0, 12);
+	*_piraten = _schepen[random];
+
 	vaar(rng);
 }
 //DP toepassen wanneer we klaar zijn !

@@ -6,10 +6,11 @@ private:
 	int _turns;
 	schip* _vaarSchip;
 	schip* _piraten;
+	schip* _schepen;
 	void vechtMetPiraten(RNG* rng);
 	void gevolgWind(int actie, RNG* rng);
 public:
-	Zee(int turns);
+	Zee(int turns, schip* schepen);
 	~Zee();
 	Zee(const Zee& copyZee);
 	Zee& operator=(const Zee& copyZee);

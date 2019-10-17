@@ -26,7 +26,7 @@ int main()
 
 	//std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
 	int turns = 5;
-	Zee* zee = new Zee(turns);
+	Zee* zee = new Zee(turns, schepen);
 	zee->enterZee(kutschip);
 	zee->vaar(rng);
 	delete rng;
