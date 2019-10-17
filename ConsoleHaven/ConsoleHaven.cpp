@@ -5,9 +5,10 @@
 #include <crtdbg.h>
 #include <iostream>
 #include "RNG.h";
-#include "Kannon.h";
+#include "Kanon.h";
 #include "Haven.h";
 #include "FileReader.h"
+#include "Zee.h"
 
 schip* schepen[13];
 Haven* havens[25];
@@ -16,19 +17,27 @@ int main()
 {
 	Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
 	haven->seedHaven();
-	delete haven;
+	//delete haven;
+	
 	const char* s = "log,licht";
 	char* t = new char[44];
 	strcpy_s(t, 44, s);
-	schip* kutschip = new schip(nullptr, 10000000, 100000, 10010205621, 41728491204, t , new Kannon(1, 50));
-	std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
-	delete kutschip;
+	char grootte[] = "licht";
+//	schip* kutschip = new schip(nullptr, 100, 100, 100, 417, t , new Kanon(grootte, 50), 0);
+	FileReader f = FileReader();
+	f.ReadSchepenFile(schepen);
+	f.MaakHavens(havens, schepen);
+	//std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
+	int turns = 5;
+	Zee* zee = new Zee(turns, *schepen);
+	schip *schip1 = schepen[5];
+	zee->enterZee(schepen[0]);
+	zee->vaar();
 	RNG::Release();
+	delete zee;
 	_CrtDumpMemoryLeaks();
     //std::cout << "Hello World!\n";
-	//FileReader f = FileReader();
-	//f.ReadSchepenFile(schepen);
-	//f.MaakHavens(havens, schepen);
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
