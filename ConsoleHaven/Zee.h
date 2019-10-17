@@ -6,8 +6,8 @@ private:
 	schip* _vaarSchip;
 	schip* _piraten;
 	void vechtMetPiraten();
-	int gevolgWind(int actie, RNG* rng);
+	int gevolgWind(int actie);
 public:
 	void enterZee(schip* vaarSchip);
-	int vaar(RNG* rng);
+	int vaar();
 };

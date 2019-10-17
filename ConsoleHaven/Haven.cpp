@@ -97,27 +97,27 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 	return *this;
 }
 
-void Haven::seedHaven(RNG *rng)
+void Haven::seedHaven()
 {
-	seedKannonen(rng);
-	seedGoederen(rng);
+	seedKannonen();
+	seedGoederen();
 }
 
-void Haven::seedKannonen(RNG* rng)
+void Haven::seedKannonen()
 {
 	_aantalKannonen = 0;
 	_kannonen = new Kannon[10];
-	int random = rng->getRandomNumber(0, 5);	
+	int random = RNG::Instance()->getRandomNumber(0, 5);	
 	for (int i = _aantalKannonen; i < random; i++) {
 		_kannonen[i] = Kannon(1, 50);
 	}
 	_aantalKannonen += random;
-	random = rng->getRandomNumber(0, 3);
+	random = RNG::Instance()->getRandomNumber(0, 3);
 	for (int i = _aantalKannonen; i < _aantalKannonen + random; i++) {
 		_kannonen [i] = Kannon(2, 200);
 	}
 	_aantalKannonen += random;
-	random = rng->getRandomNumber(0, 2);
+	random = RNG::Instance()->getRandomNumber(0, 2);
 	for (int i = _aantalKannonen; i < _aantalKannonen + random; i++) {
 		_kannonen[i] = Kannon(3, 1000);
 	}
@@ -127,11 +127,11 @@ void Haven::seedKannonen(RNG* rng)
 	}
 }
 
-void Haven::seedGoederen(RNG* rng)
+void Haven::seedGoederen()
 {
 	for (int i = 0; i < _aantalGoederen; i++) {
-		_handelsGoederen[i].setAantal(rng->getRandomNumber(_handelsGoederen[i].getMinAantal(), _handelsGoederen[i].getMaxAantal()));
-		_handelsGoederen[i].setPrijs(rng->getRandomNumber(_handelsGoederen[i].getMinPrijs(), _handelsGoederen[i].getMaxPrijs()));
+		_handelsGoederen[i].setAantal(RNG::Instance()->getRandomNumber(_handelsGoederen[i].getMinAantal(), _handelsGoederen[i].getMaxAantal()));
+		_handelsGoederen[i].setPrijs(RNG::Instance()->getRandomNumber(_handelsGoederen[i].getMinPrijs(), _handelsGoederen[i].getMaxPrijs()));
 	}
 }
 

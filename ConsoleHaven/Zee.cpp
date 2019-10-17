@@ -5,21 +5,21 @@ void Zee::enterZee(schip* vaarSchip)
 	_vaarSchip = std::move(vaarSchip);
 }
 
-int Zee::vaar(RNG* rng)
+int Zee::vaar()
 {
-	if (rng->getRandomNumber(1,10) < 3) {
+	if (RNG::Instance()->getRandomNumber(1,10) < 3) {
 		vechtMetPiraten();		
 	}
 	else {
-		int random = rng->getRandomNumber(1,20);
-		return gevolgWind(random, rng);
+		int random = RNG::Instance()->getRandomNumber(1,20);
+		return gevolgWind(random);
 	}
 }
 
 void Zee::vechtMetPiraten() {
 }
 //DP toepassen wanneer we klaar zijn !
-int Zee::gevolgWind(int actie, RNG* rng) {
+int Zee::gevolgWind(int actie) {
 	if (actie <= 2) {
 		return 0;
 	}
@@ -42,7 +42,7 @@ int Zee::gevolgWind(int actie, RNG* rng) {
 		return 2;
 	}
 	else {
-		int stormGevolg = rng->getRandomNumber(1, 10);
+		int stormGevolg = RNG::Instance()->getRandomNumber(1, 10);
 		if (stormGevolg >= 1 && stormGevolg <= 4) {
 			return -1;
 		}
@@ -52,6 +52,6 @@ int Zee::gevolgWind(int actie, RNG* rng) {
 		else if (stormGevolg >= 9 && stormGevolg <= 10) {
 			return 1;
 		}
-		_vaarSchip->setSchade(_vaarSchip->getSchade() * rng->getRandomNumber(1, 100));
+		_vaarSchip->setSchade(_vaarSchip->getSchade() * RNG::Instance()->getRandomNumber(1, 100));
 	}
 }
