@@ -1,14 +1,14 @@
 #include "Kanon.h"
 
-Kanon::Kanon() : _type{ 0 }, _prijs{ 0 }, _minDamage{ 0 }, _maxDamage{ 0 } {}
+Kanon::Kanon() :  _prijs{ 0 }, _minDamage{ 0 }, _maxDamage{ 0 } { _type = new char[15]; }
 
 Kanon::Kanon(char* const type, int prijs) : _type { type }, _prijs { prijs }
 {
 	_minDamage = 0;
-	if (std::strcmp(_type, "licht") == 0) {
+	if (std::strcmp(type, "licht") == 0) {
 		_maxDamage = 2;
 	}
-	else if (std::strcmp(_type, "middelgroot") == 0) {
+	else if (std::strcmp(type, "middelgroot") == 0) {
 		_maxDamage = 4;
 	}
 	else {
@@ -21,7 +21,6 @@ Kanon::~Kanon()
 	if (_type != nullptr) {
 		delete[] _type;
 	}
-	
 }
 
 Kanon::Kanon(const Kanon& copyKanon) : _type{copyKanon._type}, _prijs{copyKanon._prijs}, _minDamage{copyKanon._minDamage}, _maxDamage{copyKanon._maxDamage}

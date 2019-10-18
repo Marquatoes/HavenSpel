@@ -31,14 +31,19 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 	}
 	file.close();
 	for (int i = 1; i < 14; i++) {
-
-		schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], nullptr, 0);
+		Kanon* kanon = new Kanon[1];
+		kanon[0] = Kanon();
+		schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], kanon, 0);
 	}
 }
 
-void FileReader::MaakHavens(Haven* havens[], schip schepen[]) {
-	char* prijzen[25][16];
-	char* hoeveelheden[25][16];
+void FileReader::MaakHavens(Haven* havens) {
+	char** prijzen = new char*[25];
+	char** hoeveelheden = new char*[25];
+	for (int i = 0; i < 25; i++) {
+		prijzen[i] = new char[16];
+		hoeveelheden[i] = new char[25];
+	}
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
 
@@ -62,12 +67,13 @@ void FileReader::MaakHavens(Haven* havens[], schip schepen[]) {
 			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid);
 
 		}
-		havens[i - 1] = new Haven(NULL, schepen, goederen, 13, 15, 10);
-		havens[i - 1]->seedHaven();
+		havens[i - 1] =  Haven(goederen, 15);
 	}
+	delete[] prijzen;
+	delete[] hoeveelheden;
 }
 
-void FileReader::readGoederen(char *goederen[25][16], const char* path) {
+void FileReader::readGoederen(char **goederen, const char* path) {
 	std::ifstream file(path);
 
 	char* next_token1 = NULL;

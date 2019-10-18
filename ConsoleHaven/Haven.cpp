@@ -1,42 +1,36 @@
 #include "Haven.h"
 
-Haven::Haven(schip* dockedSchip, schip* koopSchepen, Handelsgoed* handelsGoederen, size_t aantalSchepen, size_t aantalGoederen, size_t aantalKanonnen) :
-	_dockedSchip{ dockedSchip }, _aantalSchepen { aantalSchepen }, _aantalGoederen { aantalGoederen } , _aantalKanonnen { aantalKanonnen } 
+Haven::Haven()
+{
+	_handelsGoederen = new Handelsgoed[10];
+	_kanonnen = new Kanon[10];
+	_aantalKanonnen = _aantalGoederen = 0;
+}
+
+Haven::Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }
 {
 	_handelsGoederen = new Handelsgoed[aantalGoederen];
 	for (int i = 0; i < aantalGoederen; i++) {
 		_handelsGoederen[i] = handelsGoederen[i];
 	}
-
-	_koopSchepen = new schip[aantalSchepen];
-	for (int i = 0; i < aantalSchepen; i++) {
-		_koopSchepen[i] = koopSchepen[i];
-	}
-	_kanonnen = nullptr;
+	_kanonnen = new Kanon[10];
 }
 
 Haven::~Haven()
 {
-	if (_dockedSchip != nullptr) {
-		delete _dockedSchip;
-	}
-	if (_koopSchepen != nullptr) {
-		delete[] _koopSchepen;
-	}
 	if (_handelsGoederen != nullptr) {
 		delete[] _handelsGoederen;
 	}
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
 	}
-	_aantalSchepen = _aantalGoederen = _aantalKanonnen = 0;
+	_aantalGoederen = _aantalKanonnen = 0;
 
 }
 
-Haven::Haven(const Haven& copyHaven) : _dockedSchip { copyHaven._dockedSchip }, _koopSchepen { new schip[copyHaven._aantalSchepen]}, _handelsGoederen { new Handelsgoed[copyHaven._aantalGoederen]}, 
-_kanonnen { new Kanon[copyHaven._aantalKanonnen]},_aantalSchepen { copyHaven._aantalSchepen}, _aantalGoederen{ copyHaven._aantalGoederen }, _aantalKanonnen{ copyHaven._aantalKanonnen }
+Haven::Haven(const Haven& copyHaven) :  _handelsGoederen { new Handelsgoed[copyHaven._aantalGoederen]}, 
+_kanonnen { new Kanon[copyHaven._aantalKanonnen]}, _aantalGoederen{ copyHaven._aantalGoederen }, _aantalKanonnen{ copyHaven._aantalKanonnen }
 {
-	std::memcpy(_koopSchepen,copyHaven._koopSchepen, copyHaven._aantalSchepen);
 	std::memcpy(_handelsGoederen, copyHaven._handelsGoederen, copyHaven._aantalGoederen);
 	std::memcpy(_kanonnen, copyHaven._kanonnen, copyHaven._aantalKanonnen);
 }
@@ -45,63 +39,43 @@ Haven& Haven::operator=(const Haven& copyHaven)
 {
 	if (&copyHaven == this) return *this;
 
-	if (_dockedSchip != nullptr) {
-		delete _dockedSchip;
-	}
-	if (_koopSchepen != nullptr) {
-		delete _koopSchepen;
-	}
 	if (_handelsGoederen != nullptr) {
-		delete _handelsGoederen;
+		delete[] _handelsGoederen;
 	}
 	if (_kanonnen != nullptr) {
-		delete _kanonnen;
+		delete[] _kanonnen;
 	}
 
-	_dockedSchip = copyHaven._dockedSchip;
 	_handelsGoederen = copyHaven._handelsGoederen;
-	_koopSchepen = copyHaven._koopSchepen;
 	_kanonnen = copyHaven._kanonnen;
 	return *this;
 }
 
-Haven::Haven(Haven&& moveHaven) noexcept : _dockedSchip { moveHaven._dockedSchip }, _koopSchepen{ moveHaven._koopSchepen }, _handelsGoederen{ moveHaven._handelsGoederen },
-_kanonnen{ moveHaven._kanonnen }, _aantalSchepen{ moveHaven._aantalSchepen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKanonnen{ moveHaven._aantalKanonnen }
+Haven::Haven(Haven&& moveHaven) noexcept :  _handelsGoederen{ moveHaven._handelsGoederen },
+_kanonnen{ moveHaven._kanonnen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKanonnen{ moveHaven._aantalKanonnen }
 {
-	moveHaven._dockedSchip = nullptr;
 	moveHaven._handelsGoederen = nullptr;
 	moveHaven._kanonnen = nullptr;
-	moveHaven._koopSchepen = nullptr;
-	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = moveHaven._aantalSchepen  = 0;
+	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = 0;
 }
 
 Haven& Haven::operator=(Haven&& moveHaven) noexcept
 {
 	if (&moveHaven == this) return *this;
 
-	if (_dockedSchip != nullptr) {
-		delete _dockedSchip;
-	}
-	if (_koopSchepen != nullptr) {
-		delete _koopSchepen;
-	}
 	if (_handelsGoederen != nullptr) {
-		delete _handelsGoederen;
+		delete[] _handelsGoederen;
 	}
 	if (_kanonnen != nullptr) {
-		delete _kanonnen;
+		delete[] _kanonnen;
 	}
 
-	_dockedSchip = moveHaven._dockedSchip;
 	_handelsGoederen = moveHaven._handelsGoederen;
-	_koopSchepen = moveHaven._koopSchepen;
 	_kanonnen = moveHaven._kanonnen;
 
-	moveHaven._dockedSchip = nullptr;
 	moveHaven._handelsGoederen = nullptr;
 	moveHaven._kanonnen = nullptr;
-	moveHaven._koopSchepen = nullptr;
-	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = moveHaven._aantalSchepen = 0;
+	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = 0;
 
 	return *this;
 }
@@ -152,11 +126,6 @@ void Haven::seedGoederen()
 	}
 }
 
-void Haven::enterHaven(schip* enterSchip)
-{
-	_dockedSchip = std::move(enterSchip);
-}
-
 void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchadePunten)
 {
 	if (speler->getGoudstukken() >= (aantalSchadePunten / 10) && aantalSchadePunten <= repareerSchip->getSchade()) {
@@ -172,7 +141,7 @@ void Haven::koopKanon(schip* schip, Speler* speler, char* type) {
 		if (std::strcmp(_kanonnen[i].getType(), type) == 0 && _kanonnen[i].getPrijs() < speler->getGoudstukken()) {
 			speler->setGoudstukken(speler->getGoudstukken() - _kanonnen[i].getPrijs());
 			//Move kanon to schip
-			_dockedSchip->addKanon(_kanonnen[i]);
+			schip->addKanon(_kanonnen[i]);
 		}
 	}
 }

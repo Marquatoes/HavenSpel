@@ -4,7 +4,7 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 {
 	_type = new char[100];
 	_bijzonderheden = new char[100];
-	_kanonnen = nullptr;
+	_kanonnen = new Kanon[10];
 }
 
 schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
