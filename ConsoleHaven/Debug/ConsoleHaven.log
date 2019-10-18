@@ -6,6 +6,5 @@ D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning 
 D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
 D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
 D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\FileReader.cpp(72,7): warning C4101:  'k': unreferenced local variable
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\FileReader.cpp(118,10): warning C4101:  'p': unreferenced local variable
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\FileReader.cpp(68,7): warning C4101:  'k': unreferenced local variable
   ConsoleHaven.vcxproj -> D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe

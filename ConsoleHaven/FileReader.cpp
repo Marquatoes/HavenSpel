@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <stdio.h> 
+#include <string.h>
 
 
 void FileReader::ReadSchepenFile(schip* schepen) {
@@ -27,7 +29,6 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 				strcpy_s(ships[currentShip][i], 25, token1);
 				token1 = strtok_s(NULL, ";", &next_token1);
 			}
-
 		}
 		currentShip++;
 		delete[] token1;
@@ -40,16 +41,11 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 
 	}
 	for (int i = 0; i < 14; i++) {
-
-		
-		
 			for (int j = 0; j < 6; j++) {
 				if (i == 0 || (j > 0 && j < 5)) {
 					delete[] ships[i][j];
 				}
-			}
-			
-		
+			}		
 		delete[] ships[i];
 	}
 	//delete[] next_token1;
@@ -90,9 +86,12 @@ void FileReader::MaakHavens(Haven* havens) {
 		havens[i - 1] =  Haven(goederen, 15);
 	}
 	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 15; j++) {
-			delete[] prijzen[i][j];
-			delete[] hoeveelheden[i][j];
+		for (int j = 0; j < 16; j++) {
+			if (j < 15 || i > 0) {
+				delete[] prijzen[i][j];
+				delete[] hoeveelheden[i][j];
+			}
+
 		}
 		delete[] prijzen[i];
 		delete[] hoeveelheden[i];
@@ -103,8 +102,7 @@ void FileReader::MaakHavens(Haven* havens) {
 
 void FileReader::readGoederen(char ***goederen, const char* path) {
 	std::ifstream file(path);
-
-	
+	char* next_token1 = NULL;
 	char line[1000];
 	int currentShip = 0;
 
@@ -112,22 +110,17 @@ void FileReader::readGoederen(char ***goederen, const char* path) {
 	{
 		file.getline(line, sizeof line);
 		if (line[0] != '#') {
-			char* next_token1 = NULL;
-			char* token1 = strtok_s(line, ";", &next_token1);
+			
+			char* token;
+			char* rest = line;
 			int counter = 0;
-			char* p;
-			while (token1 != NULL) {
+			while ((token = strtok_s(rest, ";", &rest))) {
 				goederen[currentShip][counter] = new char[25];
-				if (token1 != nullptr) {
-					strcpy_s(goederen[currentShip][counter], 25, token1);
-				}
-
-				token1 = strtok_s(NULL, ";", &next_token1);
-
+				printf("%s\n", token);
+				strcpy_s(goederen[currentShip][counter], 25, token);
 				counter++;
 			}
 			currentShip++;
-
 		}
 		
 	}
