@@ -6,14 +6,16 @@
 
 
 void FileReader::ReadSchepenFile(schip* schepen) {
-
+	
 	std::ifstream file("DataFiles/schepen.csv");
 	
 	char* next_token1 = NULL;
 	char line [1000];
 	int currentShip = 0;
-	
-	char *ships[14][6];
+	char*** ships = new char** [14];
+	for (int i = 0; i < 14; i++) {
+		ships[i] = new char* [6];
+	}
 	while (currentShip < 14)
 	{
 		file.getline(line, sizeof line);
@@ -28,21 +30,39 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 
 		}
 		currentShip++;
+		delete[] token1;
 	}
 	file.close();
 	for (int i = 1; i < 14; i++) {
 		Kanon* kanon = new Kanon[1];
 		kanon[0] = Kanon();
 		schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], kanon, 0);
+
 	}
+	for (int i = 0; i < 14; i++) {
+
+		
+		
+			for (int j = 0; j < 6; j++) {
+				if (i == 0 || (j > 0 && j < 5)) {
+					delete[] ships[i][j];
+				}
+			}
+			
+		
+		delete[] ships[i];
+	}
+	//delete[] next_token1;
+	delete[] ships;
+
 }
 
 void FileReader::MaakHavens(Haven* havens) {
-	char** prijzen = new char*[25];
-	char** hoeveelheden = new char*[25];
+	char*** prijzen = new char**[25];
+	char*** hoeveelheden = new char**[25];
 	for (int i = 0; i < 25; i++) {
-		prijzen[i] = new char[16];
-		hoeveelheden[i] = new char[25];
+		prijzen[i] = new char*[16];
+		hoeveelheden[i] = new char*[16];
 	}
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
@@ -69,14 +89,22 @@ void FileReader::MaakHavens(Haven* havens) {
 		}
 		havens[i - 1] =  Haven(goederen, 15);
 	}
+	for (int i = 0; i < 25; i++) {
+		for (int j = 0; j < 15; j++) {
+			delete[] prijzen[i][j];
+			delete[] hoeveelheden[i][j];
+		}
+		delete[] prijzen[i];
+		delete[] hoeveelheden[i];
+	}
 	delete[] prijzen;
 	delete[] hoeveelheden;
 }
 
-void FileReader::readGoederen(char **goederen, const char* path) {
+void FileReader::readGoederen(char ***goederen, const char* path) {
 	std::ifstream file(path);
 
-	char* next_token1 = NULL;
+	
 	char line[1000];
 	int currentShip = 0;
 
@@ -84,9 +112,10 @@ void FileReader::readGoederen(char **goederen, const char* path) {
 	{
 		file.getline(line, sizeof line);
 		if (line[0] != '#') {
+			char* next_token1 = NULL;
 			char* token1 = strtok_s(line, ";", &next_token1);
 			int counter = 0;
-
+			char* p;
 			while (token1 != NULL) {
 				goederen[currentShip][counter] = new char[25];
 				if (token1 != nullptr) {
@@ -94,9 +123,11 @@ void FileReader::readGoederen(char **goederen, const char* path) {
 				}
 
 				token1 = strtok_s(NULL, ";", &next_token1);
+
 				counter++;
 			}
 			currentShip++;
+
 		}
 		
 	}

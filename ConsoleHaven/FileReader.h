@@ -4,7 +4,7 @@
 
 class FileReader {
 private:
-	void readGoederen(char** goederen, const char* path);
+	void readGoederen(char*** goederen, const char* path);
 public:
 	void ReadSchepenFile(schip* schepen);
 	void MaakHavens(Haven* havens);

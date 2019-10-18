@@ -16,33 +16,23 @@ int main()
 	//Haven *haven = new Haven(nullptr, nullptr, nullptr, 0, 0, 0);
 	//haven->seedHaven();
 	//delete haven;
-	schip alleSchepen[13];
-	Haven havens[24];
-	Haven* ptr = &havens[0];
-	const char* s = "log,licht";
-	const char* typo = "zeerkut";
-	char* t = new char[44];
-	char* type = new char[44];
-	strcpy_s(t, 44, s);
-	strcpy_s(type, 44, typo);
-	Kanon* kanon = new Kanon[1];
-	kanon[0] = Kanon();
-	schip* kutschip = new schip(type, 100, 100, 100, 417, t , kanon  , 0);
+	schip* alleSchepen;
+	alleSchepen = new schip[13];
+	Haven* havens;
+	havens = new Haven[24];
+
 	FileReader f = FileReader();
-	schip *schepen = alleSchepen;
-	f.ReadSchepenFile(schepen);
-	f.MaakHavens(ptr);
-	//std::cout << kutschip->hasBijzonderheid("licht") << std::endl;
+	//schip *schepen = alleSchepen;
+	f.ReadSchepenFile(alleSchepen);
+	f.MaakHavens(havens);
 	int turns = 5;
 	//Zee* zee = new Zee(turns, schepen);
-	//schip *schip1 = schepen[5];
 	//zee->enterZee(kutschip);
 	//zee->vaar();
 	RNG::Release();
-	delete kutschip;
-	//delete zee;
+	delete[] alleSchepen;
+	delete[] havens;
 	_CrtDumpMemoryLeaks();
-    //std::cout << "Hello World!\n";
 
 }
 
