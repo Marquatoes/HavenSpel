@@ -20,18 +20,31 @@ int main()
 	alleSchepen = new schip[13];
 	Haven* havens;
 	havens = new Haven[24];
-
+	const char* s = "klein,licht";
+	const char* typo = "zeerkut";
+	char* t = new char[44];
+	char* type = new char[44];
+	strcpy_s(t, 44, s);
+	strcpy_s(type, 44, typo);
+	Kanon* kanon = new Kanon[1];
+	char grootte[] = "licht";
+	kanon[0] = Kanon(grootte, 50);
+	schip* kutschip = new schip(type, 100, 100, 100, 417, t, kanon, 1);
 	FileReader f = FileReader();
-	//schip *schepen = alleSchepen;
+	schip *schepen = alleSchepen;
 	f.ReadSchepenFile(alleSchepen);
 	f.MaakHavens(havens);
 	int turns = 5;
-	//Zee* zee = new Zee(turns, schepen);
-	//zee->enterZee(kutschip);
-	//zee->vaar();
+	Zee* zee = new Zee(turns, schepen);
+	zee->enterZee(kutschip);
+	zee->vaar();
+
 	RNG::Release();
-	delete[] alleSchepen;
+	
 	delete[] havens;
+	delete zee;
+	delete[] alleSchepen;
+	
 	_CrtDumpMemoryLeaks();
 
 }

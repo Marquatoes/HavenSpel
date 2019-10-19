@@ -8,7 +8,9 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 }
 
 schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
-	_type{ type }, _prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen } {};
+	_prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen } {
+	_type = type;
+};
 
 schip::~schip()
 {
@@ -42,14 +44,19 @@ schip& schip::operator=(const schip& copySchip)
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
 	}
-
-	_type = copySchip._type;
+	_type = new char[100];
+	std::memcpy(_type, copySchip._type, 100);
 	_prijs = copySchip._prijs;
 	_laadruimte = copySchip._laadruimte;
 	_maxKanonnen = copySchip._maxKanonnen;
 	_schadepunten = copySchip._schadepunten;
-	_bijzonderheden = copySchip._bijzonderheden;
-	_kanonnen = copySchip._kanonnen;
+	_bijzonderheden = new char[100];
+	std::memcpy(_bijzonderheden, copySchip._bijzonderheden, 100);
+	_kanonnen = new Kanon[copySchip._maxKanonnen];
+	for (int i = 0; i < copySchip._aantalKanonnen; i++) {
+		_kanonnen[i] = Kanon();
+		_kanonnen[i] = copySchip._kanonnen[i];
+	}
 	_aantalKanonnen = copySchip._aantalKanonnen;
 	return *this;
 }
@@ -108,11 +115,11 @@ const int schip::getSchade()
 	return _schadepunten;
 }
 
-const int schip::getDamage(RNG* rng)
+const int schip::getDamage()
 {
 	int dmg = 0;
 	for (int i = 0; i < _aantalKanonnen; i++) {
-		dmg += _kanonnen[i].getDamage(rng);
+		dmg += _kanonnen[i].getDamage();
 	}
 	return dmg;
 }
@@ -146,4 +153,38 @@ const bool schip::hasBijzonderheid(const char* bijzonderheid)
 bool schip::addKanon(Kanon kanon)
 {
 	return false;
+}
+
+void schip::seedKanonnen(int aantal)
+{
+	if (_kanonnen != nullptr) {
+		delete[] _kanonnen;
+	}
+	_aantalKanonnen = 0;
+
+	_kanonnen = new Kanon[aantal];
+	for (int i = 0; i < aantal; i++) {
+		int random;
+		if (hasBijzonderheid("klein")) {
+			random = RNG::Instance()->getRandomNumber(0, 1);
+		}
+		else {
+			random = RNG::Instance()->getRandomNumber(0, 2);
+		}
+		
+		char* kanonGrootte;
+		if (random == 0) {
+			char grootte[] = "licht";
+			kanonGrootte = grootte;
+		}
+		else if (random == 1) {
+			char grootte[] = "middelgroot";
+			kanonGrootte = grootte;
+		}
+		else {
+			char grootte[] = "zwaar";
+			kanonGrootte = grootte;
+		}
+		_kanonnen[i] = Kanon(kanonGrootte, 50);
+	}
 }

@@ -9,6 +9,7 @@ private:
 	schip* _schepen;
 	void vechtMetPiraten();
 	void gevolgWind(int actie);
+	int getVluchtKans();
 public:
 	Zee(int turns, schip* schepen);
 	~Zee();

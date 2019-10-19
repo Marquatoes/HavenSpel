@@ -10,7 +10,7 @@ private:
 	int _minDamage;
 public:
 	Kanon();
-	Kanon(char* const type, int prijs);
+	Kanon(char* type, int prijs);
 	~Kanon();
 	Kanon(const Kanon& copyKanon);
 	Kanon& operator=(const Kanon& copyKanon);
@@ -18,5 +18,5 @@ public:
 	Kanon& operator=(Kanon&& moveKanon) noexcept;
 	const char* getType();
 	const int getPrijs();
-	const int getDamage(RNG* rng);
+	const int getDamage();
 };

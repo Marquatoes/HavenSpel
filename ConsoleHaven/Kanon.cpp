@@ -2,8 +2,10 @@
 
 Kanon::Kanon() :  _prijs{ 0 }, _minDamage{ 0 }, _maxDamage{ 0 } { _type = new char[15]; }
 
-Kanon::Kanon(char* const type, int prijs) : _type { type }, _prijs { prijs }
+Kanon::Kanon(char* type, int prijs) : _prijs { prijs }
 {
+	_type = new char[100];
+	std:memcpy(_type, type, 100);
 	_minDamage = 0;
 	if (std::strcmp(type, "licht") == 0) {
 		_maxDamage = 2;
@@ -35,7 +37,6 @@ Kanon& Kanon::operator=(const Kanon& copyKanon)
 	if (_type != nullptr) {
 		delete _type;
 	}
-
 	_type = copyKanon._type;
 	_prijs = copyKanon._prijs;
 	_minDamage = copyKanon._minDamage;
@@ -59,6 +60,9 @@ Kanon& Kanon::operator=(Kanon&& moveKanon) noexcept
 	}
 
 	_type = moveKanon._type;
+	_maxDamage = moveKanon._maxDamage;
+	_minDamage = moveKanon._minDamage;
+	_prijs = moveKanon._prijs;
 
 	moveKanon._type = nullptr;
 	moveKanon._minDamage = moveKanon._maxDamage = moveKanon._prijs = 0;
@@ -76,7 +80,7 @@ const int Kanon::getPrijs()
 	return _prijs;
 }
 
-const int Kanon::getDamage(RNG* rng)
+const int Kanon::getDamage()
 {
-	return rng->getRandomNumber(_minDamage, _maxDamage);
+	return RNG::Instance()->getRandomNumber(_minDamage, _maxDamage);
 }

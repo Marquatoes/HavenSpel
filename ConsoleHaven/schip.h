@@ -23,8 +23,9 @@ public:
 	schip& operator=(schip&& moveSchip) noexcept;
 	void repareer(int aantalSchadePunten);
 	const int getSchade();
-	const int getDamage(RNG* rng);
+	const int getDamage();
 	void setSchade(int aantal);
 	const bool hasBijzonderheid(const char* bijzonderheid);
 	bool addKanon(Kanon kanon);
+	void seedKanonnen(int aantal);
 };

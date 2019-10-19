@@ -1,10 +1,4 @@
-﻿  FileReader.cpp
+﻿  schip.cpp
 D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\FileReader.cpp(68,7): warning C4101:  'k': unreferenced local variable
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.cpp(30,5): warning C4102:  'std': unreferenced label
   ConsoleHaven.vcxproj -> D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe

@@ -5,6 +5,7 @@ Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _p
 	for (int i = 0; i < 13; i++) {
 		_schepen[i] = schepen[i];
 	}
+	_piraten = new schip();
 }
 
 Zee::~Zee()
@@ -13,7 +14,10 @@ Zee::~Zee()
 		delete _vaarSchip;
 	}
 	if (_piraten != nullptr) {
-		//delete _piraten;
+		delete _piraten;
+	}
+	if (_schepen != nullptr) {
+		delete[] _schepen;
 	}
 	
 }
@@ -63,9 +67,6 @@ Zee& Zee::operator=(Zee&& moveZee) noexcept
 	if (_vaarSchip != nullptr) {
 		delete _vaarSchip;
 	}
-	if (_schepen != nullptr) {
-		delete _schepen;
-	}
 
 	_piraten = moveZee._piraten;
 	_vaarSchip = moveZee._vaarSchip;
@@ -87,7 +88,7 @@ void Zee::enterZee(schip* vaarSchip)
 
 bool Zee::vaar()
 {
-	if (_turns != 0) {
+	if (_turns > 0) {
 		if (RNG::Instance()->getRandomNumber(1, 10) < 3) {
 			vechtMetPiraten();
 		}
@@ -102,10 +103,29 @@ bool Zee::vaar()
 }
 
 void Zee::vechtMetPiraten() {
-	int random = RNG::Instance()->getRandomNumber(0, 12);
-	_piraten = new schip();
+	int random = RNG::Instance()->getRandomNumber(0, 12);	
 	*_piraten = _schepen[random];
+	_piraten->seedKanonnen(RNG::Instance()->getRandomNumber(1, 10));
+	while (_piraten->getSchade() > 0 && _vaarSchip->getSchade() > 0) {
+		bool vecht = false; //moet worden uitgleezen uit console
+		bool vlucht = true;
+		bool geefover = false;
+		if (vecht) {
+			_piraten->setSchade(_piraten->getSchade() - _vaarSchip->getDamage());
 
+			if (_piraten->getSchade() > 0) {
+				_vaarSchip->setSchade(_vaarSchip->getSchade() - _piraten->getDamage());
+			}
+		}
+		else if(vlucht) { //vlucht
+			int vluchtkans = getVluchtKans();
+			int random = RNG::Instance()->getRandomNumber(1, 100);
+			if (random <= vluchtkans) {
+				break;
+			}
+		}
+	}
+	
 	vaar();
 }
 //DP toepassen wanneer we klaar zijn !
@@ -142,4 +162,42 @@ void Zee::gevolgWind(int actie) {
 		vaar();
 	}
 	
+}
+
+int Zee::getVluchtKans()
+{
+	if (_vaarSchip->hasBijzonderheid("licht")) {
+		if (_piraten->hasBijzonderheid("licht")) {
+			return 50;
+		}
+		else if (_piraten->hasBijzonderheid("normaal")) {
+			return 60;
+		}
+		else {
+			return 75;
+		}
+
+	}
+	else if (_vaarSchip->hasBijzonderheid("normaal")) {
+		if (_piraten->hasBijzonderheid("licht")) {
+			return 30;
+		}
+		else if (_piraten->hasBijzonderheid("normaal")) {
+			return 40;
+		}
+		else {
+			return 55;
+		}
+	}
+	else {
+		if (_piraten->hasBijzonderheid("licht")) {
+			return 5;
+		}
+		else if (_piraten->hasBijzonderheid("normaal")) {
+			return 15;
+		}
+		else {
+			return 30;
+		}
+	}
 }
