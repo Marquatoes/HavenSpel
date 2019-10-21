@@ -61,7 +61,8 @@ void FileReader::MaakHavens(Haven* havens) {
 	}
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
-
+	int** afstanden = new int*[24];
+	readAfstanden(afstanden);
 	for (int i = 1; i < 25; i++) {
 		Handelsgoed goederen[15];
 		int k;
@@ -80,9 +81,9 @@ void FileReader::MaakHavens(Haven* havens) {
 			minHoeveelheid = atoi(minH);
 			maxHoeveelheid = atoi(maxH);
 			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[i - 1][j - 1]);
-
 		}
-		havens[i - 1] =  Haven(goederen, 15, prijzen[i][0]);
+		 
+		havens[i - 1] =  Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
 	}
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 16; j++) {
@@ -94,9 +95,14 @@ void FileReader::MaakHavens(Haven* havens) {
 		}
 		delete[] prijzen[i];
 		delete[] hoeveelheden[i];
+		if (i < 24) {
+			delete[] afstanden[i];
+		}
+		
 	}
 	delete[] prijzen;
 	delete[] hoeveelheden;
+	delete[] afstanden;
 }
 
 void FileReader::readGoederen(char ***goederen, const char* path) {
@@ -115,13 +121,47 @@ void FileReader::readGoederen(char ***goederen, const char* path) {
 			int counter = 0;
 			while ((token = strtok_s(rest, ";", &rest))) {
 				goederen[currentShip][counter] = new char[25];
-				printf("%s\n", token);
 				strcpy_s(goederen[currentShip][counter], 25, token);
 				counter++;
 			}
 			currentShip++;
 		}
 		
+	}
+	file.close();
+}
+
+void FileReader::readAfstanden(int** afstanden)
+{
+	for (int i = 0; i < 24; i++) {
+		afstanden[i] = new int[24];
+	}
+
+	std::ifstream file("DataFiles/afstanden tussen steden.csv");
+	char* next_token1 = NULL;
+	char line[1000];
+	int currentShip = 0;
+
+	while (currentShip < 25)
+	{
+		file.getline(line, sizeof line);
+		if (line[0] != '#') {
+
+			char* token;
+			char* rest = line;
+			int counter = 0;
+			while ((token = strtok_s(rest, ";", &rest))) {
+				if (currentShip > 0 && counter > 0) {
+					int afstand = atoi(token);
+					afstanden[currentShip - 1][counter - 1] = afstand;
+					
+				}
+				
+				counter++;
+			}
+			currentShip++;
+		}
+
 	}
 	file.close();
 }
