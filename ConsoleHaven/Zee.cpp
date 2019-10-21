@@ -124,6 +124,9 @@ void Zee::vechtMetPiraten() {
 				break;
 			}
 		}
+		else if (geefover) {
+			
+		}
 	}
 	
 	vaar();

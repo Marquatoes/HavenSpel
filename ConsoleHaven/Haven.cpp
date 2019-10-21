@@ -106,7 +106,7 @@ void Haven::seedKanonnen()
 	_aantalKanonnen += random;
 	random = RNG::Instance()->getRandomNumber(0, 2);
 	for (int i = _aantalKanonnen; i < _aantalKanonnen + random; i++) {
-		char grootte[] = "licht";
+		char grootte[] = "zwaar";
 		char* ptr = grootte;
 		_kanonnen[i] = Kanon(ptr, 1000);
 	}
@@ -124,6 +124,13 @@ void Haven::seedGoederen()
 		_handelsGoederen[i].setAantal(RNG::Instance()->getRandomNumber(_handelsGoederen[i].getMinAantal(), _handelsGoederen[i].getMaxAantal()));
 		_handelsGoederen[i].setPrijs(RNG::Instance()->getRandomNumber(_handelsGoederen[i].getMinPrijs(), _handelsGoederen[i].getMaxPrijs()));
 	}
+}
+
+void Haven::enterHaven(schip* vaarschip)
+{
+	seedHaven();
+	
+		
 }
 
 void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchadePunten)
@@ -146,3 +153,34 @@ void Haven::koopKanon(schip* schip, Speler* speler, char* type) {
 	}
 }
 
+void Haven::koopGoederen()
+{
+}
+
+void Haven::verkoopGoederen()
+{
+}
+
+void Haven::koopKanonnen()
+{
+}
+
+void Haven::verkoopKanonnen()
+{
+}
+
+void Haven::koopSchip()
+{
+}
+
+void Haven::verkoopSchip()
+{
+}
+
+void Haven::wegvaren()
+{
+}
+
+void Haven::repareerSchip()
+{
+}

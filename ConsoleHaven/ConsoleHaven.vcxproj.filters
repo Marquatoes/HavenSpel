@@ -42,6 +42,9 @@
     <ClCompile Include="Kanon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Spel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="schip.h">
@@ -66,6 +69,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Kanon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

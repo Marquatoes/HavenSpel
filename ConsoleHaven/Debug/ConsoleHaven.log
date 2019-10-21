@@ -1,4 +1,15 @@
-﻿  schip.cpp
+﻿  Haven.cpp
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
 D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.cpp(30,5): warning C4102:  'std': unreferenced label
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Speler.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.cpp(13,20): warning C4018:  '<': signed/unsigned mismatch
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.cpp(101,34): warning C4018:  '<': signed/unsigned mismatch
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.cpp(108,34): warning C4018:  '<': signed/unsigned mismatch
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.cpp(114,20): warning C4018:  '<': signed/unsigned mismatch
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.cpp(123,20): warning C4018:  '<': signed/unsigned mismatch
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.cpp(159,20): warning C4018:  '<': signed/unsigned mismatch
   ConsoleHaven.vcxproj -> D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe

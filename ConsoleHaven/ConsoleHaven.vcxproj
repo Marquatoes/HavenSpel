@@ -158,6 +158,7 @@
     <ClCompile Include="Kanon.cpp" />
     <ClCompile Include="RNG.cpp" />
     <ClCompile Include="schip.cpp" />
+    <ClCompile Include="Spel.cpp" />
     <ClCompile Include="Speler.cpp" />
     <ClCompile Include="Zee.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="Kanon.h" />
     <ClInclude Include="RNG.h" />
     <ClInclude Include="schip.h" />
+    <ClInclude Include="Spel.h" />
     <ClInclude Include="Speler.h" />
     <ClInclude Include="Zee.h" />
   </ItemGroup>
