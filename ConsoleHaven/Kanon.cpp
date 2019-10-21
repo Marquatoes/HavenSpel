@@ -46,8 +46,8 @@ Kanon& Kanon::operator=(const Kanon& copyKanon)
 
 Kanon::Kanon(Kanon&& moveKanon) noexcept : _type{ moveKanon._type }, _prijs{ moveKanon._prijs }, _minDamage{ moveKanon._minDamage }, _maxDamage{ moveKanon._maxDamage }
 {
-	_type = nullptr;
-	_minDamage = _maxDamage = _prijs = 0;
+	moveKanon._type = nullptr;
+	moveKanon._minDamage = moveKanon._maxDamage = moveKanon._prijs = 0;
 }
 
 Kanon& Kanon::operator=(Kanon&& moveKanon) noexcept

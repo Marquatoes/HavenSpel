@@ -48,7 +48,6 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 			}		
 		delete[] ships[i];
 	}
-	//delete[] next_token1;
 	delete[] ships;
 
 }
@@ -80,10 +79,10 @@ void FileReader::MaakHavens(Haven* havens) {
 			char* minH = strtok_s(hoeveelheden[i][j], "-", &maxH);
 			minHoeveelheid = atoi(minH);
 			maxHoeveelheid = atoi(maxH);
-			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid);
+			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[i - 1][j - 1]);
 
 		}
-		havens[i - 1] =  Haven(goederen, 15);
+		havens[i - 1] =  Haven(goederen, 15, prijzen[i][0]);
 	}
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 16; j++) {

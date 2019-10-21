@@ -5,15 +5,19 @@ Haven::Haven()
 	_handelsGoederen = new Handelsgoed[10];
 	_kanonnen = new Kanon[10];
 	_aantalKanonnen = _aantalGoederen = 0;
+	_naam = new char[100];
 }
 
-Haven::Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }
+Haven::Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen, char* naam) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }
 {
+	_naam = new char[100];
+	std::memcpy(_naam, naam, 100);
 	_handelsGoederen = new Handelsgoed[aantalGoederen];
 	for (int i = 0; i < aantalGoederen; i++) {
 		_handelsGoederen[i] = handelsGoederen[i];
 	}
 	_kanonnen = new Kanon[10];
+
 }
 
 Haven::~Haven()
@@ -24,6 +28,9 @@ Haven::~Haven()
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
 	}
+	if (_naam != nullptr) {
+		delete[] _naam;
+	}
 	_aantalGoederen = _aantalKanonnen = 0;
 
 }
@@ -31,6 +38,7 @@ Haven::~Haven()
 Haven::Haven(const Haven& copyHaven) :  _handelsGoederen { new Handelsgoed[copyHaven._aantalGoederen]}, 
 _kanonnen { new Kanon[copyHaven._aantalKanonnen]}, _aantalGoederen{ copyHaven._aantalGoederen }, _aantalKanonnen{ copyHaven._aantalKanonnen }
 {
+	std::memcpy(_naam, copyHaven._naam, 100);
 	std::memcpy(_handelsGoederen, copyHaven._handelsGoederen, copyHaven._aantalGoederen);
 	std::memcpy(_kanonnen, copyHaven._kanonnen, copyHaven._aantalKanonnen);
 }
@@ -46,16 +54,18 @@ Haven& Haven::operator=(const Haven& copyHaven)
 		delete[] _kanonnen;
 	}
 
+	std::memcpy(_naam, copyHaven._naam, 100);
 	_handelsGoederen = copyHaven._handelsGoederen;
 	_kanonnen = copyHaven._kanonnen;
 	return *this;
 }
 
 Haven::Haven(Haven&& moveHaven) noexcept :  _handelsGoederen{ moveHaven._handelsGoederen },
-_kanonnen{ moveHaven._kanonnen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKanonnen{ moveHaven._aantalKanonnen }
+_kanonnen{ moveHaven._kanonnen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKanonnen{ moveHaven._aantalKanonnen }, _naam { moveHaven._naam }
 {
 	moveHaven._handelsGoederen = nullptr;
 	moveHaven._kanonnen = nullptr;
+	moveHaven._naam = nullptr;
 	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = 0;
 }
 
@@ -69,12 +79,16 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
 	}
-
+	if (_naam != nullptr) {
+		delete[] _naam;
+	}
+	_naam = moveHaven._naam;
 	_handelsGoederen = moveHaven._handelsGoederen;
 	_kanonnen = moveHaven._kanonnen;
 
 	moveHaven._handelsGoederen = nullptr;
 	moveHaven._kanonnen = nullptr;
+	moveHaven._naam = nullptr;
 	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = 0;
 
 	return *this;
