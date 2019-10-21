@@ -129,8 +129,6 @@ void Haven::seedGoederen()
 void Haven::enterHaven(schip* vaarschip)
 {
 	seedHaven();
-	
-		
 }
 
 void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchadePunten)
@@ -153,34 +151,34 @@ void Haven::koopKanon(schip* schip, Speler* speler, char* type) {
 	}
 }
 
-void Haven::koopGoederen()
+void Haven::KoopGoederen()
 {
 }
 
-void Haven::verkoopGoederen()
+void Haven::VerkoopGoederen()
 {
 }
 
-void Haven::koopKanonnen()
+void Haven::KoopKanonnen()
 {
 }
 
-void Haven::verkoopKanonnen()
+void Haven::VerkoopKanonnen()
 {
 }
 
-void Haven::koopSchip()
+void Haven::KoopSchip()
 {
 }
 
-void Haven::verkoopSchip()
+void Haven::VerkoopSchip()
 {
 }
 
-void Haven::wegvaren()
+void Haven::Wegvaren()
 {
 }
 
-void Haven::repareerSchip()
+void Haven::RepareerSchip()
 {
 }

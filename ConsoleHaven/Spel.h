@@ -10,10 +10,10 @@
 class Spel {
 private: 
 	void speelBeurt();
-	schip* alleSchepen;
-	Haven* havens;
-	schip* huidigSchip;
-	Haven* huidigeHaven;
+	schip* _alleSchepen;
+	Haven* _havens;
+	schip* _huidigSchip;
+	Haven* _huidigeHaven;
 public:
 	void Start();
 	void Stop();

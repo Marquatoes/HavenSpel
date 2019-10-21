@@ -11,15 +11,6 @@ private:
 	Kanon* _kanonnen;
 	size_t _aantalGoederen;
 	size_t _aantalKanonnen;
-	void koopGoederen();
-	void verkoopGoederen();
-	void koopKanonnen();
-	void verkoopKanonnen();
-	void koopSchip();
-	void verkoopSchip();
-	void wegvaren();
-	void repareerSchip();
-
 public:
 	Haven();
 	Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen);
@@ -34,4 +25,12 @@ public:
 	void enterHaven(schip* vaarschip);
 	void repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunten);
 	void koopKanon(schip* schip, Speler* speler, char* type);
+	void KoopGoederen();
+	void VerkoopGoederen();
+	void KoopKanonnen();
+	void VerkoopKanonnen();
+	void KoopSchip();
+	void VerkoopSchip();
+	void Wegvaren();
+	void RepareerSchip();
 };

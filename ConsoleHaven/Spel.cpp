@@ -6,9 +6,9 @@ void Spel::Start()
 	//haven->seedHaven();
 	//delete haven;
 	
-	alleSchepen = new schip[13];
+	_alleSchepen = new schip[13];
 	
-	havens = new Haven[24];
+	_havens = new Haven[24];
 	const char* s = "klein,licht";
 	const char* typo = "zeerkut";
 	char* t = new char[44];
@@ -18,12 +18,12 @@ void Spel::Start()
 	Kanon* kanon = new Kanon[1];
 	char grootte[] = "licht";
 	kanon[0] = Kanon(grootte, 50);
-	huidigSchip = new schip(type, 100, 100, 100, 417, t, kanon, 1);
+	_huidigSchip = new schip(type, 100, 100, 100, 417, t, kanon, 1);
 	FileReader f = FileReader();
-	schip* schepen = alleSchepen;
-	f.ReadSchepenFile(alleSchepen);
-	f.MaakHavens(havens);
-	havens[0].enterHaven(huidigSchip);
+	schip* schepen = _alleSchepen;
+	f.ReadSchepenFile(_alleSchepen);
+	f.MaakHavens(_havens);
+	_havens[0].enterHaven(_huidigSchip);
 	int turns = 5;
 	//Zee* zee = new Zee(turns, schepen);
 	//zee->enterZee(kutschip);
@@ -31,9 +31,9 @@ void Spel::Start()
 
 	RNG::Release();
 
-	delete[] havens;
+	delete[] _havens;
 	//delete zee;
-	delete[] alleSchepen;
+	delete[] _alleSchepen;
 }
 
 void Spel::speelBeurt()
@@ -53,23 +53,23 @@ void Spel::speelBeurt()
 
 	switch (result) {
 	case 1:
-		koopGoederen();
+		_huidigeHaven->KoopGoederen();
 	case 2:
-		verkoopGoederen();
+		_huidigeHaven->VerkoopGoederen();
 	case 3:
-		koopKanonnen();
+		_huidigeHaven->KoopKanonnen();
 	case 4:
-		verkoopKanonnen();
+		_huidigeHaven->VerkoopKanonnen();
 	case 5:
-		koopSchip();
+		_huidigeHaven->KoopSchip();
 	case 6:
-		verkoopSchip();
+		_huidigeHaven->VerkoopSchip();
 	case 7:
-		wegvaren();
+		_huidigeHaven->Wegvaren();
 	case 8:
-		repareerSchip();
+		_huidigeHaven->RepareerSchip();
 	case 9:
-		afsluiten();
+		Stop();
 	}
 }
 
