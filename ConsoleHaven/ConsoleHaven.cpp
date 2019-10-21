@@ -7,9 +7,9 @@
 
 int main()
 {
-	Spel spel = Spel();
-	spel.Start();
-	
+	Spel* spel = new Spel();
+	spel->Start();
+	delete spel;
 	
 	_CrtDumpMemoryLeaks();
 

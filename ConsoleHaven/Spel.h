@@ -15,6 +15,7 @@ private:
 	schip* _huidigSchip;
 	Haven* _huidigeHaven;
 	Zee* _zee;
+	Speler* _speler;
 public:
 	Spel();
 	~Spel();

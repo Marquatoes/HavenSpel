@@ -2,6 +2,11 @@
 #include "schip.h"
 #include <utility>
 
+Speler::Speler(int goudStukken) : _goudstukken { goudStukken }
+{
+
+}
+
 int Speler::getGoudstukken()
 {
 	return _goudstukken;
@@ -10,9 +15,4 @@ int Speler::getGoudstukken()
 void Speler::setGoudstukken(int aantal)
 {
 	_goudstukken = aantal;
-}
-
-void Speler::setSchip(schip &newSchip)
-{
-	_schip = std::move(newSchip);
 }

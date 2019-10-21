@@ -3,6 +3,9 @@
 void Spel::Start()
 {
 	_havens[0].enterHaven(_huidigSchip);
+	_huidigeHaven = new Haven();
+	*_huidigeHaven = _havens[0];
+	speelBeurt();
 }
 
 void Spel::speelBeurt()
@@ -23,29 +26,40 @@ void Spel::speelBeurt()
 	switch (result) {
 	case 1:
 		_huidigeHaven->KoopGoederen();
+		break;
 	case 2:
 		_huidigeHaven->VerkoopGoederen();
+		break;
 	case 3:
-		_huidigeHaven->KoopKanonnen();
+		_huidigeHaven->KoopKanonnen(_huidigSchip, _speler);
+		break;
 	case 4:
-		_huidigeHaven->VerkoopKanonnen();
+		_huidigeHaven->VerkoopKanon(_huidigSchip, _speler);
+		break;
 	case 5:
 		_huidigeHaven->KoopSchip();
+		break;
 	case 6:
 		_huidigeHaven->VerkoopSchip();
+		break;
 	case 7:
 		_huidigeHaven->Wegvaren();
+		break;
 	case 8:
 		_huidigeHaven->RepareerSchip();
+		break;
 	case 9:
 		Stop();
+		break;
 	}
+	speelBeurt();
 }
 
 Spel::Spel()
 {
 	_alleSchepen = new schip[13];
 	_havens = new Haven[24];
+	_speler = new Speler(5000);
 	FileReader f = FileReader();
 	f.ReadSchepenFile(_alleSchepen);
 	f.MaakHavens(_havens);
@@ -56,9 +70,7 @@ Spel::Spel()
 	strcpy_s(t, 44, s);
 	strcpy_s(type, 44, typo);
 	Kanon* kanon = new Kanon[1];
-	char grootte[] = "licht";
-	kanon[0] = Kanon(grootte, 50);
-	_huidigSchip = new schip(type, 100, 100, 100, 417, t, kanon, 1);
+	_huidigSchip = new schip(type, 100, 100, 1, 417, t, kanon, 0);
 }
 
 Spel::~Spel()

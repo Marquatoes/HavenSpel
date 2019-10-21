@@ -24,11 +24,10 @@ public:
 	void seedGoederen();
 	void enterHaven(schip* vaarschip);
 	void repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunten);
-	void koopKanon(schip* schip, Speler* speler, char* type);
+	void KoopKanonnen(schip* havenschip, Speler* speler);
+	void VerkoopKanon(schip* havenschip, Speler* speler);
 	void KoopGoederen();
 	void VerkoopGoederen();
-	void KoopKanonnen();
-	void VerkoopKanonnen();
 	void KoopSchip();
 	void VerkoopSchip();
 	void Wegvaren();

@@ -150,9 +150,38 @@ const bool schip::hasBijzonderheid(const char* bijzonderheid)
 	return false;
 }
 
-bool schip::addKanon(Kanon kanon)
+void schip::addKanon(Kanon kanon)
 {
+	if (_aantalKanonnen < _maxKanonnen) {
+		_kanonnen[_aantalKanonnen] = std::move(kanon);
+		_aantalKanonnen++;
+	}
+}
+bool schip::checkMaxKanonnen() {
+	if (_aantalKanonnen < _maxKanonnen) {
+		return true;
+	}
 	return false;
+}
+void schip::verkoopKanon(Speler* speler) {
+	if (_aantalKanonnen == 0) {
+		std::cout << "Je hebt geen kanonnen, beetje gevaarlijk niet?" << std::endl;
+		return;
+	}
+	for (int i = 0; i < _aantalKanonnen; i++) {
+		std::cout << i << ": " << _kanonnen[i].getType() << "Kanon voor de prijs van: " << _kanonnen[i].getPrijs() << std::endl;
+	}
+	int result;
+	std::cin >> result;
+	if (result >= 0 && result < _aantalKanonnen) {
+		speler->setGoudstukken(speler->getGoudstukken() + _kanonnen[result].getPrijs());
+		--_aantalKanonnen;
+	}
+	else {
+		for (int i = result; i < _aantalKanonnen - 1; i++) {
+			_kanonnen[i] = _kanonnen[i+1];
+		}
+	}
 }
 
 void schip::seedKanonnen(int aantal)

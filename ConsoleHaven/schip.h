@@ -1,7 +1,8 @@
 #include <cstddef>
-#include "Kanon.h";
+#include "Kanon.h"
 #include <cstring>
 #include "Handelsgoed.h"
+#include "Speler.h"
 #pragma once
 class schip
 {
@@ -28,7 +29,9 @@ public:
 	const int getDamage();
 	void setSchade(int aantal);
 	const bool hasBijzonderheid(const char* bijzonderheid);
-	bool addKanon(Kanon kanon);
+	void addKanon(Kanon kanon);
+	bool checkMaxKanonnen();
+	void verkoopKanon(Speler* speler);
 	void seedKanonnen(int aantal);
 	void dumpHandelsgoederen();
 };

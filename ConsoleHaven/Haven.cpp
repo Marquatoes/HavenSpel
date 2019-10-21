@@ -48,6 +48,8 @@ Haven& Haven::operator=(const Haven& copyHaven)
 
 	_handelsGoederen = copyHaven._handelsGoederen;
 	_kanonnen = copyHaven._kanonnen;
+	_aantalGoederen = copyHaven._aantalGoederen;
+	_aantalKanonnen = copyHaven._aantalKanonnen;
 	return *this;
 }
 
@@ -139,17 +141,6 @@ void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchad
 	}
 	
 }
-void Haven::koopKanon(schip* schip, Speler* speler, char* type) {
-	
-	//Selecteer optie
-	for (int i = 0; i < _aantalKanonnen; i++) {
-		if (std::strcmp(_kanonnen[i].getType(), type) == 0 && _kanonnen[i].getPrijs() < speler->getGoudstukken()) {
-			speler->setGoudstukken(speler->getGoudstukken() - _kanonnen[i].getPrijs());
-			//Move kanon to schip
-			schip->addKanon(_kanonnen[i]);
-		}
-	}
-}
 
 void Haven::KoopGoederen()
 {
@@ -159,16 +150,49 @@ void Haven::VerkoopGoederen()
 {
 }
 
-void Haven::KoopKanonnen()
+void Haven::KoopKanonnen(schip* havenschip, Speler* speler)
 {
+	if (_aantalKanonnen == 0) {
+		std::cout << "Deze haven heeft geen kanonnen" << std::endl;
+		return;
+	}
+	std::cout << "Welke type kanon wil je kopen?" << std::endl;
+	std::cout << "Je hebt "<< speler->getGoudstukken() << " goudstukken"<< std::endl;
+	for (int i = 0; i < _aantalKanonnen; i++) {
+		std::cout << i << ": " << _kanonnen[i].getType() << "Kanon voor de prijs van "<< _kanonnen[i].getPrijs()  << std::endl;
+	}
+	int result;
+	std::cin >> result;
+	if (result <= _aantalKanonnen && result >= 0) {
+		if (_kanonnen[result].getPrijs() < speler->getGoudstukken()) {
+			speler->setGoudstukken(speler->getGoudstukken() - _kanonnen[result].getPrijs());
+			if(havenschip->checkMaxKanonnen()) {
+				havenschip->addKanon(std::move(_kanonnen[result]));
+				for (int i = result; i < _aantalKanonnen - 1; i++) {
+					_kanonnen[i] = Kanon(std::move(_kanonnen[i + 1]));
+				}
+				_aantalKanonnen--;
+			}
+			else {
+				std::cout << "Je hebt al het maximale aantal kanonnen" << std::endl;
+			}
+			
+		}
+		else {
+			std::cout << "Je hebt niet genoeg geld" << std::endl;
+		}
+
+	}
 }
 
-void Haven::VerkoopKanonnen()
+void Haven::VerkoopKanon(schip* havenschip, Speler* speler)
 {
+	havenschip->verkoopKanon(speler);
 }
 
 void Haven::KoopSchip()
 {
+
 }
 
 void Haven::VerkoopSchip()
