@@ -10,7 +10,6 @@ int main()
 	Spel* spel = new Spel();
 	spel->Start();
 	delete spel;
-	
 	_CrtDumpMemoryLeaks();
 
 }

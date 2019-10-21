@@ -11,9 +11,13 @@ private:
 	Kanon* _kanonnen;
 	size_t _aantalGoederen;
 	size_t _aantalKanonnen;
+	int* _afstanden;
+	char* _naam;
+	
 public:
 	Haven();
-	Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen);
+	Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen, char* naam, int* afstanden);
+	
 	~Haven();
 	Haven(const Haven& copyHaven);
 	Haven& operator=(const Haven& copyHaven);
