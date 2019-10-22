@@ -35,4 +35,6 @@ public:
 	void seedKanonnen(int aantal);
 	void dumpHandelsgoederen();
 	Handelsgoed* getHandelsGoederen();
+	const int getAantalHandelsGoederen();
+	const int getCapaciteit();
 };

@@ -240,3 +240,17 @@ Handelsgoed* schip::getHandelsGoederen()
 {
 	return _handelsGoederen;
 }
+
+const int schip::getAantalHandelsGoederen()
+{
+	int aantal = 0;
+	for (int i = 0; i < 15; i++) {
+		aantal += _handelsGoederen[i].getAantal();
+	}
+	return aantal;
+}
+
+const int schip::getCapaciteit()
+{
+	return _laadruimte;
+}

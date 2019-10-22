@@ -186,8 +186,15 @@ void Haven::KoopGoederen(schip* havenschip, Speler* speler)
 	int result;
 	std::cin >> result;
 	int aantal = _handelsGoederen[result].Koop(havenschip->getHandelsGoederen()[result].getAantal(), speler->getGoudstukken());
-	speler->setGoudstukken(speler->getGoudstukken() - aantal * _handelsGoederen[result].getPrijs());
-	havenschip->getHandelsGoederen()[result].setAantal(havenschip->getHandelsGoederen()[result].getAantal() + aantal);
+	if (havenschip->getCapaciteit() > havenschip->getAantalHandelsGoederen() + aantal) {
+		speler->setGoudstukken(speler->getGoudstukken() - aantal * _handelsGoederen[result].getPrijs());
+		havenschip->getHandelsGoederen()[result].setAantal(havenschip->getHandelsGoederen()[result].getAantal() + aantal);
+	}
+	else {
+		std::cout << "Er is niet genoeg laadruimte beschikbaar voor dat aantal grondstoffen." << std::endl;
+		KoopGoederen(havenschip, speler);
+	}
+	
 }
 
 void Haven::VerkoopGoederen(schip* havenschip, Speler* speler)
