@@ -149,3 +149,31 @@ int Handelsgoed::Koop(const int huidigAantal, const int goudstukken)
 	Koop(huidigAantal, goudstukken);
 }
 
+int Handelsgoed::Verkoop(const int huidigAantal, const int goudstukken)
+{
+	std::cout << "---------------------------------------------------------------" << std::endl;
+	std::cout << "Verkoop " << _type << std::endl;
+	std::cout << "inventaris: " << huidigAantal << std::endl;
+	std::cout << "huiding goudstukken: " << goudstukken << std::endl;
+	std::cout << "Prijs per stuk: " << _prijs << std::endl;
+	std::cout << "Plek in haven: " << _maxAantal - _aantal << std::endl;
+
+	std::cout << "Hoeveel wil je er verkopen?" << std::endl;
+	int result;
+	std::cin >> result;
+	if (result <= _maxAantal - _aantal && result <= huidigAantal) {
+		_aantal += result;
+		return result;
+	}
+	else {
+		if (result > huidigAantal) {
+			std::cout << "Zoveel goederen heb je niet" << std::endl;
+		}
+		if (result > _maxAantal - _aantal) {
+			std::cout << "Zoveel is er niet in de haven" << std::endl;
+		}
+	}
+
+	Verkoop(huidigAantal, goudstukken);
+}
+

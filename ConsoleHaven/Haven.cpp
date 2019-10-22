@@ -192,6 +192,16 @@ void Haven::KoopGoederen(schip* havenschip, Speler* speler)
 
 void Haven::VerkoopGoederen(schip* havenschip, Speler* speler)
 {
+	std::cout << "---------------------------------------------------------------" << std::endl;
+	std::cout << "Kies een handelsgoed om te verkopen." << std::endl;
+	for (int i = 0; i < _aantalGoederen; i++) {
+		std::cout << i << ": " << _handelsGoederen[i].getType() << " | Prijs per stuk: " << _handelsGoederen[i].getPrijs() << " | Aantal in inventaris: " << havenschip->getHandelsGoederen()[i].getAantal() << std::endl;
+	}
+	int result;
+	std::cin >> result;
+	int aantal = _handelsGoederen[result].Verkoop(havenschip->getHandelsGoederen()[result].getAantal(), speler->getGoudstukken());
+	speler->setGoudstukken(speler->getGoudstukken() + aantal * _handelsGoederen[result].getPrijs());
+	havenschip->getHandelsGoederen()[result].setAantal(havenschip->getHandelsGoederen()[result].getAantal() - aantal);
 }
 
 void Haven::KoopKanonnen(schip* havenschip, Speler* speler)
