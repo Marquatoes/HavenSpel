@@ -70,17 +70,17 @@ Kanon& Kanon::operator=(Kanon&& moveKanon) noexcept
 	return *this;
 }
 
-const char* Kanon::getType()
+const char* Kanon::getType() const
 {
 	return _type;
 }
 
-const int Kanon::getPrijs()
+int Kanon::getPrijs() const
 {
 	return _prijs;
 }
 
-const int Kanon::getDamage()
+int Kanon::getDamage() const
 {
 	return RNG::Instance()->getRandomNumber(_minDamage, _maxDamage);
 }

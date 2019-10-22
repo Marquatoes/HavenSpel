@@ -9,7 +9,7 @@ Haven::Haven()
 	_afstanden = new int[24];
 }
 
-Haven::Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen, char* naam, int* afstanden) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }
+Haven::Haven(Handelsgoed* handelsGoederen, int aantalGoederen, char* naam, int* afstanden) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }
 {
 	_naam = new char[100];
 	std::memcpy(_naam, naam, 100);
@@ -103,6 +103,7 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 	}
 	_naam = moveHaven._naam;
 	_handelsGoederen = moveHaven._handelsGoederen;
+	_aantalGoederen = moveHaven._aantalGoederen;
 	_kanonnen = moveHaven._kanonnen;
 	_afstanden = moveHaven._afstanden;
 
@@ -175,11 +176,21 @@ void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchad
 	
 }
 
-void Haven::KoopGoederen()
+void Haven::KoopGoederen(schip* havenschip, Speler* speler)
 {
+	std::cout << "---------------------------------------------------------------" << std::endl;
+	std::cout << "Kies een handelsgoed om te kopen." << std::endl;
+	for (int i = 0; i < _aantalGoederen; i++) {
+		std::cout << i << ": " << _handelsGoederen[i].getType() << " | Prijs per stuk: " << _handelsGoederen[i].getPrijs() << " | Aantal beschikbaar: " << _handelsGoederen[i].getAantal() << std::endl;
+	}
+	int result;
+	std::cin >> result;
+	int aantal = _handelsGoederen[result].Koop(havenschip->getHandelsGoederen()[result].getAantal(), speler->getGoudstukken());
+	speler->setGoudstukken(speler->getGoudstukken() - aantal * _handelsGoederen[result].getPrijs());
+	havenschip->getHandelsGoederen()[result].setAantal(havenschip->getHandelsGoederen()[result].getAantal() + aantal);
 }
 
-void Haven::VerkoopGoederen()
+void Haven::VerkoopGoederen(schip* havenschip, Speler* speler)
 {
 }
 

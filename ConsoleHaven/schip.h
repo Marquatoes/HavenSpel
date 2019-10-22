@@ -34,4 +34,5 @@ public:
 	void verkoopKanon(Speler* speler);
 	void seedKanonnen(int aantal);
 	void dumpHandelsgoederen();
+	Handelsgoed* getHandelsGoederen();
 };

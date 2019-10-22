@@ -25,10 +25,10 @@ void Spel::speelBeurt()
 
 	switch (result) {
 	case 1:
-		_huidigeHaven->KoopGoederen();
+		_huidigeHaven->KoopGoederen(_huidigSchip, _speler);
 		break;
 	case 2:
-		_huidigeHaven->VerkoopGoederen();
+		_huidigeHaven->VerkoopGoederen(_huidigSchip, _speler);
 		break;
 	case 3:
 		_huidigeHaven->KoopKanonnen(_huidigSchip, _speler);
@@ -50,7 +50,8 @@ void Spel::speelBeurt()
 		break;
 	case 9:
 		Stop();
-		break;
+		return;
+		
 	}
 	speelBeurt();
 }

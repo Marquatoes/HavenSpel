@@ -27,5 +27,7 @@ public:
 	int getMaxPrijs() const;
 	void setAantal(int aantal);
 	void setPrijs(int prijs);
+	const char* getType() const;
+	int Koop(const int huidigAantal, const int goudstukken);
 	
 };

@@ -1,4 +1,5 @@
 #include "Handelsgoed.h"
+#include <iostream>
 
 Handelsgoed::Handelsgoed() :_prijs{ 0 }, _aantal{ 0 }, _maxPrijs{ 0 }, _minPrijs{ 0 }, _maxAantal{ 0 }, _minAantal{ 0 } {
 	_type = new char[100];
@@ -114,5 +115,37 @@ void Handelsgoed::setAantal(int aantal)
 void Handelsgoed::setPrijs(int prijs)
 {
 	_prijs = prijs;
+}
+
+const char* Handelsgoed::getType() const {
+	return _type;
+}
+
+int Handelsgoed::Koop(const int huidigAantal, const int goudstukken)
+{
+	std::cout << "---------------------------------------------------------------"<< std::endl;
+	std::cout << "Koop " << _type << std::endl;
+	std::cout << "inventaris: " << huidigAantal << std::endl;
+	std::cout << "huiding goudstukken: " << goudstukken << std::endl;
+	std::cout << "Kosten per stuk: " << _prijs << std::endl;
+	std::cout << "aantal beschikbaar: " << _aantal << std::endl;
+
+	std::cout << "Hoeveel wil je er kopen?" << std::endl;
+	int result;
+	std::cin >> result;
+	if (result <= _aantal && _aantal >= 0 && result * _prijs <= goudstukken) {
+		_aantal -= result;
+		return result;
+	}
+	else {
+		if (result > _aantal) {
+			std::cout << "Zoveel goederen zijn er niet beschikbaar" << std::endl;
+		}
+		if (result * _prijs > goudstukken) {
+			std::cout << "Zoveel goederen kun je niet betalen" << std::endl;
+		}
+	}
+
+	Koop(huidigAantal, goudstukken);
 }
 

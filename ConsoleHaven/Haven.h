@@ -9,14 +9,14 @@ class Haven
 private:
 	Handelsgoed* _handelsGoederen;
 	Kanon* _kanonnen;
-	size_t _aantalGoederen;
+	int _aantalGoederen;
 	size_t _aantalKanonnen;
 	int* _afstanden;
 	char* _naam;
 	
 public:
 	Haven();
-	Haven(Handelsgoed* handelsGoederen, size_t aantalGoederen, char* naam, int* afstanden);
+	Haven(Handelsgoed* handelsGoederen, int aantalGoederen, char* naam, int* afstanden);
 	
 	~Haven();
 	Haven(const Haven& copyHaven);
@@ -30,8 +30,8 @@ public:
 	void repareer(schip* repareerSchip, Speler* speler, int aantalSchadePunten);
 	void KoopKanonnen(schip* havenschip, Speler* speler);
 	void VerkoopKanon(schip* havenschip, Speler* speler);
-	void KoopGoederen();
-	void VerkoopGoederen();
+	void KoopGoederen(schip* havenschip, Speler* speler);
+	void VerkoopGoederen(schip* havenschip, Speler* speler);
 	void KoopSchip();
 	void VerkoopSchip();
 	void Wegvaren();

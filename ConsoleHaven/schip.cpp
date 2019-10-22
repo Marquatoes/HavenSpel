@@ -10,6 +10,10 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
 	_prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen } {
 	_type = type;
+	_handelsGoederen = new Handelsgoed[15];
+	for (int i = 0; i < 15; i++) {
+		_handelsGoederen[i] = Handelsgoed();
+	}
 };
 
 schip::~schip()
@@ -22,6 +26,9 @@ schip::~schip()
 	}
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
+	}
+	if (_handelsGoederen != nullptr) {
+		delete[] _handelsGoederen;
 	}
 }
 
@@ -57,14 +64,19 @@ schip& schip::operator=(const schip& copySchip)
 		_kanonnen[i] = Kanon();
 		_kanonnen[i] = copySchip._kanonnen[i];
 	}
+	for (int i = 0; i < 15; i++) {
+		_handelsGoederen[i] = Handelsgoed();
+		_handelsGoederen[i] = copySchip._handelsGoederen[i];
+	}
 	_aantalKanonnen = copySchip._aantalKanonnen;
 	return *this;
 }
 
-schip::schip(schip&& moveSchip) noexcept : _type{ moveSchip._type }, _prijs{ moveSchip._prijs }, _laadruimte{ moveSchip._laadruimte }, _maxKanonnen{ moveSchip._maxKanonnen }, _schadepunten{ moveSchip._schadepunten }, _bijzonderheden{ moveSchip._bijzonderheden }, _kanonnen{ moveSchip._kanonnen }, _aantalKanonnen{ moveSchip._aantalKanonnen } {
+schip::schip(schip&& moveSchip) noexcept : _type{ moveSchip._type }, _prijs{ moveSchip._prijs }, _laadruimte{ moveSchip._laadruimte }, _maxKanonnen{ moveSchip._maxKanonnen }, _schadepunten{ moveSchip._schadepunten }, _bijzonderheden{ moveSchip._bijzonderheden }, _kanonnen{ moveSchip._kanonnen }, _aantalKanonnen{ moveSchip._aantalKanonnen }, _handelsGoederen{ moveSchip._handelsGoederen } {
 	moveSchip._type = nullptr;
 	moveSchip._bijzonderheden = nullptr;
 	moveSchip._kanonnen = nullptr;
+	moveSchip._handelsGoederen = nullptr;
 	moveSchip._maxKanonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = moveSchip._aantalKanonnen = 0;
 }
 
@@ -91,10 +103,11 @@ schip& schip::operator=(schip&& moveSchip) noexcept
 	_bijzonderheden = moveSchip._bijzonderheden;
 	_kanonnen = moveSchip._kanonnen;
 	_aantalKanonnen = moveSchip._aantalKanonnen;
-
+	_handelsGoederen = moveSchip._handelsGoederen;
 	moveSchip._type = nullptr;
 	moveSchip._bijzonderheden = nullptr;
 	moveSchip._kanonnen = nullptr;
+	moveSchip._handelsGoederen = nullptr;
 	moveSchip._maxKanonnen = moveSchip._aantalKanonnen = moveSchip._prijs = moveSchip._schadepunten = moveSchip._laadruimte = 0;
 
 	return *this;
@@ -221,4 +234,9 @@ void schip::seedKanonnen(int aantal)
 void schip::dumpHandelsgoederen()
 {
 	
+}
+
+Handelsgoed* schip::getHandelsGoederen()
+{
+	return _handelsGoederen;
 }

@@ -16,7 +16,7 @@ public:
 	Kanon& operator=(const Kanon& copyKanon);
 	Kanon(Kanon&& moveKanon) noexcept;
 	Kanon& operator=(Kanon&& moveKanon) noexcept;
-	const char* getType();
-	const int getPrijs();
-	const int getDamage();
+	const char* getType() const;
+	int getPrijs() const;
+	int getDamage() const;
 };

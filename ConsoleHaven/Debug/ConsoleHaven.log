@@ -1,18 +1,12 @@
-﻿  Haven.cpp
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(13,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(103,34): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(110,34): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(116,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(125,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(161,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(166,13): warning C4018: '<=': signed/unsigned mismatch
-  schip.cpp
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Haven.cpp(171,28): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\schip.cpp(31,5): warning C4102: 'std': unreferenced label
-  ConsoleHaven.vcxproj -> C:\Users\Gebruiker'\Documents\GitHub\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe
+﻿  Spel.cpp
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Spel.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Spel.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Spel.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Zee.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Zee.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+  ConsoleHaven.vcxproj -> D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe
