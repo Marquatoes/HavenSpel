@@ -84,7 +84,7 @@ void FileReader::MaakHavens(Haven* havens) {
 			char* minH = strtok_s(hoeveelheden[i][j], "-", &maxH);
 			minHoeveelheid = atoi(minH);
 			maxHoeveelheid = atoi(maxH);
-			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[i - 1][j - 1]);
+			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[0][j - 1]);
 		}
 		 
 		havens[i - 1] =  Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
