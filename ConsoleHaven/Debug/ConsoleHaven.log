@@ -1,3 +1,12 @@
-﻿  schip.cpp
-D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\schip.cpp(38,5): warning C4102:  'std': unreferenced label
+﻿  Spel.cpp
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Spel.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Spel.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Spel.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(3,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(4,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Haven.h(5,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Zee.h(1,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
+D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Zee.h(2,10): warning C4067:  unexpected tokens following preprocessor directive - expected a newline
   ConsoleHaven.vcxproj -> D:\documenten\Avans\Minor\Project\HavenSpel\ConsoleHaven\Debug\ConsoleHaven.exe

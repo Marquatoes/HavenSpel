@@ -5,6 +5,10 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 	_type = new char[100];
 	_bijzonderheden = new char[100];
 	_kanonnen = new Kanon[10];
+	_handelsGoederen = new Handelsgoed[15];
+	for (int i = 0; i < 15; i++) {
+		_handelsGoederen[i] = Handelsgoed();
+	}
 }
 
 schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
@@ -51,6 +55,9 @@ schip& schip::operator=(const schip& copySchip)
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
 	}
+	if (_handelsGoederen != nullptr) {
+		delete[] _handelsGoederen;
+	}
 	_type = new char[100];
 	std::memcpy(_type, copySchip._type, 100);
 	_prijs = copySchip._prijs;
@@ -64,6 +71,7 @@ schip& schip::operator=(const schip& copySchip)
 		_kanonnen[i] = Kanon();
 		_kanonnen[i] = copySchip._kanonnen[i];
 	}
+	_handelsGoederen = new Handelsgoed[15];
 	for (int i = 0; i < 15; i++) {
 		_handelsGoederen[i] = Handelsgoed();
 		_handelsGoederen[i] = copySchip._handelsGoederen[i];
@@ -93,6 +101,9 @@ schip& schip::operator=(schip&& moveSchip) noexcept
 	}
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
+	}
+	if (_handelsGoederen != nullptr) {
+		delete[] _handelsGoederen;
 	}
 
 	_type = moveSchip._type;

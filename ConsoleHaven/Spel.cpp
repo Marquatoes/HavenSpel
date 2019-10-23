@@ -3,8 +3,7 @@
 void Spel::Start()
 {
 	_havens[0].enterHaven(_huidigSchip);
-	_huidigeHaven = new Haven();
-	*_huidigeHaven = _havens[0];
+	_huidigeHaven = &_havens[0];
 	speelBeurt();
 }
 
@@ -64,14 +63,8 @@ Spel::Spel()
 	FileReader f = FileReader();
 	f.ReadSchepenFile(_alleSchepen);
 	f.MaakHavens(_havens);
-	const char* s = "klein,licht";
-	const char* typo = "zeerkut";
-	char* t = new char[44];
-	char* type = new char[44];
-	strcpy_s(t, 44, s);
-	strcpy_s(type, 44, typo);
-	Kanon* kanon = new Kanon[1];
-	_huidigSchip = new schip(type, 100, 100, 1, 417, t, kanon, 0);
+	_huidigSchip = new schip();
+	*_huidigSchip = _alleSchepen[0];
 }
 
 Spel::~Spel()
@@ -87,6 +80,9 @@ Spel::~Spel()
 	}
 	if (_huidigSchip != nullptr) {
 		delete _huidigSchip;
+	}
+	if (_speler != nullptr) {
+		delete _speler;
 	}
 	RNG::Release();
 }
