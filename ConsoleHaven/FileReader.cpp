@@ -29,6 +29,9 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 				strcpy_s(ships[currentShip][i], 25, token1);
 				token1 = strtok_s(NULL, ";", &next_token1);
 			}
+			else if (i == 5) {
+				strcpy_s(ships[currentShip][i], 25, "geen");
+			}
 		}
 		currentShip++;
 		delete[] token1;
@@ -37,6 +40,7 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 	for (int i = 1; i < 14; i++) {
 		Kanon* kanon = new Kanon[1];
 		kanon[0] = Kanon();
+
 		schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], kanon, 0);
 
 	}
