@@ -88,7 +88,7 @@ bool Zee::vaar()
 {
 	if (_turns > 0 && _vaarSchip->getSchade() > 0) {
 		if (RNG::Instance()->getRandomNumber(1, 10) < 3) {
-			std::cout << "PIRATEN!!!" << std::endl;
+			std::cout << "--------------------PIRATEN--------------------" << std::endl;
 			int random = RNG::Instance()->getRandomNumber(0, 12);
 			*_piraten = _schepen[random];
 			_piraten->seedKanonnen(RNG::Instance()->getRandomNumber(1, _piraten->getMaxAantalKanonnen()));
@@ -104,7 +104,7 @@ bool Zee::vaar()
 }
 
 void Zee::vechtMetPiraten() {
-	std::cout << "-----------------------------------------------------------" << std::endl;
+	
 	std::cout << "PiratenSchip: " << std::endl;
 	_piraten->printInfo();
 	std::cout << std::endl;
@@ -135,7 +135,6 @@ void Zee::vechtMetPiraten() {
 		geefOver();
 		break;
 	}
-	
 	vaar();
 }
 
@@ -150,6 +149,7 @@ void Zee::vecht() {
 		std::cout << "De piraten schieten terug en ze raken je voor: " << pSchade << " schade." << std::endl;
 		_vaarSchip->setSchade(_vaarSchip->getSchade() - pSchade);
 		if (_vaarSchip->getSchade() > 0) {
+			std::cout << "-----------------------------------------------------------" << std::endl;
 			vechtMetPiraten();
 		}
 		else {
@@ -191,35 +191,50 @@ void Zee::geefOver() {
 
 //DP toepassen wanneer we klaar zijn !
 void Zee::gevolgWind(int actie) {
+	std::cout << "--------------------VAREN--------------------" << std::endl;
+	std::cout << "De afstand to de haven is " << _turns << std::endl;
+	int turnVerschil = 0;
 	if (actie >= 3 && actie <= 4) {
+		std::cout << "Er staat een briesje" << std::endl;
 		if (_vaarSchip->hasBijzonderheid("licht")) {
-			_turns -= 1;
+			turnVerschil -= 1;
 		}
 	}
 	else if (actie >= 5 && actie <= 7) {
+		std::cout << "Er staat een zwakke wind" << std::endl;
 		if (!_vaarSchip->hasBijzonderheid("log")) {
-			_turns -= 1;
+			turnVerschil -= 1;
 		}
 	}
 	else if (actie >= 8 && actie <= 17) {
-		_turns -= 1;
+		std::cout << "Er staat een normale wind" << std::endl;
+		turnVerschil -= 1;
 	}
 	else if (actie >= 18 && actie <= 19) {
-		_turns -= 2;
+		std::cout << "Er staat een sterke wind" << std::endl;
+		turnVerschil -= 2;
 	}
 	else {
+		std::cout << "Het stormt!" << std::endl;
 		int stormGevolg = RNG::Instance()->getRandomNumber(1, 10);
 		if (stormGevolg >= 1 && stormGevolg <= 4) {
-			_turns += 1;
+			turnVerschil += 1;
 		}
 		else if (stormGevolg >= 9 && stormGevolg <= 10) {
-			_turns -= 1;
+			turnVerschil -= 1;
 		}
-		int schade = _vaarSchip->getSchade();
-		_vaarSchip->setSchade(schade - (schade * (RNG::Instance()->getRandomNumber(1, 100) / 100)));
 
+		
+		double schade = _vaarSchip->getSchade();
+		int random = RNG::Instance()->getRandomNumber(1, 100);
+		int windSchade = schade * random / 100;
+		std::cout << "Door de storm pakt je schip " << windSchade << " schade." << std::endl;
+		_vaarSchip->setSchade(schade - windSchade);
 	}
+	
+	_turns = _turns + turnVerschil;
 	if (_vaarSchip->getSchade() > 0) {
+		std::cout << "Als gevolg van de wind is de afstand tot de haven met " << turnVerschil << " veranderd" << std::endl;
 		vaar();
 	}
 	
