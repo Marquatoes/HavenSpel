@@ -140,12 +140,12 @@ const int schip::getMaxSchadePuntenOmTeRepareren() const {
 	return _maxSchadepunten - _schadepunten;
 }
 
-const int schip::getSchade()
+const int schip::getSchade() const
 {
 	return _schadepunten;
 }
 
-const int schip::getDamage()
+const int schip::getDamage() const
 {
 	int dmg = 0;
 	for (int i = 0; i < _aantalKanonnen; i++) {
@@ -159,7 +159,7 @@ void schip::setSchade(int aantal)
 	_schadepunten = aantal;
 }
 
-const bool schip::hasBijzonderheid(const char* bijzonderheid)
+const bool schip::hasBijzonderheid(const char* bijzonderheid) const
 {
 	char* copy = new char[100];
 	strcpy_s(copy, 100 , _bijzonderheden);
@@ -187,7 +187,7 @@ void schip::addKanon(Kanon kanon)
 		_aantalKanonnen++;
 	}
 }
-bool schip::checkMaxKanonnen() {
+bool schip::checkMaxKanonnen() const {
 	if (_aantalKanonnen < _maxKanonnen) {
 		return true;
 	}
@@ -267,12 +267,12 @@ void schip::dumpHandelsgoederen()
 	}
 }
 
-Handelsgoed* schip::getHandelsGoederen()
+Handelsgoed* schip::getHandelsGoederen() const
 {
 	return _handelsGoederen;
 }
 
-const int schip::getAantalHandelsGoederen()
+const int schip::getAantalHandelsGoederen() const
 {
 	int aantal = 0;
 	for (int i = 0; i < 15; i++) {
@@ -281,7 +281,7 @@ const int schip::getAantalHandelsGoederen()
 	return aantal;
 }
 
-const int schip::getCapaciteit()
+const int schip::getCapaciteit() const
 {
 	return _laadruimte;
 }
@@ -305,7 +305,7 @@ const char* schip::getBijzonderheden() const {
 	return _bijzonderheden;
 }
 
-void schip::printInfo()
+void schip::printInfo() const
 {
 	std::cout << "Schade: " << _schadepunten << std::endl;
 	std::cout << "Bijzonderheid: " << _bijzonderheden << std::endl;

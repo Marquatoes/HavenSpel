@@ -5,7 +5,7 @@ Handelsgoed::Handelsgoed() :_prijs{ 0 }, _aantal{ 0 }, _maxPrijs{ 0 }, _minPrijs
 	_type = new char[100];
 }
 
-Handelsgoed::Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal, char* type) : 
+Handelsgoed::Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal, char* type) :
 	_prijs{ prijs }, _aantal{ aantal }, _maxPrijs{ maxPrijs }, _minPrijs{ minPrijs }, _maxAantal { maxAantal }, _minAantal { minAantal } 
 {
 	_type = new char[100];
@@ -121,7 +121,7 @@ const char* Handelsgoed::getType() const {
 	return _type;
 }
 
-int Handelsgoed::Koop(const int huidigAantal, const int goudstukken)
+int Handelsgoed::Koop(int huidigAantal, int goudstukken)
 {
 	std::cout << "---------------------------------------------------------------"<< std::endl;
 	std::cout << "Koop " << _type << std::endl;
@@ -149,7 +149,7 @@ int Handelsgoed::Koop(const int huidigAantal, const int goudstukken)
 	Koop(huidigAantal, goudstukken);
 }
 
-int Handelsgoed::Verkoop(const int huidigAantal, const int goudstukken)
+int Handelsgoed::Verkoop(int huidigAantal, int goudstukken)
 {
 	std::cout << "---------------------------------------------------------------" << std::endl;
 	std::cout << "Verkoop " << _type << std::endl;

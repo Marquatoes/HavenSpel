@@ -7,7 +7,7 @@ Speler::Speler(int goudStukken) : _goudstukken { goudStukken }
 
 }
 
-int Speler::getGoudstukken()
+int Speler::getGoudstukken() const
 {
 	return _goudstukken;
 }

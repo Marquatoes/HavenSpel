@@ -185,15 +185,6 @@ void Haven::enterHaven(schip* vaarschip)
 	seedHaven();
 }
 
-void Haven::repareer(schip* repareerSchip, Speler* speler, const int aantalSchadePunten)
-{
-	if (speler->getGoudstukken() >= (aantalSchadePunten / 10) && aantalSchadePunten <= repareerSchip->getSchade()) {
-		repareerSchip->repareer(aantalSchadePunten);
-		speler->setGoudstukken(speler->getGoudstukken() - (aantalSchadePunten / 10));
-	}
-	
-}
-
 void Haven::KoopGoederen(schip* havenschip, Speler* speler)
 {
 	std::cout << "---------------------------------------------------------------" << std::endl;
@@ -352,7 +343,7 @@ int Haven::getAfstand(const int havenNummer) const
 	return _afstanden[havenNummer];
 }
 
-void Haven::RepareerSchip(Speler* speler, schip* huidigSchip)
+void Haven::RepareerSchip(Speler* speler, schip* huidigSchip) const
 {
 	std::cout << "druk op 0 om terug te gaan" << std::endl;
 	std::cout << "Repareren kost 1 goudstuk per 10 schadepunten, hoeveel wens je er te repareren" << std::endl;

@@ -12,7 +12,7 @@ private:
 	void vlucht();
 	void geefOver();
 	void gevolgWind(int actie);
-	int getVluchtKans();
+	int getVluchtKans() const;
 public:
 	Zee(int turns, schip* schepen);
 	~Zee();

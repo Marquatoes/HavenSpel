@@ -67,7 +67,7 @@ Spel::Spel()
 {
 	_alleSchepen = new schip[13];
 	_havens = new Haven[24];
-	_speler = new Speler(2000000);
+	_speler = new Speler(20000);
 	FileReader f = FileReader();
 	f.ReadSchepenFile(_alleSchepen);
 	f.MaakHavens(_havens);
@@ -96,7 +96,7 @@ Spel::~Spel()
 	RNG::Release();
 }
 
-void Spel::Stop()
+void Spel::Stop() const
 {
 	std::cout << "L0Z3R" << std::endl;
 }

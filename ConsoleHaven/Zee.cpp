@@ -240,7 +240,7 @@ void Zee::gevolgWind(int actie) {
 	
 }
 
-int Zee::getVluchtKans()
+int Zee::getVluchtKans() const
 {
 	if (_vaarSchip->hasBijzonderheid("licht")) {
 		if (_piraten->hasBijzonderheid("licht")) {

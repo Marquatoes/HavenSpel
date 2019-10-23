@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-void FileReader::ReadSchepenFile(schip* schepen) {
+void FileReader::ReadSchepenFile(schip* schepen) const {
 	
 	std::ifstream file("DataFiles/schepen.csv");
 	
@@ -56,7 +56,7 @@ void FileReader::ReadSchepenFile(schip* schepen) {
 
 }
 
-void FileReader::MaakHavens(Haven* havens) {
+void FileReader::MaakHavens(Haven* havens) const {
 	char*** prijzen = new char**[25];
 	char*** hoeveelheden = new char**[25];
 	for (int i = 0; i < 25; i++) {
@@ -109,7 +109,7 @@ void FileReader::MaakHavens(Haven* havens) {
 	delete[] afstanden;
 }
 
-void FileReader::readGoederen(char ***goederen, const char* path) {
+void FileReader::readGoederen(char ***goederen, const char* path) const {
 	std::ifstream file(path);
 	char* next_token1 = NULL;
 	char line[1000];
@@ -135,7 +135,7 @@ void FileReader::readGoederen(char ***goederen, const char* path) {
 	file.close();
 }
 
-void FileReader::readAfstanden(int** afstanden)
+void FileReader::readAfstanden(int** afstanden) const
 {
 	for (int i = 0; i < 24; i++) {
 		afstanden[i] = new int[24];

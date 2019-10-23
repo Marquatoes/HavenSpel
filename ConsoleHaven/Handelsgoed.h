@@ -28,8 +28,7 @@ public:
 	void setAantal(int aantal);
 	void setPrijs(int prijs);
 	const char* getType() const;
-	int Koop(const int huidigAantal, const int goudstukken);
-
-	int Verkoop(const int huidigAantal, const int goudstukken);
+	int Koop(int huidigAantal, int goudstukken);
+	int Verkoop(int huidigAantal, int goudstukken);
 	
 };

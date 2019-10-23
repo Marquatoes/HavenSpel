@@ -21,11 +21,11 @@ private:
 public:
 	Spel();
 	~Spel();
-	Spel(const Spel& copyHaven) = delete;
-	Spel& operator=(const Spel& copyHaven) = delete;
-	Spel(Spel&& moveHaven) = delete;
-	Spel& operator=(Spel&& moveHaven) = delete;
+	Spel(const Spel& copySpel) = delete;
+	Spel& operator=(const Spel& copySpel) = delete;
+	Spel(Spel&& moveSpel) = delete;
+	Spel& operator=(Spel&& moveSpel) = delete;
 	void Start();
-	void Stop();
+	void Stop() const;
 
 };

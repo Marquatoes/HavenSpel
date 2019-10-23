@@ -23,8 +23,7 @@ void RNG::Release()
 	}
 }
 
-int RNG::getRandomNumber(int min, int max)
-{
+int RNG::getRandomNumber(int min, int max) {
 	std::uniform_int_distribution<int> distribution1(min, max);
 	return distribution1(generator);
 }
