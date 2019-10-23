@@ -36,6 +36,7 @@ public:
 	void VerkoopGoederen(schip* havenschip, Speler* speler);
 	void KoopSchip(Speler* speler, schip*& huidigSchip);
 	void seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen);
-	void Wegvaren();
+	int getAfstand(const int havenNummer) const;
 	void RepareerSchip();
+	const char* getNaam() const;
 };

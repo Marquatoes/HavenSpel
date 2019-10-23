@@ -16,6 +16,8 @@ private:
 	Haven* _huidigeHaven;
 	Zee* _zee;
 	Speler* _speler;
+
+	void kiesHaven();
 public:
 	Spel();
 	~Spel();

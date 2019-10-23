@@ -6,6 +6,7 @@ Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _p
 		_schepen[i] = schepen[i];
 	}
 	_piraten = new schip();
+	_vaarSchip = new schip();
 }
 
 Zee::~Zee()
@@ -97,10 +98,9 @@ bool Zee::vaar()
 			int random = RNG::Instance()->getRandomNumber(1, 20);
 			gevolgWind(random);
 		}
-		return _vaarSchip->getSchade() > 0;
 	}
 
-	return true;
+	return _vaarSchip->getSchade() > 0;
 }
 
 void Zee::vechtMetPiraten() {
