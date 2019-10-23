@@ -46,8 +46,7 @@ void Spel::speelBeurt()
 		_huidigeHaven->KoopSchip(_speler, _huidigSchip);
 		break;
 	case 6:
-		//int afstand = _huidigeHaven->Wegvaren();
-		_zee->enterZee(_huidigSchip, 5);
+		kiesHaven();
 		break;
 	case 7:
 		_huidigeHaven->RepareerSchip();
@@ -70,7 +69,7 @@ Spel::Spel()
 	f.MaakHavens(_havens);
 	_huidigSchip = new schip();
 	*_huidigSchip = _alleSchepen[0];
-	_zee = new Zee(5, _alleSchepen);
+	_zee = new Zee(0, _alleSchepen);
 }
 
 Spel::~Spel()
@@ -95,4 +94,25 @@ Spel::~Spel()
 
 void Spel::Stop()
 {
+}
+
+void Spel::kiesHaven() {
+	std::cout << "Je bent nu in " << _huidigeHaven->getNaam() << std::endl;
+	std::cout << "Je kunt naar de volgende Havens: " << std::endl;
+	for (int i = 0; i < 24; i++)
+	{
+		std::cout << i << ": " << _havens[i].getNaam() << " de afstand is: " << _huidigeHaven->getAfstand(i) << std::endl;
+	}
+	int result;
+	std::cin >> result;
+
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
+	int afstand = _huidigeHaven->getAfstand(result);
+    _zee->enterZee(_huidigSchip, afstand);
+	_zee->vaar();
 }

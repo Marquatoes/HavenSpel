@@ -335,10 +335,16 @@ void Haven::seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen) 
 	}
 }
 
-void Haven::Wegvaren()
+int Haven::getAfstand(const int havenNummer) const
 {
+	return _afstanden[havenNummer];
 }
 
 void Haven::RepareerSchip()
 {
+}
+
+const char* Haven::getNaam() const
+{
+	return _naam;
 }
