@@ -16,34 +16,29 @@ void FileReader::ReadSchepenFile(schip* schepen) const {
 	int currentShip = 0;
 	char*** ships = nullptr;
 	try {
-		ships = new char** [1000000];
-		//initialize everything as nullptr at p == 0 and fill it at p == 1
-		for (int p = 0; p < 2; p++) {
-			for (int i = 0; i < 1000000; i++) {
-				if (p == 0) {
-					ships[i] = nullptr;
-				}
-				else {
-					ships[i] = new char* [1000000];
-					for (int j = 0; j < 100000; j++) {
-						ships[i][j] = nullptr;
-					}
-					for (int j = 0; j < 100000; j++) {
-						ships[i][j] = new char[10000000];
-					}
-				}
+		ships = new char** [14];
+		//set all the entries in the array to nullptr and then allocate memory to them
+		for (int i = 0; i < 14; i++) {
+			ships[i] = nullptr;
+		}
+		for (int i = 0; i < 14; i++) {
+			ships[i] = new char* [6];
+			for (int j = 0; j < 6; j++) {
+				ships[i][j] = nullptr;
+			}
+			for (int j = 0; j < 6; j++) {
+				ships[i][j] = new char[25];
 			}
 		}
 	}
 	catch (...) {
+		//delete the entries of ships that have memory allocated to them if something went wrong
 		if (ships != nullptr) {
-			for (int i = 0; i < 1000000; i++) {
+			for (int i = 0; i < 14; i++) {
 				if (ships[i] != nullptr) {
-					for (int j = 0; j < 100000; j++) {
-						if (i == 0 || (j > 0 && j < 5)) {
-							if (ships[i][j] != nullptr) {
-								delete[] ships[i][j];
-							}
+					for (int j = 0; j < 6; j++) {
+						if (ships[i][j] != nullptr) {
+							delete[] ships[i][j];
 						}
 					}
 					delete[] ships[i];
@@ -85,22 +80,86 @@ void FileReader::ReadSchepenFile(schip* schepen) const {
 				delete[] ships[i][j];
 			}
 		}
-		delete[] ships[i];
+		if (ships[i] != nullptr) {
+			delete[] ships[i];
+		}
 	}
-	delete[] ships;
+	if (ships != nullptr) {
+		delete[] ships;
+	}
+
 
 }
 
 void FileReader::MaakHavens(Haven* havens) const {
-	char*** prijzen = new char** [25];
-	char*** hoeveelheden = new char** [25];
-	for (int i = 0; i < 25; i++) {
-		prijzen[i] = new char* [16];
-		hoeveelheden[i] = new char* [16];
+	char*** prijzen = nullptr;
+	char*** hoeveelheden = nullptr;
+	int** afstanden = nullptr;
+	try {
+		prijzen = new char** [25];
+		hoeveelheden = new char** [25];
+		afstanden = new int* [24];
+		for (int i = 0; i < 25; i++) {
+			prijzen[i] = nullptr;
+			hoeveelheden[i] = nullptr;
+			if (i < 24) {
+				afstanden[i] = nullptr;
+			}
+
+		}
+		for (int i = 0; i < 25; i++) {
+			prijzen[i] = new char* [16];
+			hoeveelheden[i] = new char* [16];
+			if (i < 24) {
+				afstanden[i] = new int[24];
+			}
+			for (int j = 0; j < 16; j++) {
+				prijzen[i][j] = nullptr;
+				hoeveelheden[i][j] = nullptr;
+			}
+			for (int j = 0; j < 16; j++) {
+				prijzen[i][j] = new char[25];
+				hoeveelheden[i][j] = new char[25];
+			}
+		}
 	}
+	catch (...) {
+		for (int i = 0; i < 25; i++) {
+			if (prijzen[i] != nullptr || hoeveelheden[i] != nullptr) {
+				for (int j = 0; j < 16; j++) {
+					if (prijzen[i] != nullptr && prijzen[i][j] != nullptr) {
+						delete[] prijzen[i][j];
+					}
+					if (hoeveelheden[i] != nullptr && hoeveelheden[i][j] != nullptr) {
+						delete[] hoeveelheden[i][j];
+					}
+				}
+				if (prijzen[i] != nullptr) {
+					delete[] prijzen[i];
+				}
+				if (hoeveelheden[i] != nullptr) {
+					delete[] hoeveelheden[i];
+				}
+			}
+			if (i < 24 && afstanden[i] != nullptr) {
+				delete[] afstanden[i];
+			}
+
+		}
+		if (prijzen != nullptr) {
+			delete[] prijzen;
+		}
+		if (hoeveelheden != nullptr) {
+			delete[] hoeveelheden;
+		}
+		if (afstanden != nullptr) {
+			delete[] afstanden;
+		}
+		throw;
+	}
+
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
-	int** afstanden = new int* [24];
 	readAfstanden(afstanden);
 	for (int i = 1; i < 25; i++) {
 		Handelsgoed goederen[15];
@@ -159,7 +218,7 @@ void FileReader::readGoederen(char*** goederen, const char* path) const {
 			char* rest = line;
 			int counter = 0;
 			while ((token = strtok_s(rest, ";", &rest))) {
-				goederen[currentShip][counter] = new char[25];
+
 				strcpy_s(goederen[currentShip][counter], 25, token);
 				counter++;
 			}
@@ -172,9 +231,6 @@ void FileReader::readGoederen(char*** goederen, const char* path) const {
 
 void FileReader::readAfstanden(int** afstanden) const
 {
-	for (int i = 0; i < 24; i++) {
-		afstanden[i] = new int[24];
-	}
 
 	std::ifstream file("DataFiles/afstanden tussen steden.csv");
 	char* next_token1 = NULL;
