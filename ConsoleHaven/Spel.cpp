@@ -64,7 +64,7 @@ Spel::Spel()
 {
 	try {
 		_alleSchepen = new schip[13];
-		_havens = new Haven[240000];
+		_havens = new Haven[24];
 		_speler = new Speler(20000);
 		FileReader f = FileReader();
 		f.ReadSchepenFile(_alleSchepen);

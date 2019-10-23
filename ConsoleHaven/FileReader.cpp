@@ -8,23 +8,58 @@
 
 
 void FileReader::ReadSchepenFile(schip* schepen) const {
-	
+
 	std::ifstream file("DataFiles/schepen.csv");
-	
+
 	char* next_token1 = NULL;
-	char line [1000];
+	char line[1000];
 	int currentShip = 0;
-	char*** ships = new char** [14];
-	for (int i = 0; i < 14; i++) {
-		ships[i] = new char* [6];
+	char*** ships = nullptr;
+	try {
+		ships = new char** [1000000];
+		//initialize everything as nullptr at p == 0 and fill it at p == 1
+		for (int p = 0; p < 2; p++) {
+			for (int i = 0; i < 1000000; i++) {
+				if (p == 0) {
+					ships[i] = nullptr;
+				}
+				else {
+					ships[i] = new char* [1000000];
+					for (int j = 0; j < 100000; j++) {
+						ships[i][j] = nullptr;
+					}
+					for (int j = 0; j < 100000; j++) {
+						ships[i][j] = new char[10000000];
+					}
+				}
+			}
+		}
 	}
+	catch (...) {
+		if (ships != nullptr) {
+			for (int i = 0; i < 1000000; i++) {
+				if (ships[i] != nullptr) {
+					for (int j = 0; j < 100000; j++) {
+						if (i == 0 || (j > 0 && j < 5)) {
+							if (ships[i][j] != nullptr) {
+								delete[] ships[i][j];
+							}
+						}
+					}
+					delete[] ships[i];
+				}
+			}
+			delete[] ships;
+		}
+		throw;
+	}
+
 	while (currentShip < 14)
 	{
 		file.getline(line, sizeof line);
 		char* token1 = strtok_s(line, ";", &next_token1);
-		
+
 		for (int i = 0; i < 6; i++) {
-			ships[currentShip][i] = new char[25];
 			if (token1 != NULL) {
 				strcpy_s(ships[currentShip][i], 25, token1);
 				token1 = strtok_s(NULL, ";", &next_token1);
@@ -45,11 +80,11 @@ void FileReader::ReadSchepenFile(schip* schepen) const {
 
 	}
 	for (int i = 0; i < 14; i++) {
-			for (int j = 0; j < 6; j++) {
-				if (i == 0 || (j > 0 && j < 5)) {
-					delete[] ships[i][j];
-				}
-			}		
+		for (int j = 0; j < 6; j++) {
+			if (i == 0 || (j > 0 && j < 5)) {
+				delete[] ships[i][j];
+			}
+		}
 		delete[] ships[i];
 	}
 	delete[] ships;
@@ -57,15 +92,15 @@ void FileReader::ReadSchepenFile(schip* schepen) const {
 }
 
 void FileReader::MaakHavens(Haven* havens) const {
-	char*** prijzen = new char**[25];
-	char*** hoeveelheden = new char**[25];
+	char*** prijzen = new char** [25];
+	char*** hoeveelheden = new char** [25];
 	for (int i = 0; i < 25; i++) {
-		prijzen[i] = new char*[16];
-		hoeveelheden[i] = new char*[16];
+		prijzen[i] = new char* [16];
+		hoeveelheden[i] = new char* [16];
 	}
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
-	int** afstanden = new int*[24];
+	int** afstanden = new int* [24];
 	readAfstanden(afstanden);
 	for (int i = 1; i < 25; i++) {
 		Handelsgoed goederen[15];
@@ -86,8 +121,8 @@ void FileReader::MaakHavens(Haven* havens) const {
 			maxHoeveelheid = atoi(maxH);
 			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[0][j - 1]);
 		}
-		 
-		havens[i - 1] =  Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
+
+		havens[i - 1] = Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
 	}
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 16; j++) {
@@ -102,14 +137,14 @@ void FileReader::MaakHavens(Haven* havens) const {
 		if (i < 24) {
 			delete[] afstanden[i];
 		}
-		
+
 	}
 	delete[] prijzen;
 	delete[] hoeveelheden;
 	delete[] afstanden;
 }
 
-void FileReader::readGoederen(char ***goederen, const char* path) const {
+void FileReader::readGoederen(char*** goederen, const char* path) const {
 	std::ifstream file(path);
 	char* next_token1 = NULL;
 	char line[1000];
@@ -119,7 +154,7 @@ void FileReader::readGoederen(char ***goederen, const char* path) const {
 	{
 		file.getline(line, sizeof line);
 		if (line[0] != '#') {
-			
+
 			char* token;
 			char* rest = line;
 			int counter = 0;
@@ -130,7 +165,7 @@ void FileReader::readGoederen(char ***goederen, const char* path) const {
 			}
 			currentShip++;
 		}
-		
+
 	}
 	file.close();
 }
@@ -158,9 +193,9 @@ void FileReader::readAfstanden(int** afstanden) const
 				if (currentShip > 0 && counter > 0) {
 					int afstand = atoi(token);
 					afstanden[currentShip - 1][counter - 1] = afstand;
-					
+
 				}
-				
+
 				counter++;
 			}
 			currentShip++;
