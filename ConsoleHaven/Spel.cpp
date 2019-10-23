@@ -10,7 +10,12 @@ void Spel::Start()
 
 void Spel::speelBeurt()
 {
-	std::cout << "Je bent in een haven, dit zijn je opties" << std::endl;
+	if (_speler->getGoudstukken() >= 1000000) {
+		std::cout << "Je bent Koning van dit spel waaraan wij zo lang hebben zitten werken," << std::endl;
+		std::cout << "fijn dat er tenminste een iemand het spel gespeeld heeft" << std::endl;
+		return;
+	}
+	std::cout << "Je bent in " << _huidigeHaven->getNaam() << ", dit zijn je opties" << std::endl;
 	std::cout << "1: Koop goederen" << std::endl;
 	std::cout << "2: Verkoop goederen" << std::endl;
 	std::cout << "3: Koop kanonnen" << std::endl;
@@ -49,10 +54,9 @@ void Spel::speelBeurt()
 		kiesHaven();
 		return;
 	case 7:
-		_huidigeHaven->RepareerSchip();
+		_huidigeHaven->RepareerSchip(_speler, _huidigSchip);
 		break;
 	case 8:
-		Stop();
 		return;
 		
 	}
@@ -63,7 +67,7 @@ Spel::Spel()
 {
 	_alleSchepen = new schip[13];
 	_havens = new Haven[24];
-	_speler = new Speler(2000);
+	_speler = new Speler(2000000);
 	FileReader f = FileReader();
 	f.ReadSchepenFile(_alleSchepen);
 	f.MaakHavens(_havens);
@@ -120,6 +124,8 @@ void Spel::kiesHaven() {
 	}
 	else {
 		_huidigeHaven = &_havens[result];
+		_huidigeHaven->seedHaven();
+		_huidigeHaven->seedSchepen(_alleSchepen, 13);
 		speelBeurt();
 	}
 }

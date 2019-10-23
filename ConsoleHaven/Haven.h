@@ -37,6 +37,6 @@ public:
 	void KoopSchip(Speler* speler, schip*& huidigSchip);
 	void seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen);
 	int getAfstand(const int havenNummer) const;
-	void RepareerSchip();
+	void RepareerSchip(Speler* speler, schip* huidigSchip);
 	const char* getNaam() const;
 };

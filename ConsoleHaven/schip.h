@@ -14,6 +14,7 @@ private:
 	int _maxKanonnen;
 	int _aantalKanonnen;
 	int _schadepunten;
+	int _maxSchadepunten;
 	char* _bijzonderheden;
 	Kanon* _kanonnen;
 public:
@@ -24,7 +25,8 @@ public:
 	schip& operator=(const schip& copySchip);
 	schip(schip&& moveSchip) noexcept;
 	schip& operator=(schip&& moveSchip) noexcept;
-	void repareer(int aantalSchadePunten);
+	bool repareer(const int aantalSchadePunten);
+	const int getMaxSchadePuntenOmTeRepareren() const;
 	const int getSchade();
 	const int getDamage();
 	void setSchade(int aantal);
