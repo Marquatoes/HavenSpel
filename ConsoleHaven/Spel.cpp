@@ -10,16 +10,16 @@ void Spel::Start()
 
 void Spel::speelBeurt()
 {
+	_huidigeHaven->seedSchepen(_alleSchepen, 13);
 	std::cout << "Je bent in een haven, dit zijn je opties" << std::endl;
 	std::cout << "1: Koop goederen" << std::endl;
 	std::cout << "2: Verkoop goederen" << std::endl;
 	std::cout << "3: Koop kanonnen" << std::endl;
 	std::cout << "4: Verkoop kanonnen" << std::endl;
 	std::cout << "5: Koop schip" << std::endl;
-	std::cout << "6: Verkoop schip" << std::endl;
-	std::cout << "7: Wegvaren" << std::endl;
-	std::cout << "8: Repareer Schip" << std::endl;
-	std::cout << "9: Afsluiten" << std::endl;
+	std::cout << "6: Wegvaren" << std::endl;
+	std::cout << "7: Repareer Schip" << std::endl;
+	std::cout << "8: Afsluiten" << std::endl;
 	int result;
 	std::cin >> result;
 
@@ -37,18 +37,15 @@ void Spel::speelBeurt()
 		_huidigeHaven->VerkoopKanon(_huidigSchip, _speler);
 		break;
 	case 5:
-		_huidigeHaven->KoopSchip();
+		_huidigeHaven->KoopSchip(_speler);
 		break;
 	case 6:
-		_huidigeHaven->VerkoopSchip();
-		break;
-	case 7:
 		_huidigeHaven->Wegvaren();
 		break;
-	case 8:
+	case 7:
 		_huidigeHaven->RepareerSchip();
 		break;
-	case 9:
+	case 8:
 		Stop();
 		return;
 		

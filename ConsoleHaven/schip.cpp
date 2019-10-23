@@ -254,3 +254,23 @@ const int schip::getCapaciteit()
 {
 	return _laadruimte;
 }
+int schip::getPrijs() const {
+	return _prijs;
+}
+
+int schip::getMaxAantalHandelsGoederen() const
+{
+	return _laadruimte;
+}
+
+int schip::getMaxAantalKanonnen() const
+{
+	return _maxKanonnen;
+}
+const char* schip::getType() const {
+	return _type;
+}
+const char* schip::getBijzonderheden() const {
+	return _bijzonderheden;
+}
+

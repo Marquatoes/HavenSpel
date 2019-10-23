@@ -10,9 +10,11 @@ private:
 	Handelsgoed* _handelsGoederen;
 	Kanon* _kanonnen;
 	int _aantalGoederen;
+	int _aantalKoopSchepen;
 	size_t _aantalKanonnen;
 	int* _afstanden;
 	char* _naam;
+	schip* _koopSchepen;
 	
 public:
 	Haven();
@@ -32,8 +34,8 @@ public:
 	void VerkoopKanon(schip* havenschip, Speler* speler);
 	void KoopGoederen(schip* havenschip, Speler* speler);
 	void VerkoopGoederen(schip* havenschip, Speler* speler);
-	void KoopSchip();
-	void VerkoopSchip();
+	void KoopSchip(Speler* speler);
+	void seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen);
 	void Wegvaren();
 	void RepareerSchip();
 };

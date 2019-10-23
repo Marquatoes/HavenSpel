@@ -37,4 +37,10 @@ public:
 	Handelsgoed* getHandelsGoederen();
 	const int getAantalHandelsGoederen();
 	const int getCapaciteit();
+	int getPrijs() const;
+	int getMaxAantalHandelsGoederen() const;
+	int getMaxAantalKanonnen() const;
+	const char* getType() const;
+	const char* getBijzonderheden() const;
+
 };

@@ -7,6 +7,7 @@ Haven::Haven()
 	_aantalKanonnen = _aantalGoederen = 0;
 	_naam = new char[100];
 	_afstanden = new int[24];
+	_koopSchepen = new schip[10];
 }
 
 Haven::Haven(Handelsgoed* handelsGoederen, int aantalGoederen, char* naam, int* afstanden) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }
@@ -22,6 +23,7 @@ Haven::Haven(Handelsgoed* handelsGoederen, int aantalGoederen, char* naam, int* 
 		_afstanden[i] = afstanden[i];
 	}
 	_kanonnen = new Kanon[10];
+	_koopSchepen = new schip[10];
 
 }
 
@@ -39,7 +41,10 @@ Haven::~Haven()
 	if (_afstanden != nullptr) {
 		delete[] _afstanden;
 	}
-	_aantalGoederen = _aantalKanonnen = 0;
+	if (_koopSchepen != nullptr) {
+		delete[] _koopSchepen;
+	}
+	_aantalGoederen = _aantalKanonnen = _aantalKoopSchepen = 0;
 
 }
 
@@ -65,6 +70,9 @@ Haven& Haven::operator=(const Haven& copyHaven)
 	if (_afstanden != nullptr) {
 		delete[] _afstanden;
 	}
+	if (_koopSchepen != nullptr) {
+		delete[] _koopSchepen;
+	}
 
 	std::memcpy(_naam, copyHaven._naam, 100);
 	_handelsGoederen = copyHaven._handelsGoederen;
@@ -72,17 +80,21 @@ Haven& Haven::operator=(const Haven& copyHaven)
 	_aantalGoederen = copyHaven._aantalGoederen;
 	_aantalKanonnen = copyHaven._aantalKanonnen;
 	_afstanden = copyHaven._afstanden;
+	_koopSchepen = copyHaven._koopSchepen;
+	_aantalKoopSchepen = copyHaven._aantalKoopSchepen;
 	return *this;
 }
 
 Haven::Haven(Haven&& moveHaven) noexcept :  _handelsGoederen{ moveHaven._handelsGoederen },
-_kanonnen{ moveHaven._kanonnen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKanonnen{ moveHaven._aantalKanonnen }, _naam { moveHaven._naam }, _afstanden{ moveHaven._afstanden }
+_kanonnen{ moveHaven._kanonnen }, _aantalGoederen{ moveHaven._aantalGoederen }, _aantalKanonnen{ moveHaven._aantalKanonnen }, _naam { moveHaven._naam }, 
+_afstanden{ moveHaven._afstanden }, _aantalKoopSchepen {moveHaven._aantalKoopSchepen}, _koopSchepen { _koopSchepen }
 {
 	moveHaven._handelsGoederen = nullptr;
 	moveHaven._kanonnen = nullptr;
 	moveHaven._naam = nullptr;
 	moveHaven._afstanden = nullptr;
-	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = 0;
+	moveHaven._koopSchepen = nullptr;
+	moveHaven._aantalGoederen = moveHaven._aantalKanonnen = moveHaven._aantalKoopSchepen = 0;
 }
 
 Haven& Haven::operator=(Haven&& moveHaven) noexcept
@@ -101,12 +113,19 @@ Haven& Haven::operator=(Haven&& moveHaven) noexcept
 	if (_afstanden != nullptr) {
 		delete[] _afstanden;
 	}
+	if (_koopSchepen != nullptr) {
+		delete[] _koopSchepen;
+	}
+
 	_naam = moveHaven._naam;
 	_handelsGoederen = moveHaven._handelsGoederen;
 	_aantalGoederen = moveHaven._aantalGoederen;
 	_kanonnen = moveHaven._kanonnen;
 	_afstanden = moveHaven._afstanden;
+	_aantalKoopSchepen = moveHaven._aantalKoopSchepen;
+	_koopSchepen = moveHaven._koopSchepen;
 
+	moveHaven._koopSchepen = nullptr;
 	moveHaven._handelsGoederen = nullptr;
 	moveHaven._kanonnen = nullptr;
 	moveHaven._naam = nullptr;
@@ -251,13 +270,23 @@ void Haven::VerkoopKanon(schip* havenschip, Speler* speler)
 	havenschip->verkoopKanon(speler);
 }
 
-void Haven::KoopSchip()
+void Haven::KoopSchip(Speler* speler)
 {
-
+	for (int i = 0; i < _aantalKoopSchepen; i++) {
+		std::cout << i << ": " << _koopSchepen[i].getType() << " kost: " << _koopSchepen[i].getPrijs() << " en heeft ruimte voor " << _koopSchepen[i].getMaxAantalHandelsGoederen() << std::endl;
+		std::cout << "En " << _koopSchepen[i].getMaxAantalKanonnen() << " kanonnen, en heeft als bijzonderheden: " << _koopSchepen[i].getBijzonderheden() << std::endl;
+	}
+	std::cout << "welk schip wil je kopen?" << std::endl;
 }
+void Haven::seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen) {
+	_aantalKoopSchepen = RNG::Instance()->getRandomNumber(0, aantalSchepen);
+	int beginVanaf = RNG::Instance()->getRandomNumber(0, aantalSchepen - _aantalKoopSchepen);
 
-void Haven::VerkoopSchip()
-{
+	_koopSchepen = new schip[_aantalKoopSchepen];
+	for (int i = 0; i < _aantalKoopSchepen; i++) {
+		_koopSchepen[i] = mogelijkeSchepen[beginVanaf];
+		++beginVanaf;
+	}
 }
 
 void Haven::Wegvaren()
