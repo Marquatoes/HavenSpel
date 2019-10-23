@@ -165,9 +165,17 @@ void Zee::vlucht() {
 	std::cout << "-----------------------------------------------------------" << std::endl;
 	int vluchtkans = getVluchtKans();
 	std::cout << "Je probeert te vluchten met een vlucht kans van " << vluchtkans << "%" << std::endl;
+	int pSchade = _piraten->getDamage();
+	std::cout << "De piraten schieten nog een keer op je en ze raken je voor: " << pSchade << " schade." << std::endl;
+	_vaarSchip->setSchade(_vaarSchip->getSchade() - pSchade);
+	if (_vaarSchip->getSchade() <= 0) {
+		std::cout << "Je bent gezonken." << std::endl;
+		return;
+	}
+
 	int random = RNG::Instance()->getRandomNumber(1, 100);
 	if (random <= vluchtkans) {
-		std::cout << "Het is gelukt! je laat de piraten achter je en vaart verder naar de haven." << std::endl;
+		std::cout << "Het is gelukt! je laat de piraten achter je en vaart verder." << std::endl;
 	}
 	else {
 		std::cout << "Het vluchten is mislukt!" << std::endl;
