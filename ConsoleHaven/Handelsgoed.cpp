@@ -2,10 +2,14 @@
 #include <iostream>
 
 Handelsgoed::Handelsgoed() :_prijs{ 0 }, _aantal{ 0 }, _maxPrijs{ 0 }, _minPrijs{ 0 }, _maxAantal{ 0 }, _minAantal{ 0 } {
+	_type = nullptr;
 	try {
 		_type = new char[100];
 	}
 	catch (...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
 		throw;
 	}
 }
@@ -13,8 +17,17 @@ Handelsgoed::Handelsgoed() :_prijs{ 0 }, _aantal{ 0 }, _maxPrijs{ 0 }, _minPrijs
 Handelsgoed::Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal, char* type) :
 	_prijs{ prijs }, _aantal{ aantal }, _maxPrijs{ maxPrijs }, _minPrijs{ minPrijs }, _maxAantal { maxAantal }, _minAantal { minAantal } 
 {
-	_type = new char[100];
-	std::memcpy(_type, type, 100);
+	_type = nullptr;
+	try {
+		_type = new char[100];
+		std:memcpy(_type, type, 100);
+	}
+	catch (...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		throw;
+	}
 	
 }
 

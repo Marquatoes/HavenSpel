@@ -1,11 +1,20 @@
 #include "Zee.h"
-Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _piraten{ nullptr }, _schepen {schepen}
+Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _piraten{ nullptr }
 {
-	_schepen = new schip[13];
-	for (int i = 0; i < 13; i++) {
-		_schepen[i] = schepen[i];
+	_schepen = nullptr;
+	try {
+		_schepen = new schip[13];
+		for (int i = 0; i < 13; i++) {
+			_schepen[i] = schepen[i];
+		}
+		_piraten = new schip();
 	}
-	_piraten = new schip();
+	catch (...) {
+		if (_schepen != nullptr) {
+			delete[] _schepen;
+		}
+	}
+	
 }
 
 Zee::~Zee()

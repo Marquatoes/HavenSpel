@@ -2,12 +2,38 @@
 
 Haven::Haven()
 {
+	_handelsGoederen = nullptr;
+	_kanonnen = nullptr;
+	_naam = nullptr;
+	_afstanden = nullptr;
+	_koopSchepen = nullptr;
+	try {
 		_handelsGoederen = new Handelsgoed[10];
 		_kanonnen = new Kanon[10];
 		_aantalKanonnen = _aantalGoederen = 0;
 		_naam = new char[100];
 		_afstanden = new int[24];
 		_koopSchepen = new schip[10];
+	}
+	catch (...) {
+		if (_handelsGoederen != nullptr) {
+			delete[] _handelsGoederen;
+		}
+		if (_kanonnen != nullptr) {
+			delete[] _kanonnen;
+		}
+		if (_naam != nullptr) {
+			delete[] _naam;
+		}
+		if (_afstanden != nullptr) {
+			delete[] _afstanden;
+		}
+		if (_koopSchepen != nullptr) {
+			delete[] _koopSchepen;
+		}
+		throw;
+	}
+		
 	
 }
 

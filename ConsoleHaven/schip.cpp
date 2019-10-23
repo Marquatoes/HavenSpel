@@ -2,6 +2,10 @@
 
 schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten{ 0 }, _aantalKanonnen{ 0 }
 {
+	_type = nullptr;
+	_bijzonderheden = nullptr;
+	_kanonnen = nullptr;
+	_handelsGoederen = nullptr;
 	try {
 		_type = new char[100];
 		_bijzonderheden = new char[100];
@@ -9,6 +13,18 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 		_handelsGoederen = new Handelsgoed[15];
 	}
 	catch (...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		if (_bijzonderheden != nullptr) {
+			delete[] _bijzonderheden;
+		}
+		if (_kanonnen != nullptr) {
+			delete[] _kanonnen;
+		}
+		if (_handelsGoederen != nullptr) {
+			delete[] _handelsGoederen;
+		}
 		throw;
 	}
 

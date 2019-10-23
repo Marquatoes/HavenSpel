@@ -1,14 +1,30 @@
 #include "Kanon.h"
 
-Kanon::Kanon() :  _prijs{ 0 }, _minDamage{ 0 }, _maxDamage{ 0 } { _type = new char[15]; }
+Kanon::Kanon() :  _prijs{ 0 }, _minDamage{ 0 }, _maxDamage{ 0 } { 
+	_type = nullptr;
+	try {
+		_type = new char[15];
+	}
+	catch (...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		throw;
+	}
+	
+}
 
 Kanon::Kanon(char* type, int prijs) : _prijs { prijs }
 {
+	_type = nullptr;
 	try {
 		_type = new char[100];
 		std:memcpy(_type, type, 100);
 	}
 	catch (...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
 		throw;
 	}
 	
