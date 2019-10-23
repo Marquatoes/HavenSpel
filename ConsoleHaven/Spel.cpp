@@ -119,6 +119,7 @@ void Spel::kiesHaven() {
 		Stop();
 	}
 	else {
+		_huidigeHaven = &_havens[result];
 		speelBeurt();
 	}
 }
