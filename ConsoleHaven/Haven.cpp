@@ -143,6 +143,9 @@ void Haven::seedHaven()
 
 void Haven::seedKanonnen()
 {
+	if (_kanonnen != nullptr) {
+		delete[] _kanonnen;
+	}
 	_aantalKanonnen = 0;
 	_kanonnen = new Kanon[10];
 	int random = RNG::Instance()->getRandomNumber(0, 5);	
