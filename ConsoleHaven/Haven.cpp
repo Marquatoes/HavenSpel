@@ -207,6 +207,14 @@ void Haven::KoopGoederen(schip* havenschip, Speler* speler)
 	}
 	int result;
 	std::cin >> result;
+
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
+
 	int aantal = _handelsGoederen[result].Koop(havenschip->getHandelsGoederen()[result].getAantal(), speler->getGoudstukken());
 	if (havenschip->getCapaciteit() > havenschip->getAantalHandelsGoederen() + aantal) {
 		speler->setGoudstukken(speler->getGoudstukken() - aantal * _handelsGoederen[result].getPrijs());
@@ -228,6 +236,14 @@ void Haven::VerkoopGoederen(schip* havenschip, Speler* speler)
 	}
 	int result;
 	std::cin >> result;
+
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
+
 	int aantal = _handelsGoederen[result].Verkoop(havenschip->getHandelsGoederen()[result].getAantal(), speler->getGoudstukken());
 	speler->setGoudstukken(speler->getGoudstukken() + aantal * _handelsGoederen[result].getPrijs());
 	havenschip->getHandelsGoederen()[result].setAantal(havenschip->getHandelsGoederen()[result].getAantal() - aantal);
@@ -275,6 +291,10 @@ void Haven::VerkoopKanon(schip* havenschip, Speler* speler)
 
 void Haven::KoopSchip(Speler* speler, schip*& huidigSchip)
 {
+	if(_aantalKoopSchepen <= 0) { 
+		std::cout << "De schepen zijn op" << std::endl;
+		return;
+	}
 	for (int i = 0; i < _aantalKoopSchepen; i++) {
 		std::cout << i << ": " << _koopSchepen[i].getType() << " kost: " << _koopSchepen[i].getPrijs() << " en heeft ruimte voor " << _koopSchepen[i].getMaxAantalHandelsGoederen() << std::endl;
 		std::cout << "En " << _koopSchepen[i].getMaxAantalKanonnen() << " kanonnen, en heeft als bijzonderheden: " << _koopSchepen[i].getBijzonderheden() << std::endl;
@@ -282,17 +302,26 @@ void Haven::KoopSchip(Speler* speler, schip*& huidigSchip)
 	std::cout << "welk schip wil je kopen?" << std::endl;
 	int result;
 	std::cin >> result;
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
 	if (result >= 0 && result < _aantalKoopSchepen) {
 		if (_koopSchepen[result].getPrijs() < (speler->getGoudstukken() + huidigSchip->getPrijs()/ 2)) {
 			speler->setGoudstukken(speler->getGoudstukken() + (huidigSchip->getPrijs() / 2) - _koopSchepen[result].getPrijs());
+
+			delete huidigSchip;
+			huidigSchip = new schip(std::move(_koopSchepen[result]));
+			for (int i = result; i < _aantalKoopSchepen - 1; i++) {
+				_koopSchepen[i] = schip(std::move(_koopSchepen[i + 1]));
+			}
+			_aantalKoopSchepen--;
 		}
-		delete huidigSchip;
-		huidigSchip = new schip(std::move(_koopSchepen[result]));
-		for (int i = result; i < _aantalKoopSchepen - 1; i++) {
-			_koopSchepen[i] = schip(std::move(_koopSchepen[i + 1]));
-		}
-		_aantalKoopSchepen--;
+		std::cout << "Armoede is wel een dingetje, ga nog maar ff sparen jonge" << std::endl;
 	}
+	
 }
 void Haven::seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen) {
 	if (_koopSchepen != nullptr) { delete[] _koopSchepen; }

@@ -22,6 +22,13 @@ void Spel::speelBeurt()
 	int result;
 	std::cin >> result;
 
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
+
 	switch (result) {
 	case 1:
 		_huidigeHaven->KoopGoederen(_huidigSchip, _speler);
@@ -37,10 +44,10 @@ void Spel::speelBeurt()
 		break;
 	case 5:
 		_huidigeHaven->KoopSchip(_speler, _huidigSchip);
-		std::cout << _huidigSchip->getType() << std::endl;
 		break;
 	case 6:
-		_huidigeHaven->Wegvaren();
+		//int afstand = _huidigeHaven->Wegvaren();
+		_zee->enterZee(_huidigSchip, 0);
 		break;
 	case 7:
 		_huidigeHaven->RepareerSchip();
@@ -57,7 +64,7 @@ Spel::Spel()
 {
 	_alleSchepen = new schip[13];
 	_havens = new Haven[24];
-	_speler = new Speler(200000);
+	_speler = new Speler(2000);
 	FileReader f = FileReader();
 	f.ReadSchepenFile(_alleSchepen);
 	f.MaakHavens(_havens);

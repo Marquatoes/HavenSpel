@@ -17,6 +17,6 @@ public:
 	Zee& operator=(const Zee& copyZee);
 	Zee(Zee&& moveZee) noexcept;
 	Zee& operator=(Zee&& moveZee) noexcept;
-	void enterZee(schip* vaarSchip);
+	void enterZee(schip* vaarSchip, int afstand);
 	bool vaar();
 };

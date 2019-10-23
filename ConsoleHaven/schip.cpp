@@ -197,6 +197,14 @@ void schip::verkoopKanon(Speler* speler) {
 	}
 	int result;
 	std::cin >> result;
+
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
+
 	if (result >= 0 && result < _aantalKanonnen) {
 		speler->setGoudstukken(speler->getGoudstukken() + _kanonnen[result].getPrijs());
 		--_aantalKanonnen;

@@ -81,9 +81,10 @@ Zee& Zee::operator=(Zee&& moveZee) noexcept
 	return *this;
 }
 
-void Zee::enterZee(schip* vaarSchip)
+void Zee::enterZee(schip* vaarSchip, int afstand)
 {
 	_vaarSchip = std::move(vaarSchip);
+	_turns = afstand;
 }
 
 bool Zee::vaar()
