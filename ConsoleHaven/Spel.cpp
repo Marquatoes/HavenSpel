@@ -4,12 +4,12 @@ void Spel::Start()
 {
 	_havens[0].enterHaven(_huidigSchip);
 	_huidigeHaven = &_havens[0];
+	_huidigeHaven->seedSchepen(_alleSchepen, 13);
 	speelBeurt();
 }
 
 void Spel::speelBeurt()
 {
-	_huidigeHaven->seedSchepen(_alleSchepen, 13);
 	std::cout << "Je bent in een haven, dit zijn je opties" << std::endl;
 	std::cout << "1: Koop goederen" << std::endl;
 	std::cout << "2: Verkoop goederen" << std::endl;
@@ -36,7 +36,8 @@ void Spel::speelBeurt()
 		_huidigeHaven->VerkoopKanon(_huidigSchip, _speler);
 		break;
 	case 5:
-		_huidigeHaven->KoopSchip(_speler);
+		_huidigeHaven->KoopSchip(_speler, _huidigSchip);
+		std::cout << _huidigSchip->getType() << std::endl;
 		break;
 	case 6:
 		_huidigeHaven->Wegvaren();
@@ -56,7 +57,7 @@ Spel::Spel()
 {
 	_alleSchepen = new schip[13];
 	_havens = new Haven[24];
-	_speler = new Speler(5000);
+	_speler = new Speler(200000);
 	FileReader f = FileReader();
 	f.ReadSchepenFile(_alleSchepen);
 	f.MaakHavens(_havens);

@@ -34,7 +34,7 @@ public:
 	void VerkoopKanon(schip* havenschip, Speler* speler);
 	void KoopGoederen(schip* havenschip, Speler* speler);
 	void VerkoopGoederen(schip* havenschip, Speler* speler);
-	void KoopSchip(Speler* speler);
+	void KoopSchip(Speler* speler, schip*& huidigSchip);
 	void seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen);
 	void Wegvaren();
 	void RepareerSchip();

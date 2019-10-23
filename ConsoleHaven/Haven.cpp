@@ -273,15 +273,29 @@ void Haven::VerkoopKanon(schip* havenschip, Speler* speler)
 	havenschip->verkoopKanon(speler);
 }
 
-void Haven::KoopSchip(Speler* speler)
+void Haven::KoopSchip(Speler* speler, schip*& huidigSchip)
 {
 	for (int i = 0; i < _aantalKoopSchepen; i++) {
 		std::cout << i << ": " << _koopSchepen[i].getType() << " kost: " << _koopSchepen[i].getPrijs() << " en heeft ruimte voor " << _koopSchepen[i].getMaxAantalHandelsGoederen() << std::endl;
 		std::cout << "En " << _koopSchepen[i].getMaxAantalKanonnen() << " kanonnen, en heeft als bijzonderheden: " << _koopSchepen[i].getBijzonderheden() << std::endl;
 	}
 	std::cout << "welk schip wil je kopen?" << std::endl;
+	int result;
+	std::cin >> result;
+	if (result >= 0 && result < _aantalKoopSchepen) {
+		if (_koopSchepen[result].getPrijs() < (speler->getGoudstukken() + huidigSchip->getPrijs()/ 2)) {
+			speler->setGoudstukken(speler->getGoudstukken() + (huidigSchip->getPrijs() / 2) - _koopSchepen[result].getPrijs());
+		}
+		delete huidigSchip;
+		huidigSchip = new schip(std::move(_koopSchepen[result]));
+		for (int i = result; i < _aantalKoopSchepen - 1; i++) {
+			_koopSchepen[i] = schip(std::move(_koopSchepen[i + 1]));
+		}
+		_aantalKoopSchepen--;
+	}
 }
 void Haven::seedSchepen(const schip* mogelijkeSchepen, const int aantalSchepen) {
+	if (_koopSchepen != nullptr) { delete[] _koopSchepen; }
 	_aantalKoopSchepen = RNG::Instance()->getRandomNumber(0, aantalSchepen);
 	int beginVanaf = RNG::Instance()->getRandomNumber(0, aantalSchepen - _aantalKoopSchepen);
 
