@@ -186,7 +186,16 @@ void Zee::vlucht() {
 void Zee::geefOver() {
 	std::cout << "-----------------------------------------------------------" << std::endl;
 	std::cout << "Je geeft je over en de piraten jatten zo veel als in hun schip past, de rest gooien ze over boord."<< std::endl;
-	_vaarSchip->dumpHandelsgoederen();
+	for (int i = 0; i < 15; i++) {
+		if (_piraten->getAantalHandelsGoederen() + _vaarSchip->getHandelsGoederen()[i].getAantal() < _piraten->getCapaciteit()) {
+			_piraten->getHandelsGoederen()[i].setAantal(_piraten->getHandelsGoederen()[i].getAantal() + _vaarSchip->getHandelsGoederen()[i].getAantal());
+		}
+		else {
+			int verschil = _piraten->getCapaciteit() - _piraten->getAantalHandelsGoederen();
+			_piraten->getHandelsGoederen()[i].setAantal(_piraten->getHandelsGoederen()[i].getAantal());
+		}
+		_vaarSchip->getHandelsGoederen()[i].setAantal(0);
+	}
 }
 
 //DP toepassen wanneer we klaar zijn !

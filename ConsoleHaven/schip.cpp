@@ -260,13 +260,6 @@ void schip::seedKanonnen(int aantal)
 	}
 }
 
-void schip::dumpHandelsgoederen()
-{
-	for (int i = 0; i < 15; i++) {
-		_handelsGoederen[i].setAantal(0);
-	}
-}
-
 Handelsgoed* schip::getHandelsGoederen()
 {
 	return _handelsGoederen;
