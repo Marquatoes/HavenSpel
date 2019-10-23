@@ -84,14 +84,14 @@ Zee& Zee::operator=(Zee&& moveZee) noexcept
 
 void Zee::enterZee(schip* vaarSchip, int afstand)
 {
+	_vaarSchip = new schip();
 	_vaarSchip = std::move(vaarSchip);
 	_turns = afstand;
-	vaar();
 }
 
 bool Zee::vaar()
 {
-	if (_turns > 0) {
+	if (_turns > 0 && _vaarSchip->getSchade() > 0) {
 		if (RNG::Instance()->getRandomNumber(1, 10) < 3) {
 			std::cout << "PIRATEN!!!" << std::endl;
 			int random = RNG::Instance()->getRandomNumber(0, 12);
@@ -109,11 +109,13 @@ bool Zee::vaar()
 }
 
 void Zee::vechtMetPiraten() {
+	std::cout << "-----------------------------------------------------------" << std::endl;
 	std::cout << "PiratenSchip: " << std::endl;
 	_piraten->printInfo();
+	std::cout << std::endl;
 	std::cout << "Jouw schip: " << std::endl;
 	_vaarSchip->printInfo();
-
+	std::cout << "--------------------------------" << std::endl;
 	std::cout << "Kies wat je wilt doen: " << std::endl;
 	std::cout << "1: Vecht" << std::endl;
 	std::cout << "2: Vlucht" << std::endl;
@@ -143,7 +145,7 @@ void Zee::vechtMetPiraten() {
 }
 
 void Zee::vecht() {
-	std::cout.clear();
+	std::cout << "-----------------------------------------------------------" << std::endl;
 	int vSchade = _vaarSchip->getDamage();
 	std::cout << "Je schiet en raakt de piraten voor: " << vSchade << " schade." << std::endl;
 	_piraten->setSchade(_piraten->getSchade() - vSchade);
@@ -165,6 +167,7 @@ void Zee::vecht() {
 }
 
 void Zee::vlucht() {
+	std::cout << "-----------------------------------------------------------" << std::endl;
 	int vluchtkans = getVluchtKans();
 	std::cout << "Je probeert te vluchten met een vlucht kans van " << vluchtkans << "%" << std::endl;
 	int random = RNG::Instance()->getRandomNumber(1, 100);
@@ -178,6 +181,7 @@ void Zee::vlucht() {
 }
 
 void Zee::geefOver() {
+	std::cout << "-----------------------------------------------------------" << std::endl;
 	std::cout << "Je geeft je over en de piraten jatten zo veel als in hun schip past, de rest gooien ze over boord."<< std::endl;
 	_vaarSchip->dumpHandelsgoederen();
 }

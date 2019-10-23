@@ -47,7 +47,7 @@ void Spel::speelBeurt()
 		break;
 	case 6:
 		kiesHaven();
-		break;
+		return;
 	case 7:
 		_huidigeHaven->RepareerSchip();
 		break;
@@ -94,6 +94,7 @@ Spel::~Spel()
 
 void Spel::Stop()
 {
+	std::cout << "L0Z3R" << std::endl;
 }
 
 void Spel::kiesHaven() {
@@ -114,5 +115,10 @@ void Spel::kiesHaven() {
 	}
 	int afstand = _huidigeHaven->getAfstand(result);
     _zee->enterZee(_huidigSchip, afstand);
-	_zee->vaar();
+	if (!_zee->vaar()) {
+		Stop();
+	}
+	else {
+		speelBeurt();
+	}
 }
