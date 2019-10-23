@@ -2,12 +2,13 @@
 
 Haven::Haven()
 {
-	_handelsGoederen = new Handelsgoed[10];
-	_kanonnen = new Kanon[10];
-	_aantalKanonnen = _aantalGoederen = 0;
-	_naam = new char[100];
-	_afstanden = new int[24];
-	_koopSchepen = new schip[10];
+		_handelsGoederen = new Handelsgoed[10];
+		_kanonnen = new Kanon[10];
+		_aantalKanonnen = _aantalGoederen = 0;
+		_naam = new char[100];
+		_afstanden = new int[24];
+		_koopSchepen = new schip[10];
+	
 }
 
 Haven::Haven(Handelsgoed* handelsGoederen, int aantalGoederen, char* naam, int* afstanden) : _aantalGoederen{ aantalGoederen }, _aantalKanonnen { 0 }

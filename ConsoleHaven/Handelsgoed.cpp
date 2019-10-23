@@ -2,7 +2,12 @@
 #include <iostream>
 
 Handelsgoed::Handelsgoed() :_prijs{ 0 }, _aantal{ 0 }, _maxPrijs{ 0 }, _minPrijs{ 0 }, _maxAantal{ 0 }, _minAantal{ 0 } {
-	_type = new char[100];
+	try {
+		_type = new char[100];
+	}
+	catch (...) {
+		throw;
+	}
 }
 
 Handelsgoed::Handelsgoed(int prijs, int aantal, int maxPrijs, int minPrijs, int maxAantal, int minAantal, char* type) :

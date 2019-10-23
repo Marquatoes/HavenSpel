@@ -4,8 +4,14 @@ Kanon::Kanon() :  _prijs{ 0 }, _minDamage{ 0 }, _maxDamage{ 0 } { _type = new ch
 
 Kanon::Kanon(char* type, int prijs) : _prijs { prijs }
 {
-	_type = new char[100];
-	std:memcpy(_type, type, 100);
+	try {
+		_type = new char[100];
+		std:memcpy(_type, type, 100);
+	}
+	catch (...) {
+		throw;
+	}
+	
 	_minDamage = 0;
 	if (std::strcmp(type, "licht") == 0) {
 		_maxDamage = 2;

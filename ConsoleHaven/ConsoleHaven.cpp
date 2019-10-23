@@ -7,9 +7,17 @@
 
 int main()
 {
-	Spel* spel = new Spel();
-	spel->Start();
-	delete spel;
+	Spel* spel = nullptr;
+	try {
+		spel = new Spel();
+		spel->Start();
+		delete spel;
+
+	}
+	catch (...) {
+		delete spel;
+	}
+
 	_CrtDumpMemoryLeaks();
 
 }
