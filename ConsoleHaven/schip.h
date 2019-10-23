@@ -42,5 +42,6 @@ public:
 	int getMaxAantalKanonnen() const;
 	const char* getType() const;
 	const char* getBijzonderheden() const;
+	void printInfo();
 
 };

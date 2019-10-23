@@ -247,12 +247,15 @@ void schip::seedKanonnen(int aantal)
 			kanonGrootte = grootte;
 		}
 		_kanonnen[i] = Kanon(kanonGrootte, 50);
+		_aantalKanonnen++;
 	}
 }
 
 void schip::dumpHandelsgoederen()
 {
-	
+	for (int i = 0; i < 15; i++) {
+		_handelsGoederen[i].setAantal(0);
+	}
 }
 
 Handelsgoed* schip::getHandelsGoederen()
@@ -291,5 +294,12 @@ const char* schip::getType() const {
 }
 const char* schip::getBijzonderheden() const {
 	return _bijzonderheden;
+}
+
+void schip::printInfo()
+{
+	std::cout << "Schade: " << _schadepunten << std::endl;
+	std::cout << "Bijzonderheid: " << _bijzonderheden << std::endl;
+	std::cout << "Aantal kanonnen: " << _aantalKanonnen << std::endl;
 }
 

@@ -47,7 +47,7 @@ void Spel::speelBeurt()
 		break;
 	case 6:
 		//int afstand = _huidigeHaven->Wegvaren();
-		_zee->enterZee(_huidigSchip, 0);
+		_zee->enterZee(_huidigSchip, 5);
 		break;
 	case 7:
 		_huidigeHaven->RepareerSchip();
@@ -70,6 +70,7 @@ Spel::Spel()
 	f.MaakHavens(_havens);
 	_huidigSchip = new schip();
 	*_huidigSchip = _alleSchepen[0];
+	_zee = new Zee(5, _alleSchepen);
 }
 
 Spel::~Spel()

@@ -85,12 +85,17 @@ void Zee::enterZee(schip* vaarSchip, int afstand)
 {
 	_vaarSchip = std::move(vaarSchip);
 	_turns = afstand;
+	vaar();
 }
 
 bool Zee::vaar()
 {
 	if (_turns > 0) {
 		if (RNG::Instance()->getRandomNumber(1, 10) < 3) {
+			std::cout << "PIRATEN!!!" << std::endl;
+			int random = RNG::Instance()->getRandomNumber(0, 12);
+			*_piraten = _schepen[random];
+			_piraten->seedKanonnen(RNG::Instance()->getRandomNumber(1, _piraten->getMaxAantalKanonnen()));
 			vechtMetPiraten();
 		}
 		else {
@@ -104,34 +109,79 @@ bool Zee::vaar()
 }
 
 void Zee::vechtMetPiraten() {
-	int random = RNG::Instance()->getRandomNumber(0, 12);	
-	*_piraten = _schepen[random];
-	_piraten->seedKanonnen(RNG::Instance()->getRandomNumber(1, 10));
-	while (_piraten->getSchade() > 0 && _vaarSchip->getSchade() > 0) {
-		bool vecht = false; //moet worden uitgleezen uit console
-		bool vlucht = true;
-		bool geefover = false;
-		if (vecht) {
-			_piraten->setSchade(_piraten->getSchade() - _vaarSchip->getDamage());
+	std::cout << "PiratenSchip: " << std::endl;
+	_piraten->printInfo();
+	std::cout << "Jouw schip: " << std::endl;
+	_vaarSchip->printInfo();
 
-			if (_piraten->getSchade() > 0) {
-				_vaarSchip->setSchade(_vaarSchip->getSchade() - _piraten->getDamage());
-			}
-		}
-		else if(vlucht) { //vlucht
-			int vluchtkans = getVluchtKans();
-			int random = RNG::Instance()->getRandomNumber(1, 100);
-			if (random <= vluchtkans) {
-				break;
-			}
-		}
-		else if (geefover) {
-			
-		}
+	std::cout << "Kies wat je wilt doen: " << std::endl;
+	std::cout << "1: Vecht" << std::endl;
+	std::cout << "2: Vlucht" << std::endl;
+	std::cout << "3: Geef je over" << std::endl;
+	int result;
+	std::cin >> result;
+
+	while (!std::cin.good())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cin >> result;
+	}
+	switch (result) {
+	case 1:
+		vecht();
+		break;
+	case 2: 
+		vlucht();
+		break;
+	case 3: 
+		geefOver();
+		break;
 	}
 	
 	vaar();
 }
+
+void Zee::vecht() {
+	std::cout.clear();
+	int vSchade = _vaarSchip->getDamage();
+	std::cout << "Je schiet en raakt de piraten voor: " << vSchade << " schade." << std::endl;
+	_piraten->setSchade(_piraten->getSchade() - vSchade);
+
+	if (_piraten->getSchade() > 0) {
+		int pSchade = _piraten->getDamage();
+		std::cout << "De piraten schieten terug en ze raken je voor: " << pSchade << " schade." << std::endl;
+		_vaarSchip->setSchade(_vaarSchip->getSchade() - pSchade);
+		if (_vaarSchip->getSchade() > 0) {
+			vechtMetPiraten();
+		}
+		else {
+			std::cout << "Je bent gezonken." << std::endl;
+		}
+	}
+	else {
+		std::cout << "Het piratenschip is gezonken, Je hebt gewonnen." << std::endl;
+	}
+}
+
+void Zee::vlucht() {
+	int vluchtkans = getVluchtKans();
+	std::cout << "Je probeert te vluchten met een vlucht kans van " << vluchtkans << "%" << std::endl;
+	int random = RNG::Instance()->getRandomNumber(1, 100);
+	if (random <= vluchtkans) {
+		std::cout << "Het is gelukt! je laat de piraten achter je en vaart verder naar de haven." << std::endl;
+	}
+	else {
+		std::cout << "Het vluchten is mislukt!" << std::endl;
+		vechtMetPiraten();
+	}
+}
+
+void Zee::geefOver() {
+	std::cout << "Je geeft je over en de piraten jatten zo veel als in hun schip past, de rest gooien ze over boord."<< std::endl;
+	_vaarSchip->dumpHandelsgoederen();
+}
+
 //DP toepassen wanneer we klaar zijn !
 void Zee::gevolgWind(int actie) {
 	if (actie >= 3 && actie <= 4) {

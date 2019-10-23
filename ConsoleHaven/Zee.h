@@ -8,6 +8,9 @@ private:
 	schip* _piraten;
 	schip* _schepen;
 	void vechtMetPiraten();
+	void vecht();
+	void vlucht();
+	void geefOver();
 	void gevolgWind(int actie);
 	int getVluchtKans();
 public:
