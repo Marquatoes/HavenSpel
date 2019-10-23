@@ -6,14 +6,10 @@ Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _p
 		_schepen[i] = schepen[i];
 	}
 	_piraten = new schip();
-	_vaarSchip = new schip();
 }
 
 Zee::~Zee()
 {
-	if (_vaarSchip != nullptr) {
-		delete _vaarSchip;
-	}
 	if (_piraten != nullptr) {
 		delete _piraten;
 	}
@@ -84,8 +80,7 @@ Zee& Zee::operator=(Zee&& moveZee) noexcept
 
 void Zee::enterZee(schip* vaarSchip, int afstand)
 {
-	_vaarSchip = new schip();
-	_vaarSchip = std::move(vaarSchip);
+	_vaarSchip = vaarSchip;
 	_turns = afstand;
 }
 
