@@ -35,7 +35,6 @@ public:
 	bool checkMaxKanonnen() const;
 	void verkoopKanon(Speler* speler);
 	void seedKanonnen(int aantal);
-	void dumpHandelsgoederen();
 	Handelsgoed* getHandelsGoederen() const;
 	const int getAantalHandelsGoederen() const;
 	const int getCapaciteit() const;
