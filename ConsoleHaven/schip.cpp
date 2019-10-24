@@ -55,44 +55,99 @@ schip::~schip()
 	}
 }
 
-schip::schip(const schip& copySchip) : _type{ new char[100] }, _prijs{ copySchip._prijs }, _laadruimte{ copySchip._laadruimte }, _maxKanonnen{ copySchip._maxKanonnen }, _schadepunten{ copySchip._schadepunten }, _bijzonderheden{ new char[100] },
-_kanonnen{ new Kanon[_maxKanonnen] }, _aantalKanonnen{ copySchip._aantalKanonnen }, _maxSchadepunten{ copySchip._maxSchadepunten } {
+schip::schip(const schip& copySchip) : _prijs{ copySchip._prijs }, _laadruimte{ copySchip._laadruimte }, _maxKanonnen{ copySchip._maxKanonnen },
+_schadepunten{ copySchip._schadepunten }, _aantalKanonnen{ copySchip._aantalKanonnen }, _maxSchadepunten{ copySchip._maxSchadepunten } {
+	_type = nullptr;
+	_bijzonderheden = nullptr;
+	_kanonnen = nullptr;
+	_handelsGoederen = nullptr;
+	try {
+		_type = new char[100];
+		_kanonnen = new Kanon[_maxKanonnen];
+		_bijzonderheden = new char[100];
+		_handelsGoederen = new Handelsgoed[15];
+	}
+	catch(...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		if (_bijzonderheden != nullptr) {
+			delete[] _bijzonderheden;
+		}
+		if (_kanonnen != nullptr) {
+			delete[] _kanonnen;
+		}
+		if (_handelsGoederen != nullptr) {
+			delete[] _handelsGoederen;
+		}
+		throw;
+	}
 	std::memcpy(_type, copySchip._type, 100);
 	std::memcpy(_bijzonderheden, copySchip._bijzonderheden, 100);
-	std:memcpy(_kanonnen, copySchip._kanonnen, _maxKanonnen);
+	std::memcpy(_kanonnen, copySchip._kanonnen, _maxKanonnen);
+	std::memcpy(_handelsGoederen, copySchip._handelsGoederen, 15);
 }
 
 schip& schip::operator=(const schip& copySchip)
 {
 	if (&copySchip == this) return *this;
+	char* type = nullptr;
+	char* bijzonderheden = nullptr;
+	Handelsgoed* handelsGoederen = nullptr;
+	Kanon* kanonnen = nullptr;
+	try {
+		type = new char[100];
+		bijzonderheden = new char[100];
+		handelsGoederen = new Handelsgoed[15];
+		kanonnen = new Kanon[copySchip._maxKanonnen];
 
-	if (_type != nullptr) {
-		delete[] _type;
+		if (_handelsGoederen != nullptr) {
+			delete[] _handelsGoederen;
+		}
+		if (_kanonnen != nullptr) {
+			delete[] _kanonnen;
+		}
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		if (_bijzonderheden != nullptr) {
+			delete[] _bijzonderheden;
+		}
+
+		_type = type;
+		_bijzonderheden = bijzonderheden;
+		_kanonnen = kanonnen;
+		_handelsGoederen = handelsGoederen;
 	}
-	if (_bijzonderheden != nullptr) {
-		delete[] _bijzonderheden;
+	catch (...) {
+		if (handelsGoederen != nullptr) {
+			delete[] handelsGoederen;
+		}
+		if (kanonnen != nullptr) {
+			delete[] kanonnen;
+		}
+		if (type != nullptr) {
+			delete[] type;
+		}
+		if (bijzonderheden != nullptr) {
+			delete[] bijzonderheden;
+		}
+		throw;
+
 	}
-	if (_kanonnen != nullptr) {
-		delete[] _kanonnen;
-	}
-	if (_handelsGoederen != nullptr) {
-		delete[] _handelsGoederen;
-	}
-	_type = new char[100];
+
 	std::memcpy(_type, copySchip._type, 100);
 	_prijs = copySchip._prijs;
 	_laadruimte = copySchip._laadruimte;
 	_maxKanonnen = copySchip._maxKanonnen;
 	_schadepunten = copySchip._schadepunten;
 	_maxSchadepunten = copySchip._maxSchadepunten;
-	_bijzonderheden = new char[100];
 	std::memcpy(_bijzonderheden, copySchip._bijzonderheden, 100);
-	_kanonnen = new Kanon[copySchip._maxKanonnen];
+
 	for (int i = 0; i < copySchip._aantalKanonnen; i++) {
 		_kanonnen[i] = Kanon();
 		_kanonnen[i] = copySchip._kanonnen[i];
 	}
-	_handelsGoederen = new Handelsgoed[15];
 	for (int i = 0; i < 15; i++) {
 		_handelsGoederen[i] = Handelsgoed();
 		_handelsGoederen[i] = copySchip._handelsGoederen[i];
@@ -180,7 +235,13 @@ void schip::setSchade(int aantal)
 
 const bool schip::hasBijzonderheid(const char* bijzonderheid) const
 {
-	char* copy = new char[100];
+	char* copy;
+	try {
+		copy = new char[100];
+	}
+	catch (...) {
+		throw;
+	}
 	strcpy_s(copy, 100 , _bijzonderheden);
 	if (bijzonderheid != nullptr) {
 		char* next_token1{};
@@ -246,12 +307,17 @@ void schip::verkoopKanon(Speler* speler) {
 
 void schip::seedKanonnen(int aantal)
 {
+	try {
+		_kanonnen = new Kanon[aantal];
+	}
+	catch (...) {
+		throw;
+	}
 	if (_kanonnen != nullptr) {
 		delete[] _kanonnen;
 	}
 	_aantalKanonnen = 0;
 
-	_kanonnen = new Kanon[aantal];
 	for (int i = 0; i < aantal; i++) {
 		int random;
 		if (hasBijzonderheid("klein")) {

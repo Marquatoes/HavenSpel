@@ -13,6 +13,7 @@ Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _p
 		if (_schepen != nullptr) {
 			delete[] _schepen;
 		}
+		throw;
 	}
 	
 }
@@ -28,15 +29,35 @@ Zee::~Zee()
 	
 }
 
-Zee::Zee(const Zee& copyZee) : _turns {copyZee._turns}, _vaarSchip{copyZee._vaarSchip}, _piraten{copyZee._piraten}, _schepen { new schip[13]}
+Zee::Zee(const Zee& copyZee) : _turns {copyZee._turns}, _vaarSchip{copyZee._vaarSchip}, _piraten{copyZee._piraten} 
 {
-	std:memcpy(_schepen, copyZee._schepen, 13);
+	try {
+		schip* schepen = new schip[13];
+		std:memcpy(schepen, copyZee._schepen, 13);
+		if (_schepen != nullptr) {
+			delete[] schepen;
+		}
+		_schepen = schepen;
+	}
+	catch (...) {
+		std::cout << "Fout bij kopieëren van schip " << std::endl;
+	}
 }
 
 Zee& Zee::operator=(const Zee& copyZee)
 {
 	if (&copyZee == this) return *this;
 
+	try {
+		_piraten = copyZee._piraten;
+		_vaarSchip = copyZee._vaarSchip;
+		_schepen = copyZee._schepen;
+		_turns = copyZee._turns;
+	}
+	catch (...) {
+		std::cout << "Fout bij kopieëren van schip " << std::endl;
+		throw;
+	}
 	if (_piraten != nullptr) {
 		delete _piraten;
 	}
@@ -47,19 +68,15 @@ Zee& Zee::operator=(const Zee& copyZee)
 		delete[] _schepen;
 	}
 
-	_piraten = copyZee._piraten;
-	_vaarSchip = copyZee._vaarSchip;
-	_schepen = copyZee._schepen;
-	_turns = copyZee._turns;
 	return *this;
 }
 
 Zee::Zee(Zee&& moveZee) noexcept : _turns{ moveZee._turns }, _vaarSchip{ moveZee._vaarSchip }, _piraten{ moveZee._piraten }, _schepen{moveZee._schepen}
 {
-	_piraten = nullptr;
-	_vaarSchip = nullptr;
-	_schepen = nullptr;
-	_turns = 0;
+	moveZee._piraten = nullptr;
+	moveZee._vaarSchip = nullptr;
+	moveZee._schepen = nullptr;
+	moveZee._turns = 0;
 }
 
 Zee& Zee::operator=(Zee&& moveZee) noexcept
@@ -67,13 +84,7 @@ Zee& Zee::operator=(Zee&& moveZee) noexcept
 	if (&moveZee == this) {
 		return *this;
 	}
-	if (_piraten != nullptr) {
-		delete _piraten;
-	}
-	if (_vaarSchip != nullptr) {
-		delete _vaarSchip;
-	}
-
+	
 	_piraten = moveZee._piraten;
 	_vaarSchip = moveZee._vaarSchip;
 	_turns = moveZee._turns;
@@ -95,11 +106,12 @@ void Zee::enterZee(schip* vaarSchip, int afstand)
 
 bool Zee::vaar()
 {
+	int random = RNG::Instance()->getRandomNumber(0, 12);
 	if (_turns > 0 && _vaarSchip->getSchade() > 0) {
 		if (RNG::Instance()->getRandomNumber(1, 10) < 3) {
-			std::cout << "--------------------PIRATEN--------------------" << std::endl;
-			int random = RNG::Instance()->getRandomNumber(0, 12);
+			//Exception safety wordt gedaan in de copy constructor
 			*_piraten = _schepen[random];
+			std::cout << "--------------------PIRATEN--------------------" << std::endl;
 			_piraten->seedKanonnen(RNG::Instance()->getRandomNumber(1, _piraten->getMaxAantalKanonnen()));
 			vechtMetPiraten();
 		}
