@@ -124,37 +124,7 @@ void FileReader::MaakHavens(Haven* havens) const {
 		}
 	}
 	catch (...) {
-		for (int i = 0; i < 25; i++) {
-			if (prijzen[i] != nullptr || hoeveelheden[i] != nullptr) {
-				for (int j = 0; j < 16; j++) {
-					if (prijzen[i] != nullptr && prijzen[i][j] != nullptr) {
-						delete[] prijzen[i][j];
-					}
-					if (hoeveelheden[i] != nullptr && hoeveelheden[i][j] != nullptr) {
-						delete[] hoeveelheden[i][j];
-					}
-				}
-				if (prijzen[i] != nullptr) {
-					delete[] prijzen[i];
-				}
-				if (hoeveelheden[i] != nullptr) {
-					delete[] hoeveelheden[i];
-				}
-			}
-			if (i < 24 && afstanden[i] != nullptr) {
-				delete[] afstanden[i];
-			}
-
-		}
-		if (prijzen != nullptr) {
-			delete[] prijzen;
-		}
-		if (hoeveelheden != nullptr) {
-			delete[] hoeveelheden;
-		}
-		if (afstanden != nullptr) {
-			delete[] afstanden;
-		}
+		deleteData(prijzen, hoeveelheden, afstanden);
 		throw;
 	}
 
@@ -180,25 +150,49 @@ void FileReader::MaakHavens(Haven* havens) const {
 			maxHoeveelheid = atoi(maxH);
 			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[0][j - 1]);
 		}
-
-		havens[i - 1] = Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
-	}
-	for (int i = 0; i < 25; i++) {
-		for (int j = 0; j < 16; j++) {
-			delete[] prijzen[i][j];
-			delete[] hoeveelheden[i][j];
-
+		try {
+			havens[i - 1] = Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
 		}
-		delete[] prijzen[i];
-		delete[] hoeveelheden[i];
-		if (i < 24) {
+		catch (...) {
+			deleteData(prijzen, hoeveelheden, afstanden);
+			throw;
+		}
+		
+	}
+	deleteData(prijzen, hoeveelheden, afstanden);
+}
+
+void FileReader::deleteData(char*** prijzen, char*** hoeveelheden, int** afstanden) const {
+	for (int i = 0; i < 25; i++) {
+		if (prijzen[i] != nullptr || hoeveelheden[i] != nullptr) {
+			for (int j = 0; j < 16; j++) {
+				if (prijzen[i] != nullptr && prijzen[i][j] != nullptr) {
+					delete[] prijzen[i][j];
+				}
+				if (hoeveelheden[i] != nullptr && hoeveelheden[i][j] != nullptr) {
+					delete[] hoeveelheden[i][j];
+				}
+			}
+			if (prijzen[i] != nullptr) {
+				delete[] prijzen[i];
+			}
+			if (hoeveelheden[i] != nullptr) {
+				delete[] hoeveelheden[i];
+			}
+		}
+		if (i < 24 && afstanden[i] != nullptr) {
 			delete[] afstanden[i];
 		}
-
 	}
-	delete[] prijzen;
-	delete[] hoeveelheden;
-	delete[] afstanden;
+	if (prijzen != nullptr) {
+		delete[] prijzen;
+	}
+	if (hoeveelheden != nullptr) {
+		delete[] hoeveelheden;
+	}
+	if (afstanden != nullptr) {
+		delete[] afstanden;
+	}
 }
 
 void FileReader::readGoederen(char*** goederen, const char* path) const {

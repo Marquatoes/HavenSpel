@@ -65,7 +65,7 @@ Spel::Spel()
 	try {
 		_alleSchepen = new schip[13];
 		_havens = new Haven[24];
-		_speler = new Speler(20000);
+		_speler = new Speler(200000);
 		FileReader f = FileReader();
 		f.ReadSchepenFile(_alleSchepen);
 		f.MaakHavens(_havens);
@@ -83,7 +83,6 @@ Spel::Spel()
 		delete _zee;
 		delete _huidigSchip;
 		delete _speler;
-		delete _huidigeHaven;
 		RNG::Release();
 		throw;
 	}
@@ -107,9 +106,6 @@ Spel::~Spel()
 	}
 	if (_speler != nullptr) {
 		delete _speler;
-	}
-	if (_huidigeHaven != nullptr) {
-		delete _huidigeHaven;
 	}
 	RNG::Release();
 }

@@ -313,15 +313,17 @@ void schip::verkoopKanon(Speler* speler) {
 
 void schip::seedKanonnen(int aantal)
 {
+	if (_kanonnen != nullptr) {
+		delete[] _kanonnen;
+	}
+	_kanonnen = nullptr;
 	try {
-		_kanonnen = new Kanon[aantal];
+		_kanonnen = new Kanon[_maxKanonnen];
 	}
 	catch (...) {
 		throw;
 	}
-	if (_kanonnen != nullptr) {
-		delete[] _kanonnen;
-	}
+	
 	_aantalKanonnen = 0;
 
 	for (int i = 0; i < aantal; i++) {
