@@ -302,13 +302,12 @@ void schip::verkoopKanon(Speler* speler) {
 	}
 	if (result > 0 && result <= _aantalKanonnen) {
 		speler->setGoudstukken(speler->getGoudstukken() + _kanonnen[result - 1].getPrijs());
+		for (int i = result - 1; i < _aantalKanonnen - 1; i++) {
+			_kanonnen[i] = _kanonnen[i + 1];
+		}
 		--_aantalKanonnen;
 	}
-	else {
-		for (int i = result; i < _aantalKanonnen - 1; i++) {
-			_kanonnen[i] = _kanonnen[i+1];
-		}
-	}
+	
 }
 
 void schip::seedKanonnen(int aantal)
