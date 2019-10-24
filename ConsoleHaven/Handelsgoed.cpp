@@ -171,7 +171,6 @@ int Handelsgoed::Koop(int huidigAantal, int goudstukken)
 	int result;
 	std::cin >> result;
 	if (result <= _aantal && _aantal >= 0 && result * _prijs <= goudstukken) {
-		_aantal -= result;
 		return result;
 	}
 	else {
