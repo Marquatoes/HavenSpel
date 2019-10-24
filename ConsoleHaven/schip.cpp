@@ -33,15 +33,30 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 }
 
 schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
-	_prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen }, _maxSchadepunten{ schadepunten } {
-	_type = type;
+	_prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen }, _maxSchadepunten{ schadepunten } {
+	
+	_type = nullptr;
+	_bijzonderheden = nullptr;
+	_handelsGoederen = nullptr;
 	try {
 		_handelsGoederen = new Handelsgoed[15];
+		_type = new char[100];
+		_bijzonderheden = new char[100];
 	}
 	catch (...) {
+		if (_handelsGoederen != nullptr) {
+			delete[] _handelsGoederen;
+		}
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		if (_bijzonderheden != nullptr) {
+			delete[] _bijzonderheden;
+		}
 		throw;
 	}
-	
+	std::memcpy(_type, type, 100);
+	std::memcpy(_bijzonderheden, bijzonderheden, 100);
 
 };
 

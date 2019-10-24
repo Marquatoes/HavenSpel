@@ -33,19 +33,7 @@ void FileReader::ReadSchepenFile(schip* schepen) const {
 	}
 	catch (...) {
 		//delete the entries of ships that have memory allocated to them if something went wrong
-		if (ships != nullptr) {
-			for (int i = 0; i < 14; i++) {
-				if (ships[i] != nullptr) {
-					for (int j = 0; j < 6; j++) {
-						if (ships[i][j] != nullptr) {
-							delete[] ships[i][j];
-						}
-					}
-					delete[] ships[i];
-				}
-			}
-			delete[] ships;
-		}
+		deleteSchepen(ships);
 		throw;
 	}
 
@@ -67,29 +55,36 @@ void FileReader::ReadSchepenFile(schip* schepen) const {
 		delete[] token1;
 	}
 	file.close();
-	for (int i = 1; i < 14; i++) {
-		Kanon* kanon = new Kanon[1];
-		kanon[0] = Kanon();
 
-		schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], kanon, 0);
-
+	try {
+		for (int i = 1; i < 14; i++) {
+			Kanon* kanon = new Kanon[atoi(ships[i][3])];
+			schepen[i - 1] = schip(ships[i][0], atoi(ships[i][1]), atoi(ships[i][2]), atoi(ships[i][3]), atoi(ships[i][4]), ships[i][5], kanon, 0);
+		}
 	}
-	for (int i = 0; i < 14; i++) {
-		for (int j = 0; j < 6; j++) {
-			if (i == 0 || (j > 0 && j < 5)) {
-				delete[] ships[i][j];
+	catch (...) {
+		deleteSchepen(ships);
+		throw;
+	}
+	deleteSchepen(ships);
+}
+
+void FileReader::deleteSchepen(char*** ships) const {
+	if (ships != nullptr) {
+		for (int i = 0; i < 14; i++) {
+			if (ships[i] != nullptr) {
+				for (int j = 0; j < 6; j++) {
+					if (ships[i][j] != nullptr) {
+						delete[] ships[i][j];
+					}
+				}
+				delete[] ships[i];
 			}
 		}
-		if (ships[i] != nullptr) {
-			delete[] ships[i];
-		}
-	}
-	if (ships != nullptr) {
 		delete[] ships;
 	}
-
-
 }
+
 
 void FileReader::MaakHavens(Haven* havens) const {
 	char*** prijzen = nullptr;
@@ -131,33 +126,32 @@ void FileReader::MaakHavens(Haven* havens) const {
 	readGoederen(prijzen, "DataFiles/goederen prijzen.csv");
 	readGoederen(hoeveelheden, "DataFiles/goederen hoeveelheid.csv");
 	readAfstanden(afstanden);
-	for (int i = 1; i < 25; i++) {
-		Handelsgoed goederen[15];
-		int k;
-		int minPrijs = NULL;
-		int maxPrijs = NULL;
-		int minHoeveelheid = NULL;
-		int maxHoeveelheid = NULL;
-		for (int j = 1; j < 16; j++) {
-			char* maxP = NULL;
-			char* minP = strtok_s(prijzen[i][j], "-", &maxP);
-			minPrijs = atoi(minP);
-			maxPrijs = atoi(maxP);
+	try {
+		for (int i = 1; i < 25; i++) {
+			Handelsgoed goederen[15];
+			int k;
+			int minPrijs = NULL;
+			int maxPrijs = NULL;
+			int minHoeveelheid = NULL;
+			int maxHoeveelheid = NULL;
+			for (int j = 1; j < 16; j++) {
+				char* maxP = NULL;
+				char* minP = strtok_s(prijzen[i][j], "-", &maxP);
+				minPrijs = atoi(minP);
+				maxPrijs = atoi(maxP);
 
-			char* maxH = NULL;
-			char* minH = strtok_s(hoeveelheden[i][j], "-", &maxH);
-			minHoeveelheid = atoi(minH);
-			maxHoeveelheid = atoi(maxH);
-			goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[0][j - 1]);
-		}
-		try {
+				char* maxH = NULL;
+				char* minH = strtok_s(hoeveelheden[i][j], "-", &maxH);
+				minHoeveelheid = atoi(minH);
+				maxHoeveelheid = atoi(maxH);
+				goederen[j - 1] = Handelsgoed(0, 0, maxPrijs, minPrijs, maxHoeveelheid, minHoeveelheid, prijzen[0][j - 1]);
+			}
 			havens[i - 1] = Haven(goederen, 15, prijzen[i][0], afstanden[i - 1]);
 		}
-		catch (...) {
-			deleteData(prijzen, hoeveelheden, afstanden);
-			throw;
-		}
-		
+	}
+	catch (...) {
+		deleteData(prijzen, hoeveelheden, afstanden);
+		throw;
 	}
 	deleteData(prijzen, hoeveelheden, afstanden);
 }
@@ -241,14 +235,11 @@ void FileReader::readAfstanden(int** afstanden) const
 				if (currentShip > 0 && counter > 0) {
 					int afstand = atoi(token);
 					afstanden[currentShip - 1][counter - 1] = afstand;
-
 				}
-
 				counter++;
 			}
 			currentShip++;
 		}
-
 	}
 	file.close();
 }
