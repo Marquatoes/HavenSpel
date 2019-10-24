@@ -35,7 +35,13 @@ schip::schip() : _prijs{ 0 }, _laadruimte{ 0 }, _maxKanonnen{ 0 }, _schadepunten
 schip::schip(char *type, int prijs, int laadruimte, int maxKanonnen, int schadepunten, char *bijzonderheden, Kanon* kanonnen, int aantalKanonnen) :
 	_prijs{ prijs }, _laadruimte{ laadruimte }, _maxKanonnen{ maxKanonnen }, _schadepunten{ schadepunten }, _bijzonderheden{ bijzonderheden }, _kanonnen{ kanonnen }, _aantalKanonnen{ aantalKanonnen }, _maxSchadepunten{ schadepunten } {
 	_type = type;
-	_handelsGoederen = new Handelsgoed[15];
+	try {
+		_handelsGoederen = new Handelsgoed[15];
+	}
+	catch (...) {
+		throw;
+	}
+	
 
 };
 

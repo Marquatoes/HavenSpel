@@ -13,6 +13,9 @@ Zee::Zee(int turns, schip* schepen) : _turns{ turns }, _vaarSchip{ nullptr }, _p
 		if (_schepen != nullptr) {
 			delete[] _schepen;
 		}
+		if (_piraten != nullptr) {
+			delete _piraten;
+		}
 		throw;
 	}
 	
@@ -27,75 +30,6 @@ Zee::~Zee()
 		delete[] _schepen;
 	}
 	
-}
-
-Zee::Zee(const Zee& copyZee) : _turns {copyZee._turns}, _vaarSchip{copyZee._vaarSchip}, _piraten{copyZee._piraten} 
-{
-	try {
-		schip* schepen = new schip[13];
-		std:memcpy(schepen, copyZee._schepen, 13);
-		if (_schepen != nullptr) {
-			delete[] schepen;
-		}
-		_schepen = schepen;
-	}
-	catch (...) {
-		std::cout << "Fout bij kopieëren van schip " << std::endl;
-	}
-}
-
-Zee& Zee::operator=(const Zee& copyZee)
-{
-	if (&copyZee == this) return *this;
-
-	try {
-		_piraten = copyZee._piraten;
-		_vaarSchip = copyZee._vaarSchip;
-		_schepen = copyZee._schepen;
-		_turns = copyZee._turns;
-	}
-	catch (...) {
-		std::cout << "Fout bij kopieëren van schip " << std::endl;
-		throw;
-	}
-	if (_piraten != nullptr) {
-		delete _piraten;
-	}
-	if (_vaarSchip != nullptr) {
-		delete _vaarSchip;
-	}
-	if (_schepen != nullptr) {
-		delete[] _schepen;
-	}
-
-	return *this;
-}
-
-Zee::Zee(Zee&& moveZee) noexcept : _turns{ moveZee._turns }, _vaarSchip{ moveZee._vaarSchip }, _piraten{ moveZee._piraten }, _schepen{moveZee._schepen}
-{
-	moveZee._piraten = nullptr;
-	moveZee._vaarSchip = nullptr;
-	moveZee._schepen = nullptr;
-	moveZee._turns = 0;
-}
-
-Zee& Zee::operator=(Zee&& moveZee) noexcept
-{
-	if (&moveZee == this) {
-		return *this;
-	}
-	
-	_piraten = moveZee._piraten;
-	_vaarSchip = moveZee._vaarSchip;
-	_turns = moveZee._turns;
-	_schepen = moveZee._schepen;
-
-	moveZee._piraten = nullptr;
-	moveZee._vaarSchip = nullptr;
-	moveZee._schepen = nullptr;
-	moveZee._turns = 0;
-	
-	return *this;
 }
 
 void Zee::enterZee(schip* vaarSchip, int afstand)

@@ -1,7 +1,7 @@
 #include "RNG.h"
 #include <stddef.h> 
 
-RNG* RNG::myInstance = NULL;
+RNG* RNG::myInstance = nullptr;
 
 RNG::RNG()
 {
@@ -10,8 +10,14 @@ RNG::RNG()
 
 RNG* RNG::Instance()
 {
-	if (!myInstance) {
-		myInstance = new RNG();
+	if (myInstance == nullptr) {
+		try {
+			myInstance = new RNG();
+		}
+		catch(...) {
+			throw;
+		}
+		
 	}
 	return myInstance;
 }

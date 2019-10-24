@@ -16,10 +16,10 @@ private:
 public:
 	Zee(int turns, schip* schepen);
 	~Zee();
-	Zee(const Zee& copyZee);
-	Zee& operator=(const Zee& copyZee);
-	Zee(Zee&& moveZee) noexcept;
-	Zee& operator=(Zee&& moveZee) noexcept;
+	Zee(const Zee& copyZee) = delete;
+	Zee& operator=(const Zee& copyZee) = delete;
+	Zee(Zee&& moveZee) = delete;
+	Zee& operator=(Zee&& moveZee) = delete;
 	void enterZee(schip* vaarSchip, int afstand);
 	bool vaar();
 };

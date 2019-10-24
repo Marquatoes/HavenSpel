@@ -42,19 +42,38 @@ Handelsgoed::Handelsgoed(const Handelsgoed& copyHandelsgoed) :
 	_prijs{ copyHandelsgoed._prijs }, _aantal{ copyHandelsgoed._aantal }, _minPrijs{ copyHandelsgoed._minPrijs }, _maxPrijs{ copyHandelsgoed._maxPrijs },
 	_minAantal{ copyHandelsgoed._minAantal }, _maxAantal{ copyHandelsgoed._maxAantal }
 {
-	_type = new char[100];
-	std::memcpy(_type, copyHandelsgoed._type, 100);
+	try {
+		_type = new char[100];
+		std::memcpy(_type, copyHandelsgoed._type, 100);
+	}
+	catch (...) {
+		if (_type != nullptr) {
+			delete[] _type;
+		}
+		throw;
+	}
+	
+	
 }
 
 Handelsgoed& Handelsgoed::operator=(const Handelsgoed& copyHandelsgoed)
 {
 	if (&copyHandelsgoed == this) return *this;
-
+	char* type = nullptr;
+	try {
+		type = new char[100];
+		std::memcpy(type, copyHandelsgoed._type, 100);
+	}
+	catch (...) {
+		if (type != nullptr) {
+			delete[] type;
+		}
+		throw;
+	}
 	if (_type != nullptr) {
 		delete _type;
 	}
-	_type = new char[100];
-	std::memcpy(_type, copyHandelsgoed._type, 100);
+	_type = type;
 	_prijs = copyHandelsgoed._prijs;
 	_aantal = copyHandelsgoed._aantal;
 	_minPrijs = copyHandelsgoed._minPrijs;
