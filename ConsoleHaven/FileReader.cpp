@@ -185,10 +185,8 @@ void FileReader::MaakHavens(Haven* havens) const {
 	}
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 16; j++) {
-			if (j < 15 || i > 0) {
-				delete[] prijzen[i][j];
-				delete[] hoeveelheden[i][j];
-			}
+			delete[] prijzen[i][j];
+			delete[] hoeveelheden[i][j];
 
 		}
 		delete[] prijzen[i];
