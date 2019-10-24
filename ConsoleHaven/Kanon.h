@@ -19,4 +19,5 @@ public:
 	const char* getType() const;
 	int getPrijs() const;
 	int getDamage() const;
+	bool hasType(const char* type) const;
 };

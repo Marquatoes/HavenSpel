@@ -117,7 +117,7 @@ void Spel::Stop() const
 
 void Spel::kiesHaven() {
 	std::cout << "Je bent nu in " << _huidigeHaven->getNaam() << std::endl;
-	std::cout << "Je kunt naar de volgende Havens: " << std::endl;
+	std::cout << "Dit zijn alle havens: " << std::endl;
 	for (int i = 0; i < 24; i++)
 	{
 		std::cout << i << ": " << _havens[i].getNaam() << " de afstand is: " << _huidigeHaven->getAfstand(i) << std::endl;
@@ -132,14 +132,21 @@ void Spel::kiesHaven() {
 		std::cin >> result;
 	}
 	int afstand = _huidigeHaven->getAfstand(result);
-    _zee->enterZee(_huidigSchip, afstand);
-	if (!_zee->vaar()) {
-		Stop();
-	}
-	else {
-		_huidigeHaven = &_havens[result];
-		_huidigeHaven->seedHaven();
-		_huidigeHaven->seedSchepen(_alleSchepen, 13);
+	if (afstand == 0) {
+		std::cout << "Je weet dat je niet naar dezelfde haven kan varen toch ? -.-" << std::endl;
 		speelBeurt();
 	}
+	else {
+		_zee->enterZee(_huidigSchip, afstand);
+		if (!_zee->vaar()) {
+			Stop();
+		}
+		else {
+			_huidigeHaven = &_havens[result];
+			_huidigeHaven->seedHaven();
+			_huidigeHaven->seedSchepen(_alleSchepen, 13);
+			speelBeurt();
+		}
+	}
+    
 }

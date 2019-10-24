@@ -106,3 +106,6 @@ int Kanon::getDamage() const
 {
 	return RNG::Instance()->getRandomNumber(_minDamage, _maxDamage);
 }
+bool Kanon::hasType(const char* type) const {
+	return std::strcmp(type, _type) == 0;
+}

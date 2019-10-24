@@ -415,6 +415,10 @@ void Haven::KoopKanonnen(schip* havenschip, Speler* speler)
 		return;
 	}
 	if (result <= _aantalKanonnen && result > 0) {
+		if (_kanonnen[result - 1].hasType("zwaar") && havenschip->hasBijzonderheid("klein")) {
+			std::cout << "Dit kanon is te heftig voor je lichte schipje" << std::endl;
+			return;
+		}
 		if (_kanonnen[result - 1].getPrijs() < speler->getGoudstukken()) {
 			speler->setGoudstukken(speler->getGoudstukken() - _kanonnen[result - 1].getPrijs());
 			if(havenschip->checkMaxKanonnen()) {
